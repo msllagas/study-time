@@ -16,8 +16,8 @@ const StartUp = () => {
         <Text>Logo here</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Login" style={styles.nyaw} />
-        <Button title="Signup" style={styles.buttons} />
+        <Button title="Login"/>
+        <Button title="Signup"/>
       </View>
     </SafeAreaView>
   );
