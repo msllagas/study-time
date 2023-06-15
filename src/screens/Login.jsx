@@ -75,20 +75,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginRight: 10,
   },
-  todoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 10,
-    marginVertical: 4,
-  },
-  todoText: {
-    flex: 1,
-    paddingHorizontal: 4,
-  },
-  todo: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-  },
 });

@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation } from "@react-navigation/native";
+import { colors } from "../utils/colors";
 
 const StartUp = () => {
   const navigation = useNavigation();
@@ -19,8 +19,8 @@ const StartUp = () => {
         <Text>Logo here</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={() => navigation.navigate('Login') }/>
-        <Button title="Signup"/>
+        <Button title="Login" onPress={() => navigation.navigate("Login")} />
+        <Button title="Signup" />
       </View>
     </SafeAreaView>
   );
@@ -35,24 +35,13 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
   },
   logoContainer: {
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    marginHorizontal: 20,
+    gap: 5,
   },
-  buttons: {
-    
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginHorizontal: 10
-  },
-  nyaw: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginHorizontal: 10
-  }
 });
