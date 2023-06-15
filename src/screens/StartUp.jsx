@@ -7,16 +7,19 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-import React from "react";
+import { useNavigation } from '@react-navigation/native';
+
 
 const StartUp = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoContainer}>
         <Text>Logo here</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Login"/>
+        <Button title="Login" onPress={() => navigation.navigate('Login') }/>
         <Button title="Signup"/>
       </View>
     </SafeAreaView>
