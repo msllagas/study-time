@@ -5,9 +5,10 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
-  Button,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "react-native-paper";
 import { colors } from "../utils/colors";
 
 const StartUp = () => {
@@ -19,8 +20,30 @@ const StartUp = () => {
         <Text>Logo here</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={() => navigation.navigate("Login")} />
-        <Button title="Signup" />
+        <Button
+          mode="outlined"
+          onPress={() => navigation.navigate("Login")}
+          buttonColor={colors.blueGreen}
+          textColor="white"
+          labelStyle={styles.buttonLabel}
+          contentStyle={{height: '100%'}}
+          style={styles.button}
+          uppercase
+        >
+          Log in
+        </Button>
+        <Button
+          mode="contained-tonal"
+          onPress={() => navigation.navigate("Login")}
+          buttonColor={colors.blueGreen}
+          textColor="white"
+          style={styles.button}
+          labelStyle={styles.buttonLabel}
+          contentStyle={{height: '100%'}}
+          uppercase
+        >
+          Register
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -35,13 +58,23 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
   },
   logoContainer: {
-    flex: 1,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
   },
   buttonContainer: {
     flex: 1,
     marginHorizontal: 20,
-    gap: 5,
+    gap: 10,
+    justifyContent: "center",
+  },
+  button: {
+    borderColor: "black",
+    borderWidth: 3,
+    height: 70,
+  },
+  buttonLabel: {
+    color: colors.beige,
+    fontSize: 20,
   },
 });
