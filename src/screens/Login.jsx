@@ -6,6 +6,8 @@ import {
   Button,
   Alert,
   StatusBar,
+  Pressable,
+  Platform
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -76,6 +78,12 @@ const Login = () => {
         <View style={{flex: 1}}>
           {/* <Button title="Create Account" onPress={signUp} /> */}
           <Button title="Sign In" onPress={signIn} />
+          <View>
+            <Text>Don't have an account yet?</Text>
+            <Pressable onPress={() => console.log("Hey")}>
+              <Text style={{color: 'blue'}}>Sign up here</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
