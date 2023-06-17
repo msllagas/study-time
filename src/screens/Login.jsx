@@ -1,12 +1,21 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  Platform,
+  StatusBar,
+  Image,
+} from "react-native";
 import React, { useState } from "react";
+import logo from "../../assets/imgs/logo3.png";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput, Button, Text } from "react-native-paper";
 import ButtonLink from "../components/ButtonLink";
 import { colors } from "../utils/colors";
 
@@ -70,52 +79,64 @@ const Login = () => {
     }
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Text>Logo here</Text>
-      </View>
-      <Text style={{ textAlign: "center", fontSize: 20 }}>Welcome Back</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          mode="outlined"
-          label="Email"
-          value={email}
-          onChangeText={onEmailChange}
-          onBlur={onEmailBlur}
-          left={<TextInput.Icon icon="account-outline" />}
-          error={isEmailEmpty}
-        />
-        <TextInput
-          mode="outlined"
-          label="Password"
-          value={password}
-          onChangeText={onPasswordChange}
-          onBlur={onPasswordBlur}
-          secureTextEntry
-          left={<TextInput.Icon icon="lock-outline" />}
-          right={<TextInput.Icon icon="eye-outline" />}
-          error={isPasswordEmpty}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          mode="contained-tonal"
-          onPress={signIn}
-          buttonColor={colors.blueGreen}
-          style={styles.button}
-          labelStyle={styles.buttonLabel}
-          contentStyle={{ height: "100%" }}
-        >
-          Login
-        </Button>
-        <View style={styles.linkText}>
-          <Text>Don't have an account yet?</Text>
-          <ButtonLink
-            onPress={() => navigation.navigate("Register")}
-            title="Click here to sign in"
+    <View
+      style={{
+        height: "100%",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      }}
+    >
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <StatusBar backgroundColor="whitesmoke" translucent />
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={logo} resizeMode="contain" />
+        </View>
+        <Text variant="headlineSmall" style={{textAlign: 'center', fontWeight: 'bold'}}>Login in Your Account</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            mode="outlined"
+            label="Email"
+            value={email}
+            onChangeText={onEmailChange}
+            onBlur={onEmailBlur}
+            left={<TextInput.Icon icon="account-outline" />}
+            error={isEmailEmpty}
+          />
+          <TextInput
+            mode="outlined"
+            label="Password"
+            value={password}
+            onChangeText={onPasswordChange}
+            onBlur={onPasswordBlur}
+            secureTextEntry
+            left={<TextInput.Icon icon="lock-outline" />}
+            right={<TextInput.Icon icon="eye-outline" />}
+            error={isPasswordEmpty}
           />
         </View>
-      </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            mode="contained-tonal"
+            onPress={signIn}
+            buttonColor={colors.blueGreen}
+            style={styles.button}
+            labelStyle={styles.buttonLabel}
+            contentStyle={{ height: "100%" }}
+          >
+            Login
+          </Button>
+          <View style={styles.linkText}>
+            <Text variant="labelLarge">Don't have an account yet?</Text>
+            <ButtonLink
+              onPress={() => navigation.navigate("Register")}
+              title="Click here to sign up"
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -124,14 +145,17 @@ export default Login;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "whitesmoke",
+    flexGrow: 1,
+    backgroundColor: "#F7F7F7",
+    padding: 8,
   },
   logoContainer: {
-    flex: 1.75,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "pink",
+    borderRadius: 20,
+    height: 400,
+    marginBottom: 20,
   },
   button: {
     borderColor: "black",
@@ -140,19 +164,19 @@ const styles = StyleSheet.create({
     // borderRadius: 10
   },
   buttonContainer: {
-    flex: 1,
     paddingHorizontal: 20,
     gap: 20,
+    marginTop: 10,
   },
   buttonLabel: {
     color: colors.white,
     fontSize: 20,
   },
   inputContainer: {
-    flex: 1,
     paddingHorizontal: 20,
-    gap: 10,
     justifyContent: "center",
+    marginVertical: 20,
+    gap: 10,
   },
   linkText: {
     alignItems: "center",
