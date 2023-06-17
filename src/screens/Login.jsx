@@ -1,26 +1,20 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Button,
-  Alert,
-  StatusBar,
-  Pressable,
-  Platform
-} from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
+import { TextInput, Button } from "react-native-paper";
+import ButtonLink from "../components/ButtonLink";
+import { colors } from "../utils/colors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
 
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
@@ -36,54 +30,90 @@ const Login = () => {
         Alert.alert("Signup error:", error.message);
       });
   };
-
+  const onEmailChange = (text) => {
+    setEmail(text);
+    setIsEmailEmpty(false);
+  };
+  const onEmailBlur = () => {
+    setIsEmailEmpty(email === "");
+  };
+  const onPasswordChange = (text) => {
+    setPassword(text);
+    setIsPasswordEmpty(false); // Clear password error when user inputs text
+  };
+  const onPasswordBlur = () => {
+    setIsPasswordEmpty(password === ""); // Set password error when user leaves the field if it's empty
+  };
   const signIn = async () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        navigation.navigate("Main");
-        setEmail(""); // Reset the email field to empty
-        setPassword(""); // Reset the password field to empty
-      })
-      .catch((error) => {
-        console.log("Login error:", error);
-        Alert.alert("Login error:", error.message);
-      });
+    if (password === "") {
+      setIsPasswordEmpty(!isPasswordEmpty);
+    }
+    if (email === "") {
+      setIsEmailEmpty(!isEmailEmpty);
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      navigation.navigate("Main");
+      setEmail("");
+      setPassword("");
+      setIsEmailEmpty(false);
+      setIsPasswordEmpty(false);
+    } catch (error) {
+      setIsEmailEmpty(true);
+      setIsPasswordEmpty(true);
+    }
   };
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Text>Logo here</Text>
       </View>
-      <View
-        style={{
-          flex: 1,
-          marginHorizontal: 20,
-          gap: 10,
-          justifyContent: "center",
-        }}
-      >
+      <Text style={{ textAlign: "center", fontSize: 20 }}>Welcome Back</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
+          mode="outlined"
+          label="Email"
           value={email}
-          style={styles.input}
+          onChangeText={onEmailChange}
+          onBlur={onEmailBlur}
+          left={<TextInput.Icon icon="account-outline" />}
+          error={isEmailEmpty}
         />
         <TextInput
-          secureTextEntry
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
+          mode="outlined"
+          label="Password"
           value={password}
-          style={styles.input}
+          onChangeText={onPasswordChange}
+          onBlur={onPasswordBlur}
+          secureTextEntry
+          left={<TextInput.Icon icon="lock-outline" />}
+          right={<TextInput.Icon icon="eye-outline" />}
+          error={isPasswordEmpty}
         />
-        <View style={{flex: 1}}>
-          {/* <Button title="Create Account" onPress={signUp} /> */}
-          <Button title="Sign In" onPress={signIn} />
-          <View>
-            <Text>Don't have an account yet?</Text>
-            <Pressable onPress={() => console.log("Hey")}>
-              <Text style={{color: 'blue'}}>Sign up here</Text>
-            </Pressable>
-          </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          mode="contained-tonal"
+          onPress={signIn}
+          buttonColor={colors.blueGreen}
+          style={styles.button}
+          labelStyle={styles.buttonLabel}
+          contentStyle={{ height: "100%" }}
+        >
+          Login
+        </Button>
+        <View style={styles.linkText}>
+          <Text>Don't have an account yet?</Text>
+          <ButtonLink
+            onPress={() => navigation.navigate("Register")}
+            title="Click here to sign in"
+          />
         </View>
       </View>
     </View>
@@ -95,21 +125,37 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: "whitesmoke",
   },
   logoContainer: {
-    flex: .5,
+    flex: 1.75,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "pink",
   },
-  input: {
-    marginVertical: 4,
-    height: 50,
+  button: {
+    borderColor: "black",
     borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: "#fff",
-    marginRight: 10,
+    height: 50,
+    // borderRadius: 10
+  },
+  buttonContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    gap: 20,
+  },
+  buttonLabel: {
+    color: colors.white,
+    fontSize: 20,
+  },
+  inputContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    gap: 10,
+    justifyContent: "center",
+  },
+  linkText: {
+    alignItems: "center",
+    gap: 5,
   },
 });
