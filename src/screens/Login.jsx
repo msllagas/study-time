@@ -2,12 +2,10 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   Button,
   Alert,
   StatusBar,
-  Pressable,
-  Platform
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -17,6 +15,8 @@ import {
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
+import { TextInput } from "react-native-paper";
+import ButtonLink from "../components/ButtonLink";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -62,7 +62,7 @@ const Login = () => {
           justifyContent: "center",
         }}
       >
-        <TextInput
+        {/* <TextInput
           placeholder="Email"
           onChangeText={(text) => setEmail(text)}
           value={email}
@@ -74,15 +74,31 @@ const Login = () => {
           onChangeText={(text) => setPassword(text)}
           value={password}
           style={styles.input}
+        /> */}
+        <TextInput
+          mode="outlined"
+          label="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          left={<TextInput.Icon icon="account-outline" />}
         />
-        <View style={{flex: 1}}>
+        <TextInput
+          mode="outlined"
+          label="Password"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          secureTextEntry
+          left={<TextInput.Icon icon="lock-outline" />}
+        />
+        <View style={{ flex: 1 }}>
           {/* <Button title="Create Account" onPress={signUp} /> */}
           <Button title="Sign In" onPress={signIn} />
           <View>
             <Text>Don't have an account yet?</Text>
-            <Pressable onPress={() => console.log("Hey")}>
-              <Text style={{color: 'blue'}}>Sign up here</Text>
-            </Pressable>
+            <ButtonLink
+              onPress={() => navigation.navigate("Register")}
+              title="Press"
+            />
           </View>
         </View>
       </View>
@@ -95,11 +111,10 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: "whitesmoke",
   },
   logoContainer: {
-    flex: .5,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "center",
   },
