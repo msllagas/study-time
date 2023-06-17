@@ -2,7 +2,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   Alert,
   StatusBar,
   Platform,
@@ -15,8 +14,9 @@ import {
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
-import { TextInput } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 import ButtonLink from "../components/ButtonLink";
+import { colors } from "../utils/colors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -54,27 +54,10 @@ const Login = () => {
       <View style={styles.logoContainer}>
         <Text>Logo here</Text>
       </View>
+      <Text style={{ textAlign: "center", fontSize: 20 }}>Welcome Back</Text>
       <View
-        style={{
-          flex: 1,
-          marginHorizontal: 20,
-          gap: 10,
-          justifyContent: "center",
-        }}
+        style={styles.inputContainer}
       >
-        {/* <TextInput
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          style={styles.input}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          style={styles.input}
-        /> */}
         <TextInput
           mode="outlined"
           label="Email"
@@ -89,17 +72,26 @@ const Login = () => {
           onChangeText={(text) => setPassword(text)}
           secureTextEntry
           left={<TextInput.Icon icon="lock-outline" />}
+          right={<TextInput.Icon icon="eye-outline" />}
         />
-        <View style={{ flex: 1 }}>
-          {/* <Button title="Create Account" onPress={signUp} /> */}
-          <Button title="Sign In" onPress={signIn} />
-          <View>
-            <Text>Don't have an account yet?</Text>
-            <ButtonLink
-              onPress={() => navigation.navigate("Register")}
-              title="Press"
-            />
-          </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          mode="contained-tonal"
+          onPress={signIn}
+          buttonColor={colors.blueGreen}
+          style={styles.button}
+          labelStyle={styles.buttonLabel}
+          contentStyle={{ height: "100%" }}
+        >
+          Login
+        </Button>
+        <View style={styles.linkText}>
+          <Text>Don't have an account yet?</Text>
+          <ButtonLink
+            onPress={() => navigation.navigate("Register")}
+            title="Click here to sign in"
+          />
         </View>
       </View>
     </View>
@@ -114,17 +106,34 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
   },
   logoContainer: {
-    flex: 0.5,
+    flex: 1.75,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "pink",
   },
-  input: {
-    marginVertical: 4,
-    height: 50,
+  button: {
+    borderColor: "black",
     borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: "#fff",
-    marginRight: 10,
+    height: 50,
+    // borderRadius: 10
+  },
+  buttonContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    gap: 20,
+  },
+  buttonLabel: {
+    color: colors.white,
+    fontSize: 20,
+  },
+  inputContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    gap: 10,
+    justifyContent: "center",
+  },
+  linkText: {
+    alignItems: "center",
+    gap: 5,
   },
 });
