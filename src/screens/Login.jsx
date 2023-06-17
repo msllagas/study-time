@@ -1,15 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Alert,
-  StatusBar,
-  Platform,
-} from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
@@ -21,6 +13,8 @@ import { colors } from "../utils/colors";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
 
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
@@ -36,18 +30,44 @@ const Login = () => {
         Alert.alert("Signup error:", error.message);
       });
   };
-
+  const onEmailChange = (text) => {
+    setEmail(text);
+    setIsEmailEmpty(false);
+  };
+  const onEmailBlur = () => {
+    setIsEmailEmpty(email === "");
+  };
+  const onPasswordChange = (text) => {
+    setPassword(text);
+    setIsPasswordEmpty(false); // Clear password error when user inputs text
+  };
+  const onPasswordBlur = () => {
+    setIsPasswordEmpty(password === ""); // Set password error when user leaves the field if it's empty
+  };
   const signIn = async () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        navigation.navigate("Main");
-        setEmail(""); // Reset the email field to empty
-        setPassword(""); // Reset the password field to empty
-      })
-      .catch((error) => {
-        console.log("Login error:", error);
-        Alert.alert("Login error:", error.message);
-      });
+    if (password === "") {
+      setIsPasswordEmpty(!isPasswordEmpty);
+    }
+    if (email === "") {
+      setIsEmailEmpty(!isEmailEmpty);
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      navigation.navigate("Main");
+      setEmail("");
+      setPassword("");
+      setIsEmailEmpty(false);
+      setIsPasswordEmpty(false);
+    } catch (error) {
+      setIsEmailEmpty(true);
+      setIsPasswordEmpty(true);
+    }
   };
   return (
     <View style={styles.container}>
@@ -55,24 +75,26 @@ const Login = () => {
         <Text>Logo here</Text>
       </View>
       <Text style={{ textAlign: "center", fontSize: 20 }}>Welcome Back</Text>
-      <View
-        style={styles.inputContainer}
-      >
+      <View style={styles.inputContainer}>
         <TextInput
           mode="outlined"
           label="Email"
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={onEmailChange}
+          onBlur={onEmailBlur}
           left={<TextInput.Icon icon="account-outline" />}
+          error={isEmailEmpty}
         />
         <TextInput
           mode="outlined"
           label="Password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={onPasswordChange}
+          onBlur={onPasswordBlur}
           secureTextEntry
           left={<TextInput.Icon icon="lock-outline" />}
           right={<TextInput.Icon icon="eye-outline" />}
+          error={isPasswordEmpty}
         />
       </View>
       <View style={styles.buttonContainer}>
