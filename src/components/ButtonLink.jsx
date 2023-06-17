@@ -1,10 +1,11 @@
-import { StyleSheet, Text, Pressable } from 'react-native'
+import { StyleSheet,  Pressable } from 'react-native';
+import { Text } from 'react-native-paper';
 import React from 'react'
 
 const ButtonLink = ({onPress, title, style}) => {
   return (
     <Pressable onPress={onPress}>
-      <Text style={[styles.link, style]}>{title}</Text>
+      <Text variant='labelLarge' style={[styles.link, style]}>{title}</Text>
     </Pressable>
   )
 }
