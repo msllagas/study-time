@@ -6,18 +6,23 @@ import {
   StatusBar,
   StyleSheet,
   Pressable,
+  ImageBackground,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import { colors } from "../utils/colors";
+import logo from "../../assets/imgs/logo3.png";
+import bg from "../../assets/imgs/bg.png";
 
 const StartUp = () => {
   const navigation = useNavigation();
-
+  
   return (
     <SafeAreaView style={styles.container}>
+      <ImageBackground source={bg} resizeMode="repeat" style={styles.image}>
       <View style={styles.logoContainer}>
-        <Text>Logo here</Text>
+        <Image style={styles.logo} source={logo} resizeMode="contain"/> 
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -45,6 +50,7 @@ const StartUp = () => {
           Register
         </Button>
       </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -61,11 +67,18 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: "center",
     justifyContent: "center",
+    alignSelf:'center',
+    width:'90%',
+    height:'50%',
+  },
+  logo:{
+    flex:1,
+    width:'100%',
   },
   buttonContainer: {
     flex: 1,
     marginHorizontal: 20,
-    gap: 10,
+    gap: 25,
     justifyContent: "center",
   },
   button: {
@@ -76,5 +89,11 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: colors.beige,
     fontSize: 20,
+    alignContent:"center",
+    justifyContent:'center',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
