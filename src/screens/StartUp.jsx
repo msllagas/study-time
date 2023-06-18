@@ -39,7 +39,7 @@ const StartUp = () => {
         </Button>
         <Button
           mode="contained-tonal"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Register")}
           buttonColor={colors.blueGreen}
           textColor="white"
           style={styles.button}
