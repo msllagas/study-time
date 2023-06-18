@@ -1,7 +1,6 @@
 import {
   View,
   StyleSheet,
-  Alert,
   ScrollView,
   Platform,
   StatusBar,
@@ -10,7 +9,6 @@ import {
 import React, { useState } from "react";
 import logo from "../../assets/imgs/logo3.png";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
@@ -28,17 +26,6 @@ const Login = () => {
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
 
-  const signUp = async () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Signup successful:", userCredential.user);
-        Alert.alert("Signup successful!");
-      })
-      .catch((error) => {
-        console.log("Signup error:", error);
-        Alert.alert("Signup error:", error.message);
-      });
-  };
   const onEmailChange = (text) => {
     setEmail(text);
     setIsEmailEmpty(false);
