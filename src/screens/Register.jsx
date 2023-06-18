@@ -5,12 +5,11 @@ import {
   Platform,
   StatusBar,
   Image,
+  BackHandler,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/imgs/logo3.png";
-import {
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { TextInput, Button, Text } from "react-native-paper";
@@ -25,6 +24,22 @@ const Register = () => {
 
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      handleBackPress
+    );
+
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
+
+  const handleBackPress = () => {
+    navigation.replace("StartUp");
+    return true;
+  };
 
   const signUp = async () => {
     if (password === "") {
@@ -49,15 +64,6 @@ const Register = () => {
       setIsEmailEmpty(true);
       setIsPasswordEmpty(true);
     }
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     console.log("Signup successful:", userCredential.user);
-    //     Alert.alert("Signup successful!");
-    //   })
-    //   .catch((error) => {
-    //     console.log("Signup error:", error);
-    //     Alert.alert("Signup error:", error.message);
-    //   });
   };
   const onEmailChange = (text) => {
     setEmail(text);
@@ -68,10 +74,10 @@ const Register = () => {
   };
   const onPasswordChange = (text) => {
     setPassword(text);
-    setIsPasswordEmpty(false); // Clear password error when user inputs text
+    setIsPasswordEmpty(false);
   };
   const onPasswordBlur = () => {
-    setIsPasswordEmpty(password === ""); // Set password error when user leaves the field if it's empty
+    setIsPasswordEmpty(password === "");
   };
   return (
     <View
