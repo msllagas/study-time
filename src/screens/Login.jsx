@@ -55,7 +55,7 @@ const Login = () => {
         email,
         password
       );
-      navigation.navigate("Main");
+      navigation.navigate("Drawer");
       setEmail("");
       setPassword("");
       setIsEmailEmpty(false);
