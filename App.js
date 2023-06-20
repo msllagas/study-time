@@ -23,7 +23,7 @@ if (!loaded) {
   // For development purposes only. Change in initialRouteName to 'StartUp' for production.
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Pomodoro" screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName="Drawer" screenOptions={{headerShown: false}}>
         <Stack.Screen name="StartUp" component={StartUp}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register}/>
