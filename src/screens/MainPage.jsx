@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
+import TopBar from '../components/TopBar'
 
 const MainPage = () => {
   return (
-    <View>
-      <Text>MainPage</Text>
-    </View>
+    <SafeAreaView>
+      <TopBar/>
+    </SafeAreaView>
   )
 }
 

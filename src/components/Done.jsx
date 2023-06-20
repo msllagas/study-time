@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { colors } from '../utils/colors';
 
 const Done = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Done...</Text>
+          <Text style={styles.label}>Done...</Text>
         </View>
       );
 }
 
-export default Done
+export default Done;
+
+const styles = StyleSheet.create({
+    label:{
+      fontFamily:'AmaticRegular',
+      fontSize:40,
+    },
+});

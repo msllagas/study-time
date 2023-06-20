@@ -13,15 +13,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Button} from "react-native-paper";
 import { colors } from "../utils/colors";
 import Header from "../components/Header";
-
+import TopBar from "../components/TopBar";
 
 
 const Pomodoro = () =>{
     return (
       <SafeAreaView>
-      <Header
-      title='Pomodoro Method'/>
-   
+      <TopBar/>
       </SafeAreaView>
     );
   };
