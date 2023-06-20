@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, BackHandler } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainPage from "../MainPage";
+import TopBar from "../../components/TopBar";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -23,7 +24,7 @@ const Drawer = () => {
     <Drawer.Navigator useLegacyImplementation initialRouteName="Main">
       <Drawer.Screen
         name="Main"
-        component={MainPage}
+        component={TopBar}
         options={{ headerTitle: "Study Time!" }}
       />
     </Drawer.Navigator>
