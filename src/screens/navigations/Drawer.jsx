@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import { View, Text, BackHandler } from "react-native";
+import { View, Text, BackHandler, StyleSheet } from "react-native";
+import { colors } from "../../utils/colors";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainPage from "../MainPage";
 import TopBar from "../../components/TopBar";
+import Pomodoro from "../Pomodoro";
+import ActiveRecall from "../ActiveRecall";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -21,14 +24,65 @@ const Drawer = () => {
     };
   }, []);
   return (
-    <Drawer.Navigator useLegacyImplementation initialRouteName="Main">
+    <Drawer.Navigator useLegacyImplementation initialRouteName="Main"
+      screenOptions={{
+        drawerStyle:{
+          backgroundColor:colors.blueGreen
+        }
+        
+      }}>
       <Drawer.Screen
         name="Main"
-        component={TopBar}
-        options={{ headerTitle: "Study Time!" }}
+        component={MainPage}
+        options={{ 
+          headerTitle: "Study Time!", 
+          headerStyle:styles.headerTab, 
+          headerTitleStyle:styles.headerTitle, 
+          headerTitleAlign:'center',
+          drawerLabel: 'Home',
+          drawerLabelStyle:styles.label
+          }}
+          
+      />
+      <Drawer.Screen
+        name="Pomodoro"
+        component={Pomodoro}
+        options={{ 
+          headerTitle: "Pomodoro Method", 
+          headerStyle:styles.headerTab, 
+          headerTitleStyle:styles.headerTitle, 
+          headerTitleAlign:'center',
+          drawerLabel: 'Pomodoro Method (temp)',
+          drawerLabelStyle:styles.label}}
+      />
+      <Drawer.Screen
+        name="ActiveRecall"
+        component={ActiveRecall}
+        options={{ 
+          headerTitle: "Active Recall", 
+          headerStyle:styles.headerTab, 
+          headerTitleStyle:styles.headerTitle, 
+          headerTitleAlign:'center',
+          drawerLabel: 'Active Recall (temp)',
+          drawerLabelStyle:styles.label}}
       />
     </Drawer.Navigator>
   );
 };
 
 export default Drawer;
+
+const styles = StyleSheet.create({
+  headerTab: {
+    backgroundColor: colors.blueGreen2,
+  },
+  headerTitle: {
+    fontFamily:'RockSalt', 
+    color:colors.redOrange,
+    fontSize: 24,
+  },
+  label:{
+    color:colors.white,
+
+  }
+});
