@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Text, View, SafeAreaView } from 'react-native';
-import { colors } from '../utils/colors';
+import { colors } from '../../utils/colors';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Done from './Done';
-import Ongoing from './Ongoing';
+import Done from './components/Done';
+import Ongoing from './components/Ongoing';
 
 
 function StatusTabs() {
