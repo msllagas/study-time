@@ -3,6 +3,7 @@ export const colors = {
     blueGreen: '#078080',
     blueGreen1: 'rgba(7,128,128,.3)',
     blueGreen2: 'rgba(7,128,128,.2)',
+    grayBlue: '#B5D9D9',
     skyBlue: '#DFF9F9',
     redOrange: '#F45D48',
     lightPink: '#F9EAE8',

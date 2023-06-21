@@ -14,12 +14,14 @@ import { Button} from "react-native-paper";
 import { colors } from "../utils/colors";
 import Header from "../components/Header";
 import TopBar from "../components/TopBar";
+import AddFAB from "../components/AddFAB";
 
 
 const Pomodoro = () =>{
     return (
       <SafeAreaView>
       <TopBar/>
+      <AddFAB/>
       </SafeAreaView>
     );
   };
