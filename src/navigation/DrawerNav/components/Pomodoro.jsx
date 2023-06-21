@@ -11,9 +11,9 @@ import {
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { Button} from "react-native-paper";
-import { colors } from "../utils/colors";
-import Header from "../components/Header";
-import TopBar from "../components/TopBar";
+import { colors } from "../../../utils/colors";
+import Header from "../../../components/Header";
+import TopBar from "../../TopTabNav/TopBar";
 
 
 const Pomodoro = () =>{

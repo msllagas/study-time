@@ -6,9 +6,9 @@ import Login from "./src/screens/Login";
 import StartUp from "./src/screens/StartUp";
 import MainPage from "./src/screens/MainPage";
 import Register from "./src/screens/Register";
-import Drawer from './src/screens/navigations/Drawer';
-import Pomodoro from './src/screens/Pomodoro';
-import ActiveRecall from './src/screens/ActiveRecall';
+import Drawer from './src/navigation/DrawerNav/Drawer';
+import Pomodoro from './src/navigation/DrawerNav/components/Pomodoro';
+import ActiveRecall from './src/navigation/DrawerNav/components/ActiveRecall';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
