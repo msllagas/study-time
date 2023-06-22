@@ -6,6 +6,7 @@ import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
 import ActiveRecall from "./components/ActiveRecall";
 import StudyMethods from "./components/StudyMethods";
+import Pomodoro from "./components/Pomodoro";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -46,6 +47,14 @@ const Drawer = () => {
         }}
       />
       <Drawer.Screen
+        name="Pomoodoro"
+        component={Pomodoro}
+        options={{
+          headerTitle: "Pomodoro Method",
+          drawerLabel: "Pomodoro (temp)",
+        }}
+      />
+      <Drawer.Screen
         name="ActiveRecall"
         component={ActiveRecall}
         options={{
@@ -53,7 +62,12 @@ const Drawer = () => {
           drawerLabel: "Active Recall (temp)",
         }}
       />
-      <Drawer.Screen name="Study Methods" component={StudyMethods}/>
+      <Drawer.Screen 
+      name="Study Methods" 
+      component={StudyMethods}
+      options={{
+        headerTitle: "Study Methods"
+      }}/>
     </Drawer.Navigator>
   );
 };
@@ -67,7 +81,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: "RockSalt",
     color: colors.redOrange,
-    fontSize: 24,
+    fontSize: 20,
   },
   label: {
     color: colors.white,

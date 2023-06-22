@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Button, Card, IconButton, MD3Colors, Surface } from "react-native-paper";
 import { colors } from "../../../utils/colors";
 import techniques from "../../../utils/techniques";
+import { SafeAreaView } from "react-native-web";
 
 const StudyMethodsCard = ({ title }) => {
   const cardWidth = Dimensions.get("window").width * 0.9;
@@ -32,7 +33,7 @@ const StudyMethodsCard = ({ title }) => {
         onPress={() => console.log("Pressed")}
       />
       <View>
-        <Text style={{ color: colors.blueGreen, fontSize: 26 }}>{title}</Text>
+        <Text style={{ color: colors.beige, fontSize: 26, fontFamily: 'RockSalt' }}>{title}</Text>
       </View>
     </Surface>
   );
@@ -40,11 +41,13 @@ const StudyMethodsCard = ({ title }) => {
 
 const StudyMethods = () => {
   return (
+    <SafeAreaView style={{backgroundColor: colors.blueGreen, height:'100%'}}>
     <ScrollView contentContainerStyle={{ alignItems: "center", paddingBottom: 20 }} showsVerticalScrollIndicator={false}>
       {techniques.map((technique) => (
         <StudyMethodsCard key={technique.id} title={technique.title} />
       ))}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
