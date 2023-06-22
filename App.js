@@ -7,7 +7,6 @@ import StartUp from "./src/screens/StartUp";
 import MainPage from "./src/screens/MainPage";
 import Register from "./src/screens/Register";
 import Drawer from './src/navigation/DrawerNav/Drawer';
-import Pomodoro from './src/navigation/DrawerNav/components/Pomodoro';
 import ActiveRecall from './src/navigation/DrawerNav/components/ActiveRecall';
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +27,6 @@ if (!loaded) {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Drawer" component={Drawer} />
-        <Stack.Screen name="Pomodoro" component={Pomodoro}/>
         <Stack.Screen name="ActiveRecall" component={ActiveRecall}/>
       </Stack.Navigator>
     </NavigationContainer>

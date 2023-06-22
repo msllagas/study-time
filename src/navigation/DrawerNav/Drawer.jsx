@@ -4,7 +4,6 @@ import { colors } from "../../utils/colors";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
-import Pomodoro from "./components/Pomodoro";
 import ActiveRecall from "./components/ActiveRecall";
 import StudyMethods from "./components/StudyMethods";
 
@@ -44,14 +43,6 @@ const Drawer = () => {
         options={{
           headerTitle: "Study Time!",
           drawerLabel: "Home",
-        }}
-      />
-      <Drawer.Screen
-        name="Pomodoro"
-        component={Pomodoro}
-        options={{
-          headerTitle: "Pomodoro Method",
-          drawerLabel: "Pomodoro Method (temp)",
         }}
       />
       <Drawer.Screen
