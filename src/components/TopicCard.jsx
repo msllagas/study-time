@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { Chip } from "react-native-paper";
+import { View, Text, StyleSheet, Dimensions, PanResponder, Animated } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 import { colors } from "../utils/colors";
 
 const TopicCard = ({ tag, topic="Topic Here" }) => {
+
+  const cardWidth = Dimensions.get('window').width * 0.9;
   let backgroundColor;
   let borderColor;
   let method;
@@ -35,9 +37,9 @@ const TopicCard = ({ tag, topic="Topic Here" }) => {
         <Text style={[styles.text]}>{method}</Text>
       </Text>
       <View style={styles.cardContainer}>
-        <View style={[styles.card, { borderColor }]}>
+        <View style={[styles.card, { borderColor, width: cardWidth }]}>
           <Text style={styles.topicText}>{topic}</Text>
-          <Text>Icon Here</Text>
+          <Ionicons name="trash-bin-outline" size={20} color="red" />
         </View>
       </View>
     </View>
@@ -45,7 +47,6 @@ const TopicCard = ({ tag, topic="Topic Here" }) => {
 };
 
 export default TopicCard;
-const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -53,9 +54,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 5,
+    
+    
   },
   card: {
-    borderColor: "red",
     borderWidth: 1,
     borderRadius: 10,
     alignItems: "center",
@@ -63,18 +65,16 @@ const styles = StyleSheet.create({
     padding: 10,
     position: "relative",
     flexDirection: "row",
+    minHeight: 60,
   },
   cardContainer: {
-    width: windowWidth * 0.9,
     alignSelf: "center",
     marginVertical: 5,
   },
   textContainer: {
     position: "absolute",
-    top: -5,
+    top: 0,
     alignSelf: "center",
-    backgroundColor: "red",
-    borderColor: "red",
     borderWidth: 0.5,
     paddingHorizontal: 8,
     borderRadius: 20,
@@ -84,8 +84,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: "center",
     color: "white",
+    fontWeight: 'bold'
   },
   topicText: {
     textAlign: "center",
+    fontWeight: 'bold',
+    fontSize: 16
   },
 });
