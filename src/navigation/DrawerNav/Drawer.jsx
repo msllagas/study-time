@@ -6,6 +6,7 @@ import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
 import Pomodoro from "./components/Pomodoro";
 import ActiveRecall from "./components/ActiveRecall";
+import StudyMethods from "./components/StudyMethods";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -31,6 +32,10 @@ const Drawer = () => {
         drawerStyle: {
           backgroundColor: colors.blueGreen,
         },
+        headerStyle: styles.headerTab,
+        headerTitleStyle: styles.headerTitle,
+        headerTitleAlign: "center",
+        drawerLabelStyle: styles.label,
       }}
     >
       <Drawer.Screen
@@ -38,11 +43,7 @@ const Drawer = () => {
         component={TopBar}
         options={{
           headerTitle: "Study Time!",
-          headerStyle: styles.headerTab,
-          headerTitleStyle: styles.headerTitle,
-          headerTitleAlign: "center",
           drawerLabel: "Home",
-          drawerLabelStyle: styles.label,
         }}
       />
       <Drawer.Screen
@@ -50,11 +51,7 @@ const Drawer = () => {
         component={Pomodoro}
         options={{
           headerTitle: "Pomodoro Method",
-          headerStyle: styles.headerTab,
-          headerTitleStyle: styles.headerTitle,
-          headerTitleAlign: "center",
           drawerLabel: "Pomodoro Method (temp)",
-          drawerLabelStyle: styles.label,
         }}
       />
       <Drawer.Screen
@@ -62,13 +59,10 @@ const Drawer = () => {
         component={ActiveRecall}
         options={{
           headerTitle: "Active Recall",
-          headerStyle: styles.headerTab,
-          headerTitleStyle: styles.headerTitle,
-          headerTitleAlign: "center",
           drawerLabel: "Active Recall (temp)",
-          drawerLabelStyle: styles.label,
         }}
       />
+      <Drawer.Screen name="Study Methods" component={StudyMethods}/>
     </Drawer.Navigator>
   );
 };
