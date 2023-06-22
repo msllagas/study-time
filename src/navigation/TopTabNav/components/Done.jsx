@@ -18,64 +18,64 @@ import TopicCard from "../../../components/TopicCard";
 const Done = () => {
   const [doneTopics, setDoneTopics] = useState([]);
 
-  useEffect(() => {
-    const fetchDoneTopics = async () => {
-      try {
-        const doneTopicsQuery = query(
-          collection(FIRESTORE_DB, "topics"),
-          where("isDone", "==", true)
-        );
-        const doneTopicsSnapshot = await getDocs(doneTopicsQuery);
-        const doneTopicsData = doneTopicsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setDoneTopics(doneTopicsData);
-      } catch (error) {
-        console.log("Error fetching done topics:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchDoneTopics = async () => {
+  //     try {
+  //       const doneTopicsQuery = query(
+  //         collection(FIRESTORE_DB, "topics"),
+  //         where("isDone", "==", true)
+  //       );
+  //       const doneTopicsSnapshot = await getDocs(doneTopicsQuery);
+  //       const doneTopicsData = doneTopicsSnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
+  //       setDoneTopics(doneTopicsData);
+  //     } catch (error) {
+  //       console.log("Error fetching done topics:", error);
+  //     }
+  //   };
 
-    fetchDoneTopics();
-  }, [doneTopics]);
+  //   fetchDoneTopics();
+  // }, [doneTopics]);
 
   {
     /* Logic for adding topic in firestore */
   }
-  const addTopicToFirestore = async () => {
-    try {
-      const topicData = {
-        title: "Topic 5",
-        description: "This is a new topic added to Firestore.",
-        tag: "sq3r",
-        isDone: true,
-        technique: {
-          date: new Date().toLocaleDateString("en-PH", {
-            month: "2-digit",
-            day: "2-digit",
-            year: "numeric",
-          }),
-        },
-        time: new Date().toLocaleTimeString("en-PH", {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
-    } catch (error) {
-      console.error("Error adding topic:", error);
-    }
-  };
+  // const addTopicToFirestore = async () => {
+  //   try {
+  //     const topicData = {
+  //       title: "Topic 5",
+  //       description: "This is a new topic added to Firestore.",
+  //       tag: "sq3r",
+  //       isDone: true,
+  //       technique: {
+  //         date: new Date().toLocaleDateString("en-PH", {
+  //           month: "2-digit",
+  //           day: "2-digit",
+  //           year: "numeric",
+  //         }),
+  //       },
+  //       time: new Date().toLocaleTimeString("en-PH", {
+  //         hour: "2-digit",
+  //         minute: "2-digit",
+  //       }),
+  //     };
+  //     await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
+  //   } catch (error) {
+  //     console.error("Error adding topic:", error);
+  //   }
+  // };
 
   return (
     <ScrollView
       contentContainerStyle={{
         justifyContent: "center",
-        alignItems: "center",
         marginTop: 15,
       }}
       showsVerticalScrollIndicator={false}
     >
+      <TopicCard tag="pomodoro" topic="Test topic"/>
       {doneTopics.map((topic) => (
         <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} />
       ))}
