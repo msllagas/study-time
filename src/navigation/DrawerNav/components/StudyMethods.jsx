@@ -1,18 +1,19 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
-import { Button, Card, IconButton, MD3Colors } from "react-native-paper";
+import { Button, Card, IconButton, MD3Colors, Surface } from "react-native-paper";
 import { colors } from "../../../utils/colors";
 import techniques from "../../../utils/techniques";
 
 const StudyMethodsCard = ({ title }) => {
   const cardWidth = Dimensions.get("window").width * 0.9;
   return (
-    <View
+    <Surface
+    mode="elevated"
       style={{
         position: "relative",
         height: 100,
         width: cardWidth,
-        borderColor: "black",
+        borderColor: "rgba(0, 0, 0, .6)",
         borderWidth: 1,
         marginTop: 15,
         borderRadius: 20,
@@ -20,9 +21,8 @@ const StudyMethodsCard = ({ title }) => {
         alignItems: "center",
         backgroundColor: colors.redOrange,
         borderBottomWidth: 4,
-        elevation: 15,
-        shadowColor: colors.blueGreen,
       }}
+      elevation={3}
     >
       <IconButton
         icon="help-circle-outline"
@@ -34,7 +34,7 @@ const StudyMethodsCard = ({ title }) => {
       <View>
         <Text style={{ color: colors.blueGreen, fontSize: 26 }}>{title}</Text>
       </View>
-    </View>
+    </Surface>
   );
 };
 
