@@ -7,11 +7,11 @@ import StartUp from "./src/screens/StartUp";
 import MainPage from "./src/screens/MainPage";
 import Register from "./src/screens/Register";
 import Drawer from './src/navigation/DrawerNav/Drawer';
-import ActiveRecall from './src/navigation/DrawerNav/components/ActiveRecall';
-import Pomodoro from './src/navigation/DrawerNav/components/Pomodoro';
-import PomodoroAdd from './src/navigation/DrawerNav/components/PomodoroAdd';
-import PomodoroTimer from './src/navigation/DrawerNav/components/PomodoroTimer';
-import PomodoroDone from './src/navigation/DrawerNav/components/PomodoroDone';
+import ActiveRecall from './src/navigation/DrawerNav/components/ActiveRecall/ActiveRecall';
+import Pomodoro from './src/navigation/DrawerNav/components/Pomodoro/Pomodoro';
+import PomodoroAdd from './src/navigation/DrawerNav/components/Pomodoro/PomodoroAdd';
+import PomodoroTimer from './src/navigation/DrawerNav/components/Pomodoro/PomodoroTimer';
+import PomodoroDone from './src/navigation/DrawerNav/components/Pomodoro/PomodoroDone';
 
 const Stack = createNativeStackNavigator();
 export default function App() {

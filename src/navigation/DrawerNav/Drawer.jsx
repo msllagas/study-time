@@ -4,9 +4,9 @@ import { colors } from "../../utils/colors";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
-import ActiveRecall from "./components/ActiveRecall";
+import Pomodoro from "./components/Pomodoro/Pomodoro";
+import ActiveRecall from "./components/ActiveRecall/ActiveRecall";
 import StudyMethods from "./components/StudyMethods";
-import Pomodoro from "./components/Pomodoro";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();

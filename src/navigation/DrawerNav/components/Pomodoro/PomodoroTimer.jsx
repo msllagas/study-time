@@ -11,20 +11,18 @@ import {
   import React from 'react';
   import { Button, Appbar } from "react-native-paper";
   import { useNavigation } from "@react-navigation/native";
-  
-  
-  
-  const PomodoroAdd = ({navigation}) => {
+  import { colors } from "../../../../utils/colors";
+ 
+
+  const PomodoroTimer = () => {
       return (
           <View>
-        
             <Text>Text here</Text>
-            <Pressable onPress={onPressFunc}>
-              <Text>Home Button</Text>
+            <Pressable>
+              <Text>timer here</Text>
             </Pressable>
-           
           </View>
         );
   }
   
-  export default PomodoroAdd;
+  export default PomodoroTimer

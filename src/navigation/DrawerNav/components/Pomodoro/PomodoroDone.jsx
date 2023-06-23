@@ -11,7 +11,7 @@ import {
   import React from 'react';
   import { Button, Appbar } from "react-native-paper";
   import { useNavigation } from "@react-navigation/native";
-import { colors } from "../../../utils/colors";
+import { colors } from "../../../../utils/colors";
   
   
   
