@@ -23,7 +23,8 @@ export default function App() {
     AlumniSansRegular: require('./assets/fonts/AlumniSans-Regular.ttf'),
     FuzzyBubblesBold: require('./assets/fonts/FuzzyBubbles-Bold.ttf'),
     FuzzyBubblesRegular: require('./assets/fonts/FuzzyBubbles-Regular.ttf'),
-    Inter: require('./assets/fonts/Inter-VariableFont_slnt,wght.ttf'),
+    // Inter: require ('./assets/fonts/Inter-VariableFont_slnt,wght.ttf')
+
 });
 
 if (!loaded) {
