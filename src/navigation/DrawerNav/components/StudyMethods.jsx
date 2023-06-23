@@ -15,7 +15,7 @@ import {
   Modal,
   PaperProvider,
   Portal,
-  Text
+  Text,
 } from "react-native-paper";
 import { colors } from "../../../utils/colors";
 import techniques from "../../../utils/techniques";
@@ -62,31 +62,34 @@ const StudyMethodsCard = ({ title, description, onPress }) => {
 
 const StudyMethods = () => {
   const [visible, setVisible] = React.useState(false);
-  const [modalContent, setModalContent] = React.useState({ title: "", description: "" });
+  const [modalContent, setModalContent] = React.useState({
+    title: "",
+    description: "",
+  });
 
   const showModal = (title, description) => {
-    setModalContent({ title, description }); 
+    setModalContent({ title, description });
     setVisible(true);
   };
   const hideModal = () => setVisible(false);
 
-  const containerStyle = { backgroundColor: "white", padding: 20 };
+  const containerStyle = { backgroundColor: "white", padding: 20, marginHorizontal: 20, borderRadius: 10 };
   return (
     <SafeAreaView style={{ backgroundColor: colors.blueGreen, height: "100%" }}>
-      <ScrollView
-        contentContainerStyle={{ alignItems: "center", paddingBottom: 20 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <PaperProvider>
-          <Portal>
-            <Modal
-              visible={visible}
-              onDismiss={hideModal}
-              contentContainerStyle={containerStyle}
-            >
-              <Text>{modalContent.description}</Text>
-            </Modal>
-          </Portal>
+      <PaperProvider>
+        <Portal>
+          <Modal
+            visible={visible}
+            onDismiss={hideModal}
+            contentContainerStyle={containerStyle}
+          >
+            <Text variant="bodyLarge">{modalContent.description}</Text>
+          </Modal>
+        </Portal>
+        <ScrollView
+          contentContainerStyle={{ alignItems: "center", paddingBottom: 20 }}
+          showsVerticalScrollIndicator={false}
+        >
           {techniques.map((technique) => (
             <StudyMethodsCard
               key={technique.id}
@@ -95,8 +98,8 @@ const StudyMethods = () => {
               onPress={showModal}
             />
           ))}
-        </PaperProvider>
-      </ScrollView>
+        </ScrollView>
+      </PaperProvider>
     </SafeAreaView>
   );
 };
