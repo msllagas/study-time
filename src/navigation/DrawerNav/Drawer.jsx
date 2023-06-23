@@ -6,6 +6,7 @@ import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
 import Pomodoro from "./components/Pomodoro/Pomodoro";
 import ActiveRecall from "./components/ActiveRecall/ActiveRecall";
+import SpacedRepitition from "./components/SpacedRepitition/SpacedRepitition";
 import StudyMethods from "./components/StudyMethods";
 
 const Drawer = () => {
@@ -62,12 +63,21 @@ const Drawer = () => {
           drawerLabel: "Active Recall (temp)",
         }}
       />
-      <Drawer.Screen 
-      name="Study Methods" 
-      component={StudyMethods}
-      options={{
-        headerTitle: "Study Methods"
-      }}/>
+      <Drawer.Screen
+        name="SpacedRepitition"
+        component={SpacedRepitition}
+        options={{
+          headerTitle: "SpacedRepitition",
+          drawerLabel: "SpacedRepitition (temp)",
+        }}
+      />
+      <Drawer.Screen
+        name="Study Methods"
+        component={StudyMethods}
+        options={{
+          headerTitle: "Study Methods",
+        }}
+      />
     </Drawer.Navigator>
   );
 };
