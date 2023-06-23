@@ -8,15 +8,16 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import React from 'react';
+import React from "react";
 import { Button, Appbar } from "react-native-paper";
-
+import AddButton from "../../../../components/AddButton";
 
 const ActiveRecall = () => {
-    return (
-        <View>
-        </View>
-      );
-}
+  return (
+    <View>
+      <AddButton />
+    </View>
+  );
+};
 
-export default ActiveRecall
+export default ActiveRecall;
