@@ -5,6 +5,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
 import Pomodoro from "./components/Pomodoro/Pomodoro";
+import SpacedRepitition from "./components/SpacedRepitition/SpacedRepitition";
 import ActiveRecall from "./components/ActiveRecall/ActiveRecall";
 import StudyMethods from "./components/StudyMethods";
 
@@ -62,12 +63,21 @@ const Drawer = () => {
           drawerLabel: "Active Recall (temp)",
         }}
       />
-      <Drawer.Screen 
-      name="Study Methods" 
-      component={StudyMethods}
-      options={{
-        headerTitle: "Study Methods"
-      }}/>
+      <Drawer.Screen
+        name="SpacedRepitition"
+        component={SpacedRepitition}
+        options={{
+          headerTitle: "Spaced Repitition",
+          drawerLabel: "Spaced Repitition(temp)",
+        }}
+      />
+      <Drawer.Screen
+        name="Study Methods"
+        component={StudyMethods}
+        options={{
+          headerTitle: "Study Methods",
+        }}
+      />
     </Drawer.Navigator>
   );
 };
