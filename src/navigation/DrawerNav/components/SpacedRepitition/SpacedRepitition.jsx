@@ -10,9 +10,13 @@ import {
 } from "react-native";
 import React from "react";
 import { Button, Appbar } from "react-native-paper";
-
+import AddButton from "../../../../components/AddButton";
 const SpacedRepitition = () => {
-  return <View></View>;
+  return (
+    <View>
+      <AddButton />
+    </View>
+  );
 };
 
 export default SpacedRepitition;
