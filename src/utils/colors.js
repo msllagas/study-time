@@ -14,7 +14,7 @@ export const colors = {
     //methods colors
     lighterYellow: 'rgba(249,188,96,.05)',
     violet: '#9747FF',
-    lighterViolet: 'rgba(151,71,255,.05)',
+    lightViolet: 'rgba(151,71,255,.05)',
     green: '#1E6529',
     lightGreen: '#5BC16B',
     lighterGreen: 'rgba(91,193,107,.05)',

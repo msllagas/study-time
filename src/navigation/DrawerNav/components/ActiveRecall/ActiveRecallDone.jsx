@@ -15,13 +15,13 @@ import { colors } from "../../../../utils/colors";
   
   
   
-  const PomodoroDone = ({navigation}) => {
+  const ActiveRecallDone = ({navigation}) => {
     const _goBack = () => navigation.goBack();
       return (
         <View>
             <Appbar.Header style={styles.appbarHeader} mode="center-aligned">
                 <Appbar.BackAction onPress= {_goBack}/>
-                <Appbar.Content title="Pomodoro Method" titleStyle={styles.appbarTitle}/>
+                <Appbar.Content title="Active Recall" titleStyle={styles.appbarTitle}/>
             </Appbar.Header>
             {/* {topicName} */}
             <Text style={styles.topicName}>Topic 1</Text>
@@ -46,7 +46,7 @@ import { colors } from "../../../../utils/colors";
         );
   }
   
-  export default PomodoroDone
+  export default ActiveRecallDone
 
   const styles=StyleSheet.create({
     appbarHeader:{
@@ -68,7 +68,7 @@ import { colors } from "../../../../utils/colors";
     topicName: {
         fontFamily:'AmaticBold',
         fontSize: 64,
-        color: colors.purple,
+        color: colors.green,
         textAlign: 'center'
     },
     subtitle: {
