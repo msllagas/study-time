@@ -46,7 +46,7 @@ const PomodoroAdd = ({navigation}) => {
               icon="arrow-left" 
               style={styles.backButton} 
               size={40}
-              onPress={()=>navigation.navigate("Pomodoro")}
+              onPress={_goBack}
             />
             
             <IconButton
@@ -80,85 +80,84 @@ const PomodoroAdd = ({navigation}) => {
               style={{width:'70%', alignSelf:'center', marginBottom:30}}
             />
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Start at 
-              <Text style={styles.smallText}>(min)
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Start at 
+                <Text style={styles.smallText}>(min)
+                </Text>
               </Text>
-            </Text>
-            <TextInput
-              value={startTime}
-              onChangeText={startTime => setStartTime(startTime)}
-              style={styles.setupInput}
-              mode="outlined"
-            />            
-          </View>
+              <TextInput
+                value={startTime}
+                onChangeText={startTime => setStartTime(startTime)}
+                style={styles.setupInput}
+                mode="outlined"
+              />            
+            </View>
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Increments 
-              <Text style={styles.smallText}>(min)
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Increments 
+                <Text style={styles.smallText}>(min)
+                </Text>
               </Text>
-            </Text>
-            <TextInput
-              value={increment}
-              onChangeText={increment => setIncrement(increment)}
-              style={styles.setupInput}
-              mode="outlined"
-            />
-          </View>
+              <TextInput
+                value={increment}
+                onChangeText={increment => setIncrement(increment)}
+                style={styles.setupInput}
+                mode="outlined"
+              />
+            </View>
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Session Set</Text>
-            <TextInput
-              value={sessionSet}
-              onChangeText={sessionSet => setSessionSet(sessionSet)}
-              style={styles.setupInput}
-              mode="outlined"
-            />
-          </View>
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Session Set</Text>
+              <TextInput
+                value={sessionSet}
+                onChangeText={sessionSet => setSessionSet(sessionSet)}
+                style={styles.setupInput}
+                mode="outlined"
+              />
+            </View>
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Break Time <Text style={styles.smallText}>(min)</Text></Text>
-            <TextInput
-              value={breakTime}
-              onChangeText={breakTime => setBreakTime(breakTime)}
-              style={styles.setupInput}
-              mode="outlined"
-            />
-          </View>
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Break Time <Text style={styles.smallText}>(min)</Text></Text>
+              <TextInput
+                value={breakTime}
+                onChangeText={breakTime => setBreakTime(breakTime)}
+                style={styles.setupInput}
+                mode="outlined"
+              />
+            </View>
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Sessions</Text>
-            <TextInput
-              value={sessions}
-              onChangeText={sessions => setSessions(sessions)}
-              style={styles.setupInput}
-              mode="outlined"
-            />
-          </View>
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Sessions</Text>
+              <TextInput
+                value={sessions}
+                onChangeText={sessions => setSessions(sessions)}
+                style={styles.setupInput}
+                mode="outlined"
+              />
+            </View>
 
-          <View style={styles.setupContainer}>             
-            <Text style={styles.largeText}>Short Break <Text style={styles.smallText}>(min)</Text></Text>
-            <TextInput
-              value={shortBreak}
-              onChangeText={shortBreak => setShortBreak(shortBreak)}
-              style={styles.setupInput}
-              mode="outlined"
-            />
-          </View>
-          
-          <Button 
-            mode="contained" 
-            onPress={()=>navigation.navigate("PomodoroTimer")} 
-            style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:30}}>
-              Start
-          </Button>
+            <View style={styles.setupContainer}>             
+              <Text style={styles.largeText}>Short Break <Text style={styles.smallText}>(min)</Text></Text>
+              <TextInput
+                value={shortBreak}
+                onChangeText={shortBreak => setShortBreak(shortBreak)}
+                style={styles.setupInput}
+                mode="outlined"
+              />
+            </View>
+            
+            <Button 
+              mode="contained" 
+              onPress={()=>navigation.navigate("PomodoroTimer")} 
+              style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:30}}>
+                Start
+            </Button>
 
-          <Portal>
-            <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-              <Text>Example Modal.  Click outside this area to dismiss.</Text>
-            </Modal>
-          </Portal>
-
+            <Portal>
+              <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+                <Text>Example Modal.  Click outside this area to dismiss.</Text>
+              </Modal>
+            </Portal>
           </PaperProvider>
         </ScrollView>
       </SafeAreaView>
