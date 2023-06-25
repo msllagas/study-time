@@ -19,16 +19,15 @@ const Pomodoro = () => {
   const navigation = useNavigation();
   return (
     <View>
-      <Text>Text here</Text>
       <Pressable onPress={() => navigation.navigate("PomodoroDone")}>
         <Text>go to DONE</Text>
       </Pressable>
-      <Pressable onPress={() => navigation.navigate("PomodoroTimer")}>
-        <Text>go to Timer</Text>
-      </Pressable>
+
       <TopBar />
 
-      <AddButton />
+      <AddButton 
+      onPress={() => navigation.navigate("PomodoroAdd")}
+      />
     </View>
   );
 };

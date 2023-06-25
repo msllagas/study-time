@@ -2,12 +2,12 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
-const AddButton = () => {
+const AddButton = ({onPress}) => {
   return (
     <FAB
       icon="plus"
       style={styles.fab}
-      onPress={() => console.log("Pressed")}
+      onPress={onPress}
     />
   );
 };
@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
   fab: {
     position: "fixed",
     bottom: "50px",
-    right: "50px",
+    right: "20px",
     width: "55px",
+    borderRadius:30
   },
 });
 

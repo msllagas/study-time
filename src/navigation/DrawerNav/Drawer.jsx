@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: "RockSalt",
     color: colors.redOrange,
-    fontSize: 20,
   },
   label: {
     color: colors.white,
