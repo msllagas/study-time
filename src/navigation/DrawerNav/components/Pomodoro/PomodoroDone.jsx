@@ -7,22 +7,23 @@ import {
     StyleSheet,
     Pressable,
     Image,
+    ScrollView
   } from "react-native";
-  import React from 'react';
-  import { Button, Appbar } from "react-native-paper";
-  import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Button, Appbar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
+import Header from "../../../../components/Header";
+
   
   
   
   const PomodoroDone = ({navigation}) => {
     const _goBack = () => navigation.goBack();
       return (
+      <ScrollView>
         <View>
-            <Appbar.Header style={styles.appbarHeader} mode="center-aligned">
-                <Appbar.BackAction onPress= {_goBack}/>
-                <Appbar.Content title="Pomodoro Method" titleStyle={styles.appbarTitle}/>
-            </Appbar.Header>
+            <Header title="Pomodoro" onPressBackArrow={_goBack}/>
             {/* {topicName} */}
             <Text style={styles.topicName}>Topic 1</Text>
             {/* {topicDate} */}
@@ -43,24 +44,13 @@ import { colors } from "../../../../utils/colors";
             </View>
            
           </View>
+        </ScrollView>
         );
   }
   
   export default PomodoroDone
 
   const styles=StyleSheet.create({
-    appbarHeader:{
-      backgroundColor:colors.grayBlue, 
-      flexDirection:'row',
-      justifyContent:'space-between',
-      alignItems: 'center'
-    },
-    appbarTitle:{
-      fontFamily:'RockSalt',
-      fontSize: 16,
-      paddingVertical: 10,
-      textAlignVertical:'center'
-    },
     textContainer: {
       width: '70%',
       alignSelf: 'center'

@@ -20,6 +20,7 @@ import { Button,
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import Constants from 'expo-constants';
+import { color } from "react-native-reanimated";
   
   
   
@@ -77,7 +78,9 @@ const PomodoroAdd = ({navigation}) => {
               label="Topic"
               value={topicName}
               onChangeText={topicName => setTopicName(topicName)}
-              style={{width:'70%', alignSelf:'center', marginBottom:30}}
+              style={{width:'70%', alignSelf:'center', marginBottom:30, backgroundColor: colors.lighterViolet}}
+              underlineColor={colors.lightViolet}
+              activeUnderlineColor={colors.violet}
             />
 
             <View style={styles.setupContainer}>             
@@ -90,6 +93,8 @@ const PomodoroAdd = ({navigation}) => {
                 onChangeText={startTime => setStartTime(startTime)}
                 style={styles.setupInput}
                 mode="outlined"
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
               />            
             </View>
 
@@ -103,6 +108,8 @@ const PomodoroAdd = ({navigation}) => {
                 onChangeText={increment => setIncrement(increment)}
                 style={styles.setupInput}
                 mode="outlined"
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
               />
             </View>
 
@@ -112,6 +119,8 @@ const PomodoroAdd = ({navigation}) => {
                 value={sessionSet}
                 onChangeText={sessionSet => setSessionSet(sessionSet)}
                 style={styles.setupInput}
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
                 mode="outlined"
               />
             </View>
@@ -123,6 +132,8 @@ const PomodoroAdd = ({navigation}) => {
                 onChangeText={breakTime => setBreakTime(breakTime)}
                 style={styles.setupInput}
                 mode="outlined"
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
               />
             </View>
 
@@ -133,6 +144,8 @@ const PomodoroAdd = ({navigation}) => {
                 onChangeText={sessions => setSessions(sessions)}
                 style={styles.setupInput}
                 mode="outlined"
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
               />
             </View>
 
@@ -143,6 +156,8 @@ const PomodoroAdd = ({navigation}) => {
                 onChangeText={shortBreak => setShortBreak(shortBreak)}
                 style={styles.setupInput}
                 mode="outlined"
+                outlineColor={colors.lightViolet}
+                activeOutlineColor={colors.violet}
               />
             </View>
             
@@ -200,6 +215,8 @@ const PomodoroAdd = ({navigation}) => {
     },
     setupInput: {
       width:'30%',
-      alignSelf:'center'
+      alignSelf:'center',
+      backgroundColor: colors.lighterViolet,
+      textAlign: 'center',
     },
   })

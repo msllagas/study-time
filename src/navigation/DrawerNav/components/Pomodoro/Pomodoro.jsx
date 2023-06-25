@@ -14,22 +14,36 @@ import { useNavigation } from "@react-navigation/native";
 import TopBar from "../../../TopTabNav/TopBar";
 import { colors } from "../../../../utils/colors";
 import AddButton from "../../../../components/AddButton";
+import Constants from 'expo-constants';
 
 const Pomodoro = () => {
   const navigation = useNavigation();
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Pressable onPress={() => navigation.navigate("PomodoroDone")}>
         <Text>go to DONE</Text>
       </Pressable>
 
-      <TopBar />
-
+      <TopBar/>
       <AddButton 
-      onPress={() => navigation.navigate("PomodoroAdd")}
-      />
-    </View>
+      onPressAdd={()=>navigation.navigate("PomodoroAdd")}/>
+      
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create ({
+  container:{
+    height: '100%',
+    backgroundColor:colors.white,
+    paddingTop: Constants.statusBarHeight,
+  },
+  addBtn: {
+    flex:1,
+    justifyContent: 'flex-end',
+    marginBottom: 50
+  },
+
+})
 
 export default Pomodoro;

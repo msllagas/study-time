@@ -8,6 +8,8 @@ import MainPage from "./src/screens/MainPage";
 import Register from "./src/screens/Register";
 import Drawer from './src/navigation/DrawerNav/Drawer';
 import ActiveRecall from './src/navigation/DrawerNav/components/ActiveRecall/ActiveRecall';
+import ActiveRecallAdd from './src/navigation/DrawerNav/components/ActiveRecall/ActiveRecallAdd';
+import ActiveRecallDone from './src/navigation/DrawerNav/components/ActiveRecall/ActiveRecallDone';
 import Pomodoro from './src/navigation/DrawerNav/components/Pomodoro/Pomodoro';
 import PomodoroAdd from './src/navigation/DrawerNav/components/Pomodoro/PomodoroAdd';
 import PomodoroTimer from './src/navigation/DrawerNav/components/Pomodoro/PomodoroTimer';
@@ -38,6 +40,8 @@ if (!loaded) {
         <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="Drawer" component={Drawer} />
         <Stack.Screen name="ActiveRecall" component={ActiveRecall}/>
+        <Stack.Screen name="ActiveRecallAdd" component={ActiveRecallAdd}/>
+        <Stack.Screen name="ActiveRecallDone" component={ActiveRecallDone}/>
         <Stack.Screen name="Pomodoro" component={Pomodoro}/>
         <Stack.Screen name="PomodoroAdd" component={PomodoroAdd}/>
         <Stack.Screen name="PomodoroTimer" component={PomodoroTimer}/>
