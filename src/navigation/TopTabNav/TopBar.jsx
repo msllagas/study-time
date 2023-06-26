@@ -8,9 +8,9 @@ const TopBar = ({ Done, Ongoing, tag }) => {
     <Tab.Navigator
       initialRouteName="Done"
       screenOptions={{
-        activeTintColor: colors.violet,
         labelStyle: { fontSize: 14 },
         style: { backgroundColor: "white" },
+        tabBarIndicatorStyle:{ backgroundColor:colors.redOrange },
       }}
     >
       <Tab.Screen name="Done" options={{ tabBarLabel: "Done" }}>
