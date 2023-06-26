@@ -42,7 +42,7 @@ const Done = ({ tag}) => {
     };
   
     fetchDoneTopics();
-  }, [tag]);
+  }, [tag, doneTopics]);
   
   return (
     <ScrollView
