@@ -8,6 +8,8 @@ import Pomodoro from "./components/Pomodoro/Pomodoro";
 import ActiveRecall from "./components/ActiveRecall/ActiveRecall";
 import SpacedRepitition from "./components/SpacedRepitition/SpacedRepitition";
 import StudyMethods from "./components/StudyMethods";
+import SQ3R from "./components/SQ3R/SQ3R";
+import PQ4R from "./components/PQ4R/PQ4R";
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -71,6 +73,25 @@ const Drawer = () => {
           drawerLabel: "SpacedRepitition (temp)",
         }}
       />
+
+      <Drawer.Screen
+        name="SQ3R"
+        component={SQ3R}
+        options={{
+          headerTitle: "SQ3R",
+          drawerLabel: "SQ3R (temp)",
+        }}
+      />
+
+      <Drawer.Screen
+        name="PQ4R"
+        component={PQ4R}
+        options={{
+          headerTitle: "PQ4R",
+          drawerLabel: "PQ4R (temp)",
+        }}
+      />
+
       <Drawer.Screen
         name="Study Methods"
         component={StudyMethods}
