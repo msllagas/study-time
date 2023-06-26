@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { View, Text, BackHandler, StyleSheet } from "react-native";
 import { colors } from "../../utils/colors";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator,   DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem, } from "@react-navigation/drawer";
 import MainPage from "../../screens/MainPage";
 import TopBar from "../TopTabNav/TopBar";
 import Pomodoro from "./components/Pomodoro/Pomodoro";
 import ActiveRecall from "./components/ActiveRecall/ActiveRecall";
 import SpacedRepitition from "./components/SpacedRepitition/SpacedRepitition";
 import StudyMethods from "./components/StudyMethods";
+
 import SQ3R from "./components/SQ3R/SQ3R";
 import PQ4R from "./components/PQ4R/PQ4R";
+
+import Logo from "../../components/Logo";
+
 
 const Drawer = () => {
   const Drawer = createDrawerNavigator();
@@ -27,6 +33,15 @@ const Drawer = () => {
   //     BackHandler.removeEventListener("hardwareBackPress", handleExitApp);
   //   };
   // }, []);
+
+  function CustomDrawerContent(props) {
+    return (
+      <DrawerContentScrollView {...props}>
+        <Logo style={{alignSelf:'center', marginVertical: 20}}/>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    );
+  }
   return (
     <Drawer.Navigator
       useLegacyImplementation
@@ -40,6 +55,7 @@ const Drawer = () => {
         headerTitleAlign: "center",
         drawerLabelStyle: styles.label,
       }}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
         name="Main"

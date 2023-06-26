@@ -8,10 +8,11 @@ import {
     Pressable,
     Image,
   } from "react-native";
-  import React from 'react';
-  import { Button, Appbar } from "react-native-paper";
-  import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Button, Appbar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
+import Header from "../../../../components/Header";
   
   
   
@@ -19,26 +20,18 @@ import { colors } from "../../../../utils/colors";
     const _goBack = () => navigation.goBack();
       return (
         <View>
-            <Appbar.Header style={styles.appbarHeader} mode="center-aligned">
-                <Appbar.BackAction onPress= {_goBack}/>
-                <Appbar.Content title="Active Recall" titleStyle={styles.appbarTitle}/>
-            </Appbar.Header>
+            <Header title={"Active Recall"} onPressBackArrow={_goBack}/>
             {/* {topicName} */}
             <Text style={styles.topicName}>Topic 1</Text>
             {/* {topicDate} */}
-            <Text style={styles.subtitle}>June 1, 2023</Text>
-            <View style={styles.textContainer}>
-            {/* {setNum}  */}
-            <Text style={styles.setTitle}>Set 1</Text>
-            {/* {sessionNum} */}
-            <Text style={styles.sessionTitle}>Session 1:
-            {/* {sessionTime} */}
-            <Text style={styles.timeStamp}>  5:00pm - 5:15pm</Text>
-            </Text>
-            {/* if setNum == userSetNum <Text>--BREAK TIME--</Text>
-                else <Text>--SHORT TIME--</Text>*/}
-            <Text style={styles.breakNote}>--SHORT BREAK--</Text>
-            {/* if setNum == userSetNum && sessionNum == userSetSession {display image} */}
+            <Text style={styles.subtitle}>June 1, 2023</Text>    
+
+            <View style={styles.textContainer}>            
+            {/* {questionNum} */}
+            <Text style={styles.questionTitle}>Q1:
+            <Text style={styles.answer}>  correct</Text>
+            </Text>            
+            {/* if questionNum == userQuestionNum {display image} */}
             <Image style={styles.imageContainer} source={require('../../../../../assets/imgs/done-badge.png')} />
             </View>
            
@@ -57,13 +50,13 @@ import { colors } from "../../../../utils/colors";
     },
     appbarTitle:{
       fontFamily:'RockSalt',
-      fontSize: 16,
       paddingVertical: 10,
       textAlignVertical:'center'
     },
     textContainer: {
       width: '70%',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      marginTop: 20,
     },
     topicName: {
         fontFamily:'AmaticBold',
@@ -76,24 +69,14 @@ import { colors } from "../../../../utils/colors";
         fontSize: 18,
         textAlign: 'center'
     },
-    setTitle: {
-        fontFamily: 'Inter',
-        fontSize: 24,
-        marginTop: 30
-    },
-    sessionTitle: {
+    questionTitle: {
         fontFamily: 'AlumniSansRegular',
         fontSize: 32
     },
-    timeStamp: {
+    answer: {
         fontFamily: 'FuzzyBubblesRegular',
-        fontSize: 16,
+        fontSize: 20,
         textAlignVertical:'center'
-    },
-    breakNote: {
-        fontFamily: 'AlumniSansRegular',
-        fontSize: 24,
-        textAlign: 'center'
     },
     imageContainer: {
       alignSelf: 'center',

@@ -18,13 +18,12 @@ Import first
 <Header title='Pomodoro Method'/> 
 */
 
-const Header = ({title}) =>{
-    const _goBack = () => console.log('Back'); 
+const Header = ({title, onPressBackArrow}) =>{ 
     return (
-      <SafeAreaView>
-        <Appbar.Header mode="center-aligned" style={styles.appbarHeader}>
-          <Appbar.BackAction onPress={_goBack}/>
-          <Appbar.Content title={title} color={colors.redOrange} titleStyle={styles.appbarTitle}/>          
+      <SafeAreaView>       
+        <Appbar.Header style={styles.appbarHeader} mode="center-aligned">
+          <Appbar.BackAction onPress= {onPressBackArrow} color={colors.redOrange}/>
+          <Appbar.Content title={title} color={colors.redOrange} titleStyle={styles.appbarTitle}/>
         </Appbar.Header>
       </SafeAreaView>
     );
@@ -32,14 +31,16 @@ const Header = ({title}) =>{
   export default Header;
 
   const styles = StyleSheet.create({
-    appbarHeader: {
-      backgroundColor: colors.blueGreen2,
+    appbarHeader:{
+      backgroundColor:colors.grayBlue, 
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems: 'center'
     },
     appbarTitle:{
-      fontFamily: 'RockSalt',
-      fontSize: 20,
+      fontFamily:'RockSalt',
+      fontSize: 16,
+      paddingVertical: 10,
+      textAlignVertical:'center'
     },
-    tabTitle:{
-      fontFamily: 'AmaticRegular'
-    }
   });
