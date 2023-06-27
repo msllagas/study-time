@@ -6,6 +6,7 @@ import { colors } from '../../../../utils/colors';
 import { IconButton, Button } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
 
+//connect to firebase, read pomodoro on-going topic --> set number, sessions, session time
 const children = ({ remainingTime }) => {
   const hours = Math.floor(remainingTime / 3600)
   const minutes = Math.floor((remainingTime % 3600) / 60)
@@ -13,7 +14,6 @@ const children = ({ remainingTime }) => {
 
   return `${hours}:${minutes}:${seconds}`
 }
-
 
 export default function PomodoroTimer({navigation}) {
   const [isPlaying, setIsPlaying] = React.useState(true)

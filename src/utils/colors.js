@@ -18,7 +18,7 @@ export const colors = {
     lighterViolet: 'rgba(151,71,255,.05)',
     green: '#1E6529',
     lightGreen: '#5BC16B',
-    lighterGreen: 'rgba(91,193,107,.05)',
+    lighterGreen: 'rgba(91,193,107,.06)',
     purple: '#DA60F9',
     lightPurple: '#E1A8EF',
     lighterPurple: 'rgba(218, 96,249,.05)',

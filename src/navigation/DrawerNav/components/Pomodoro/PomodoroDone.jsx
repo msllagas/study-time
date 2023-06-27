@@ -15,9 +15,8 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import Header from "../../../../components/Header";
 
-  
-  
-  
+//connect to firebase, read pomodoro 1 done topic
+//displayHistory
   const PomodoroDone = ({navigation}) => {
     const _goBack = () => navigation.goBack();
       return (
@@ -28,20 +27,23 @@ import Header from "../../../../components/Header";
             <Text style={styles.topicName}>Topic 1</Text>
             {/* {topicDate} */}
             <Text style={styles.subtitle}>June 1, 2023</Text>
+
+            {/* displayHistory */}
             <View style={styles.textContainer}>
-            {/* {setNum}  */}
-            <Text style={styles.setTitle}>Set 1</Text>
-            {/* {sessionNum} */}
-            <Text style={styles.sessionTitle}>Session 1:
-            {/* {sessionTime} */}
-            <Text style={styles.timeStamp}>  5:00pm - 5:15pm</Text>
-            </Text>
-            {/* if setNum == userSetNum <Text>--BREAK TIME--</Text>
-                else <Text>--SHORT TIME--</Text>*/}
-            <Text style={styles.breakNote}>--SHORT BREAK--</Text>
-            {/* if setNum == userSetNum && sessionNum == userSetSession {display image} */}
-            <Image style={styles.imageContainer} source={require('../../../../../assets/imgs/done-badge.png')} />
+              {/* {setNum}  */}
+              <Text style={styles.setTitle}>Set 1</Text>
+              {/* {sessionNum} */}
+              <Text style={styles.sessionTitle}>Session 1:
+              {/* {sessionTime} */}
+              <Text style={styles.timeStamp}>  5:00pm - 5:15pm</Text>
+              </Text>
+              {/* if setNum == userSetNum <Text>--BREAK TIME--</Text>
+                  else <Text>--SHORT TIME--</Text>*/}
+              <Text style={styles.breakNote}>--SHORT BREAK--</Text>
+              {/* if setNum == userSetNum && sessionNum == userSetSession {display image} */}
             </View>
+            
+            <Image style={styles.imageContainer} source={require('../../../../../assets/imgs/done-badge.png')} />
            
           </View>
         </ScrollView>

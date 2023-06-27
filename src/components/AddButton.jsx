@@ -9,6 +9,9 @@ import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
     height: '100%',
     backgroundColor:colors.white,
   },
+
+  usage
+  <AddButton onPressAdd={()=>console.log("pressed")}
 */
 const AddButton = ({onPressAdd}) => {
   return (
@@ -43,7 +46,8 @@ const styles = StyleSheet.create({
   fabView:{
     flex:1,
     justifyContent: 'flex-end',
-    marginBottom: 50
+    bottom: 50
+    // marginBottom: 50
   },
 });
 

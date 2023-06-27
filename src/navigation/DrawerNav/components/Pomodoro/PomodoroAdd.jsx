@@ -22,8 +22,7 @@ import { colors } from "../../../../utils/colors";
 import Constants from 'expo-constants';
 import { color } from "react-native-reanimated";
   
-  
-  
+ //connect to firebase, write setup 
 const PomodoroAdd = ({navigation}) => {
   const [topicName, setTopicName] = React.useState("");
   const [startTime, setStartTime] = React.useState("0");

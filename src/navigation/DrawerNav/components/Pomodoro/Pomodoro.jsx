@@ -22,11 +22,16 @@ import TopicCard from "../../../../components/TopicCard";
 function Dones() {
   return <Done tag="pomodoro"></Done>;
 }
+
 const Pomodoro = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro" />
+      <Pressable onPress={() => navigation.navigate("PomodoroDone")}>
+        <Text>go to DONE</Text>
+      </Pressable>
+      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro"/>
+      <AddButton onPressAdd={()=>navigation.navigate("PomodoroAdd")}/>
     </SafeAreaView>
   );
 };
