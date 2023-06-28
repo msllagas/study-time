@@ -93,24 +93,24 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
   let method;
 
   if (tag === "pomodoro") {
-    backgroundColor = "#8e44ad";
-    borderColor = "#8e44ad";
+    backgroundColor = colors.violet;
+    borderColor = colors.violet;
     method = "Pomodoro Technique";
   } else if (tag === "spaced repetition") {
-    backgroundColor = "#f39c12";
-    borderColor = "#f39c12";
+    backgroundColor = colors.beige
+    borderColor = colors.beige
     method = "Spaced Repetition";
   } else if (tag === "active recall") {
-    backgroundColor = "#27ae60";
-    borderColor = "#27ae60";
+    backgroundColor = colors.green;
+    borderColor = colors.green;
     method = "Active Recall";
   } else if (tag === "pq4r") {
-    backgroundColor = "#2980b9";
-    borderColor = "#2980b9";
+    backgroundColor = colors.skyBlue;
+    borderColor = colors.skyBlue;
     method = "PQ4R Method";
   } else if (tag === "sq3r") {
-    backgroundColor = "#9b59b6";
-    borderColor = "#9b59b6";
+    backgroundColor = colors.purple;
+    borderColor = colors.purple;
     method = "SQ3R Method";
   }
 
