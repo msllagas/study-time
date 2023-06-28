@@ -1,9 +1,10 @@
 import { ScrollView, View, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { FIRESTORE_DB } from "../../firebaseConfig";
 import TopicCard from "./TopicCard";
+import { colors } from "../utils/colors";
 
 const Ongoing = ({ tag }) => {
   const [ongoingTopics, setOngoingTopics] = useState([]);
@@ -50,7 +51,7 @@ const Ongoing = ({ tag }) => {
         >
           <ActivityIndicator
             animating={true}
-            color={MD2Colors.red800}
+            color={colors.blueGreen}
             size="large"
           />
         </View>
@@ -58,11 +59,17 @@ const Ongoing = ({ tag }) => {
 
       <ScrollView
         contentContainerStyle={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
       >
         {ongoingTopics.map((topic) => (
           <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} />
         ))}
-        {/* <TopicCard tag="pomodoro" topic="Sample awdawdawda wd awd awd awda daw dawd awdawdawdawd awdawd awd awd awd awd "/> */}
+        {/* <TopicCard tag="pomodoro" topic="Sample Topic 1"/>
+        <TopicCard tag="active recall" topic="Sample Topic 2"/>
+        <TopicCard tag="spaced repetition" topic="Sample Topic 3"/>
+        <TopicCard tag="pq4r" topic="Sample Topic 3"/>
+        <TopicCard tag="sq3r" topic="Sample Topic 3"/> */}
       </ScrollView>
     </View>
   );
