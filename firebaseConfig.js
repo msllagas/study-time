@@ -10,20 +10,34 @@ import { getFirestore } from "firebase/firestore";
 // import {...} from "firebase/storage";
 
 // Initialize Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyBEvpe3cOyfQcoi-694-OWEzDquiQfOm9k",
 
-    authDomain: "study-time-866b9.firebaseapp.com",
+// Main Project Config
+// PS: DO NOT UNCOMMENT
+// const firebaseConfig = {
+
+//     apiKey: "AIzaSyBEvpe3cOyfQcoi-694-OWEzDquiQfOm9k",
   
-    projectId: "study-time-866b9",
+//     authDomain: "study-time-866b9.firebaseapp.com",
   
-    storageBucket: "study-time-866b9.appspot.com",
+//     projectId: "study-time-866b9",
   
-    messagingSenderId: "936454543290",
+//     storageBucket: "study-time-866b9.appspot.com",
   
-    appId: "1:936454543290:web:7416ffe0999fec07ccef83"
+//     messagingSenderId: "936454543290",
   
-};
+//     appId: "1:936454543290:web:8e99c07e99ed26d1ccef83"
+  
+//   };
+  
+
+// For testing purposes
+// Changed based on your project config
+const firebaseConfig = {
+
+    // Add Here your project's firebase config
+  
+  };
+  
 
 export const FIREBASE_APP = initializeApp(firebaseConfig);
 export const FIRESTORE_DB = getFirestore(FIREBASE_APP);
