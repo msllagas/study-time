@@ -6,7 +6,7 @@ import {
   PanResponder,
   Animated,
 } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { IconButton, Text, Surface } from "react-native-paper";
 import { colors } from "../utils/colors";
 
 const TopicCard = ({ tag, topic = "Topic Here" }) => {
@@ -131,21 +131,24 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
         </Text>
       </Animated.View>
       <Animated.View style={styles.cardContainer}>
-        <Animated.View
+        <Surface
+        elevation={2}
           style={[
-            styles.card,
-            {
-              transform: [{ translateX: slideAnimation }],
-              width: cardWidth,
-              borderColor: borderColor,
-            },
-          ]}
-          {...panResponder.panHandlers}
+              styles.card,
+              {
+                transform: [{ translateX: slideAnimation }],
+                width: cardWidth,
+                borderColor: borderColor,
+                shadowColor: borderColor
+              },
+            ]}
+            {...panResponder.panHandlers}
         >
-          <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
-            {topic}
-          </Text>
-        </Animated.View>
+          
+            <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
+              {topic}
+            </Text>
+        </Surface>
       </Animated.View>
       <Animated.View
         style={[
@@ -181,25 +184,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingRight: 10,
   },
-  cardContainer: { 
-    alignSelf: "center", 
-    marginVertical: 5 
+  cardContainer: {
+    alignSelf: "center",
+    marginVertical: 5,
   },
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 5,
+    marginVertical: 2,
   },
   card: {
     borderWidth: 1,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 10,
+    paddingHorizontal: 13,
     position: "relative",
     flexDirection: "row",
-    minHeight: 60,
+    minHeight: 70,
   },
   methodText: {
     color: colors.white,
