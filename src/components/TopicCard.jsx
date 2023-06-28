@@ -130,20 +130,22 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
           {method}
         </Text>
       </Animated.View>
-      <Animated.View
-        style={[
-          styles.card,
-          {
-            transform: [{ translateX: slideAnimation }],
-            width: cardWidth,
-            borderColor: borderColor,
-          },
-        ]}
-        {...panResponder.panHandlers}
-      >
-        <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
-          {topic}
-        </Text>
+      <Animated.View style={styles.cardContainer}>
+        <Animated.View
+          style={[
+            styles.card,
+            {
+              transform: [{ translateX: slideAnimation }],
+              width: cardWidth,
+              borderColor: borderColor,
+            },
+          ]}
+          {...panResponder.panHandlers}
+        >
+          <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
+            {topic}
+          </Text>
+        </Animated.View>
       </Animated.View>
       <Animated.View
         style={[
@@ -178,6 +180,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: "center",
     paddingRight: 10,
+  },
+  cardContainer: { 
+    alignSelf: "center", 
+    marginVertical: 5 
   },
   container: {
     flex: 1,
