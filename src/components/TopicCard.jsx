@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Dimensions,
   PanResponder,
   Animated,
 } from "react-native";
-import { IconButton } from "react-native-paper";
+import { IconButton, Text } from "react-native-paper";
+import { colors } from "../utils/colors";
 
 const TopicCard = ({ tag, topic = "Topic Here" }) => {
   const slideAnimation = useRef(new Animated.Value(0)).current;
@@ -126,7 +126,9 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
           },
         ]}
       >
-        <Text style={styles.text}>{method}</Text>
+        <Text variant="labelSmall" style={styles.methodText}>
+          {method}
+        </Text>
       </Animated.View>
       <Animated.View
         style={[
@@ -139,7 +141,9 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
         ]}
         {...panResponder.panHandlers}
       >
-        <Text style={styles.topicText}>{topic}</Text>
+        <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
+          {topic}
+        </Text>
       </Animated.View>
       <Animated.View
         style={[
@@ -167,6 +171,14 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
 export default TopicCard;
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    paddingRight: 10,
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -183,6 +195,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     minHeight: 60,
   },
+  methodText: {
+    color: colors.white,
+  },
   textContainer: {
     position: "absolute",
     top: 0,
@@ -191,24 +206,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 20,
     zIndex: 100,
-  },
-  text: {
-    fontSize: 12,
-    textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
-  },
-  topicText: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  buttonContainer: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: "center",
-    paddingRight: 10,
   },
 });
