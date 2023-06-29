@@ -7,18 +7,30 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
+  Button,
 } from "react-native";
 import { colors } from "../../../../utils/colors";
 import AddButton from "../../../../components/AddButton";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const SQ3R = () => {
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [topicName, setTopicName] = useState("");
   const [isInputActive, setIsInputActive] = useState(false);
-
   const toggleModal = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const toggleSurvey = () => {
+    // Perform any save logic here
+
+    // Close the modal
+    setModalVisible(false);
+
+    // Navigate to "SQ3RSurvey" screen
+    navigation.navigate("SQ3RSurvey");
   };
 
   const handleInputFocus = () => {
@@ -67,7 +79,15 @@ const SQ3R = () => {
               onBlur={handleInputBlur}
             />
 
-            <TouchableOpacity style={styles.saveButton}>
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={toggleSurvey}
+              // Save button pressed
+              // Perform any save logic here
+
+              // Navigate to "SQ3RSurvey" screen
+              //navigation.navigate("SQ3RSurvey")
+            >
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -80,7 +100,7 @@ const SQ3R = () => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: colors.white,
+    backgroundColor: "#FFFFFF",
   },
 
   modalBackground: {

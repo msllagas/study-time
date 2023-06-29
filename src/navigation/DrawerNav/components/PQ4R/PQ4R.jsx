@@ -11,14 +11,26 @@ import {
 import { colors } from "../../../../utils/colors";
 import AddButton from "../../../../components/AddButton";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const PQ4R = () => {
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [topicName, setTopicName] = useState("");
   const [isInputActive, setIsInputActive] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const togglePreview = () => {
+    // Perform any save logic here
+
+    // Close the modal
+    setModalVisible(false);
+
+    // Navigate to "PQ4RSurvey" screen
+    navigation.navigate("PQ4RPreview");
   };
 
   const handleInputFocus = () => {
@@ -67,7 +79,15 @@ const PQ4R = () => {
               onBlur={handleInputBlur}
             />
 
-            <TouchableOpacity style={styles.saveButton}>
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={togglePreview}
+              // Save button pressed
+              // Perform any save logic here
+
+              // Navigate to "PQ4RSurvey" screen
+              //navigation.navigate("PQ4RSurvey")
+            >
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -109,6 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: colors.lighterBlue,
     borderBottomColor: colors.lightBlue,
+
     borderBottomWidth: 1,
   },
   inactiveInput: {
