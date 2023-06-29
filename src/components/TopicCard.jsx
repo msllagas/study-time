@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flexDirection: "row",
     minHeight: 70,
+    backgroundColor: 'white'
   },
   methodText: {
     color: colors.white,
