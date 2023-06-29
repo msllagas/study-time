@@ -7,9 +7,11 @@ import {
   Animated,
 } from "react-native";
 import { IconButton, Text, Surface } from "react-native-paper";
+import { doc, deleteDoc } from "firebase/firestore";
+import { FIRESTORE_DB } from "../../firebaseConfig";
 import { colors } from "../utils/colors";
 
-const TopicCard = ({ tag, topic = "Topic Here" }) => {
+const TopicCard = ({ tag, topic = "Topic Here", topicId }) => {
   const slideAnimation = useRef(new Animated.Value(0)).current;
   const buttonOpacity = useRef(new Animated.Value(0)).current;
   const buttonScale = useRef(new Animated.Value(0)).current;
@@ -114,6 +116,17 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
     method = "SQ3R Method";
   }
 
+
+  const deleteTopic = async () => {
+    try {
+      const topicRef = doc(FIRESTORE_DB, 'topics', topicId);
+      await deleteDoc(topicRef);
+      console.log('Topic deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting topic:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -166,7 +179,7 @@ const TopicCard = ({ tag, topic = "Topic Here" }) => {
           containerColor="red"
           iconColor="white"
           size={buttonSize}
-          onPress={() => console.log("Pressed")}
+          onPress={deleteTopic}
         />
       </Animated.View>
     </View>

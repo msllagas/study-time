@@ -63,7 +63,7 @@ const Ongoing = ({ tag }) => {
         bounces={false}
       >
         {ongoingTopics.map((topic) => (
-          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} />
+          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} topicId={topic.id}/>
         ))}
         {/* <TopicCard tag="pomodoro" topic="Sample Topic 1"/>
         <TopicCard tag="active recall" topic="Sample Topic 2"/>

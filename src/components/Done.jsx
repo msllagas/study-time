@@ -58,7 +58,7 @@ const Done = ({ tag }) => {
 
       <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} bounces={false}>
         {doneTopics.map((topic) => (
-          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} />
+          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} topicId={topic.id}/>
         ))}
         {/* Uncomment to render TopicCard with fake data */}
         {/* <TopicCard tag="pomodoro" topic="Sample Topic 1"/>
