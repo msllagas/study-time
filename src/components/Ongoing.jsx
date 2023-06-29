@@ -1,4 +1,5 @@
-import { ScrollView, View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
+import { Text } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { ActivityIndicator } from "react-native-paper";
@@ -45,32 +46,37 @@ const Ongoing = ({ tag }) => {
 
   return (
     <View style={styles.container}>
-      {isLoading && (
-        <View
-          style={styles.indicatorContainer}
-        >
+      {isLoading ? (
+        <View style={styles.indicatorContainer}>
           <ActivityIndicator
             animating={true}
             color={colors.blueGreen}
             size="large"
+            style={{ alignSelf: "center" }}
           />
         </View>
-      )}
-
-      <ScrollView
-        contentContainerStyle={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-        bounces={false}
-      >
-        {ongoingTopics.map((topic) => (
-          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} topicId={topic.id}/>
-        ))}
-        {/* <TopicCard tag="pomodoro" topic="Sample Topic 1"/>
-        <TopicCard tag="active recall" topic="Sample Topic 2"/>
-        <TopicCard tag="spaced repetition" topic="Sample Topic 3"/>
-        <TopicCard tag="pq4r" topic="Sample Topic 3"/>
-        <TopicCard tag="sq3r" topic="Sample Topic 3"/> */}
-      </ScrollView>
+      ) : (ongoingTopics.length > 0 ? (
+        <FlatList
+          data={ongoingTopics}
+          renderItem={(topic) => (
+            <TopicCard
+              key={topic.id}
+              tag={topic.item.tag}
+              topic={topic.item.title}
+              topicId={topic.item.id}
+            />
+          )}
+          keyExtractor={(topic) => topic.id}
+          showsVerticalScrollIndicator = {false}
+          style={styles.scrollView}
+          contentContainerStyle={{justifyContent: 'center'}}
+          bounces={false}
+        />
+      ) : (
+        <View style={styles.emptyText}>
+          <Text variant="displaySmall">Empty</Text>
+        </View>
+      ))}
     </View>
   );
 };
@@ -79,6 +85,12 @@ export default Ongoing;
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
+    backgroundColor: colors.white,
+  },
+  emptyText: {
+    justifyContent: "center",
+    alignItems: "center",
     height: "100%",
   },
   indicatorContainer: {
@@ -90,9 +102,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  scrollView: {
-    justifyContent: "center",
-    marginTop: 15,
-    paddingBottom: 50,
-  }
 });

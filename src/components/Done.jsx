@@ -1,4 +1,5 @@
-import { ScrollView, View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
+import { Text } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { ActivityIndicator } from "react-native-paper";
@@ -45,7 +46,7 @@ const Done = ({ tag }) => {
 
   return (
     <View style={styles.container}>
-      {isLoading && (
+      {isLoading ? (
         <View style={styles.indicatorContainer}>
           <ActivityIndicator
             animating={true}
@@ -54,19 +55,28 @@ const Done = ({ tag }) => {
             style={{ alignSelf: "center" }}
           />
         </View>
+      ) : doneTopics.length > 0 ? (
+        <FlatList
+          data={doneTopics}
+          renderItem={(topic) => (
+            <TopicCard
+              key={topic.id}
+              tag={topic.item.tag}
+              topic={topic.item.title}
+              topicId={topic.item.id}
+            />
+          )}
+          keyExtractor={(topic) => topic.id}
+          showsVerticalScrollIndicator={false}
+          style={styles.scrollView}
+          contentContainerStyle={{ justifyContent: "center" }}
+          bounces={false}
+        />
+      ) : (
+        <View style={styles.emptyText}>
+          <Text variant="displaySmall">Empty</Text>
+        </View>
       )}
-
-      <ScrollView contentContainerStyle={styles.scrollView} showsVerticalScrollIndicator={false} bounces={false}>
-        {doneTopics.map((topic) => (
-          <TopicCard key={topic.id} tag={topic.tag} topic={topic.title} topicId={topic.id}/>
-        ))}
-        {/* Uncomment to render TopicCard with fake data */}
-        {/* <TopicCard tag="pomodoro" topic="Sample Topic 1"/>
-        <TopicCard tag="active recall" topic="Sample Topic 2"/>
-        <TopicCard tag="spaced repetition" topic="Sample Topic 3"/>
-        <TopicCard tag="pq4r" topic="Sample Topic 3"/>
-        <TopicCard tag="sq3r" topic="Sample Topic 3"/> */}
-      </ScrollView>
     </View>
   );
 };
@@ -75,6 +85,12 @@ export default Done;
 
 const styles = StyleSheet.create({
   container: {
+    height: "100%",
+    backgroundColor: colors.white,
+  },
+  emptyText: {
+    justifyContent: "center",
+    alignItems: "center",
     height: "100%",
   },
   indicatorContainer: {
@@ -85,10 +101,5 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",
-  },
-  scrollView: {
-    justifyContent: "center",
-    marginTop: 15,
-    paddingBottom: 50,
   },
 });
