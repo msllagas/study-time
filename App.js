@@ -15,6 +15,11 @@ import Pomodoro from "./src/navigation/DrawerNav/components/Pomodoro/Pomodoro";
 import PomodoroAdd from "./src/navigation/DrawerNav/components/Pomodoro/PomodoroAdd";
 import PomodoroTimer from "./src/navigation/DrawerNav/components/Pomodoro/PomodoroTimer";
 import PomodoroDone from "./src/navigation/DrawerNav/components/Pomodoro/PomodoroDone";
+import SQ3RSurvey from "./src/navigation/DrawerNav/components/SQ3R/SQ3RSurvey";
+import SQ3R from "./src/navigation/DrawerNav/components/SQ3R/SQ3R";
+import SQ3RQuestion from "./src/navigation/DrawerNav/components/SQ3R/SQ3RQuestion";
+import PQ4R from "./src/navigation/DrawerNav/components/PQ4R/PQ4R";
+import PQ4RPreview from "./src/navigation/DrawerNav/components/PQ4R/PQ4RPreview";
 import SpacedRepitition from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepitition";
 import SpacedRepititionAdd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionAdd";
 import SpacedRepititionDateStart from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateStart";
@@ -55,6 +60,11 @@ export default function App() {
         <Stack.Screen name="PomodoroAdd" component={PomodoroAdd} />
         <Stack.Screen name="PomodoroTimer" component={PomodoroTimer} />
         <Stack.Screen name="PomodoroDone" component={PomodoroDone} />
+        <Stack.Screen name="SQ3R" component={SQ3R} />
+        <Stack.Screen name="SQ3RSurvey" component={SQ3RSurvey} />
+        <Stack.Screen name="SQ3RQuestion" component={SQ3RQuestion} />
+        <Stack.Screen name="PQ4R" component={PQ4R} />
+        <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
         <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
         <Stack.Screen
           name="SpacedRepititionAdd"
