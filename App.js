@@ -20,6 +20,10 @@ import SQ3R from "./src/navigation/DrawerNav/components/SQ3R/SQ3R";
 import SQ3RQuestion from "./src/navigation/DrawerNav/components/SQ3R/SQ3RQuestion";
 import PQ4R from "./src/navigation/DrawerNav/components/PQ4R/PQ4R";
 import PQ4RPreview from "./src/navigation/DrawerNav/components/PQ4R/PQ4RPreview";
+import SpacedRepitition from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepitition";
+import SpacedRepititionAdd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionAdd";
+import SpacedRepititionDateStart from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateStart";
+import SpacedRepititionDateEnd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateEnd";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -61,6 +65,19 @@ export default function App() {
         <Stack.Screen name="SQ3RQuestion" component={SQ3RQuestion} />
         <Stack.Screen name="PQ4R" component={PQ4R} />
         <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
+        <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
+        <Stack.Screen
+          name="SpacedRepititionAdd"
+          component={SpacedRepititionAdd}
+        />
+        <Stack.Screen
+          name="SpacedRepititionDateStart"
+          component={SpacedRepititionDateStart}
+        />
+        <Stack.Screen
+          name="SpacedRepititionDateEnd"
+          component={SpacedRepititionDateEnd}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

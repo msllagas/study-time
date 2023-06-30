@@ -11,7 +11,9 @@ const TopBar = ({ Done, Ongoing, tag }) => {
         labelStyle: { fontSize: 14 },
         style: { backgroundColor: "white" },
         tabBarIndicatorStyle:{ backgroundColor:colors.redOrange },
+        swipeEnabled: false
       }}
+      
     >
       <Tab.Screen name="Done" options={{ tabBarLabel: "Done" }}>
         {() => <Done tag={tag} />}
