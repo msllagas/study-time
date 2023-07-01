@@ -45,7 +45,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Drawer"
+        initialRouteName="StartUp"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="StartUp" component={StartUp} />
