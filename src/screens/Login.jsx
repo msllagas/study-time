@@ -22,6 +22,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isEmailEmpty, setIsEmailEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
@@ -41,11 +42,13 @@ const Login = () => {
     setIsPasswordEmpty(password === ""); // Set password error when user leaves the field if it's empty
   };
   const signIn = async () => {
+    setIsLoading(true);
     if (password === "") {
       setIsPasswordEmpty(!isPasswordEmpty);
     }
     if (email === "") {
       setIsEmailEmpty(!isEmailEmpty);
+      setIsLoading(false);
       return;
     }
 
@@ -64,6 +67,8 @@ const Login = () => {
       setIsEmailEmpty(true);
       setIsPasswordEmpty(true);
     }
+
+    setIsLoading(false);
   };
   return (
     <View
@@ -106,12 +111,13 @@ const Login = () => {
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            mode="contained-tonal"
+            mode="elevated"
             onPress={signIn}
-            buttonColor={colors.blueGreen}
-            style={styles.button}
+            buttonColor='dodgerblue'
+            style={[styles.button, { opacity: isLoading ? 0.5 : 1 }]}
             labelStyle={styles.buttonLabel}
             contentStyle={{ height: "100%" }}
+            loading={isLoading}
           >
             Login
           </Button>
@@ -139,14 +145,14 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "pink",
+    backgroundColor: "dodgerblue",
     borderRadius: 20,
     height: 400,
     marginBottom: 20,
   },
   button: {
-    borderColor: "black",
-    borderWidth: 1,
+    // borderColor: "black",
+    // borderWidth: 1,
     height: 50,
     // borderRadius: 10
   },
