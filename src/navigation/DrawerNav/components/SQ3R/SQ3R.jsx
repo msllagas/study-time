@@ -13,6 +13,9 @@ import { colors } from "../../../../utils/colors";
 import AddButton from "../../../../components/AddButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import TopBar from "../../../TopTabNav/TopBar";
+import Done from "../../../../components/Done";
+import Ongoing from "../../../../components/Ongoing";
 
 const SQ3R = () => {
   const navigation = useNavigation();
@@ -43,6 +46,7 @@ const SQ3R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro" />
       <AddButton onPressAdd={toggleModal} />
       <Modal
         visible={modalVisible}

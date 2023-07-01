@@ -18,8 +18,16 @@ import PomodoroDone from "./src/navigation/DrawerNav/components/Pomodoro/Pomodor
 import SQ3RSurvey from "./src/navigation/DrawerNav/components/SQ3R/SQ3RSurvey";
 import SQ3R from "./src/navigation/DrawerNav/components/SQ3R/SQ3R";
 import SQ3RQuestion from "./src/navigation/DrawerNav/components/SQ3R/SQ3RQuestion";
+import SQ3RRead from "./src/navigation/DrawerNav/components/SQ3R/SQ3RRead";
+import SQ3RRecite from "./src/navigation/DrawerNav/components/SQ3R/SQ3RRecite";
+import SQ3RReview from "./src/navigation/DrawerNav/components/SQ3R/SQ3RReview";
 import PQ4R from "./src/navigation/DrawerNav/components/PQ4R/PQ4R";
 import PQ4RPreview from "./src/navigation/DrawerNav/components/PQ4R/PQ4RPreview";
+import PQ4RQuestion from "./src/navigation/DrawerNav/components/PQ4R/PQ4RQuestion";
+import PQ4RRead from "./src/navigation/DrawerNav/components/PQ4R/PQ4RRead";
+import PQ4RReflect from "./src/navigation/DrawerNav/components/PQ4R/PQ4RReflect";
+import PQ4RRecite from "./src/navigation/DrawerNav/components/PQ4R/PQ4RRecite";
+import PQ4RReview from "./src/navigation/DrawerNav/components/PQ4R/PQ4RReview";
 import SpacedRepitition from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepitition";
 import SpacedRepititionAdd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionAdd";
 import SpacedRepititionDateStart from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateStart";
@@ -63,8 +71,16 @@ export default function App() {
         <Stack.Screen name="SQ3R" component={SQ3R} />
         <Stack.Screen name="SQ3RSurvey" component={SQ3RSurvey} />
         <Stack.Screen name="SQ3RQuestion" component={SQ3RQuestion} />
+        <Stack.Screen name="SQ3RRead" component={SQ3RRead} />
+        <Stack.Screen name="SQ3RRecite" component={SQ3RRecite} />
+        <Stack.Screen name="SQ3RReview" component={SQ3RReview} />
         <Stack.Screen name="PQ4R" component={PQ4R} />
         <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
+        <Stack.Screen name="PQ4RQuestion" component={PQ4RQuestion} />
+        <Stack.Screen name="PQ4RRead" component={PQ4RRead} />
+        <Stack.Screen name="PQ4RReflect" component={PQ4RReflect} />
+        <Stack.Screen name="PQ4RRecite" component={PQ4RRecite} />
+        <Stack.Screen name="PQ4RReview" component={PQ4RReview} />
         <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
         <Stack.Screen
           name="SpacedRepititionAdd"

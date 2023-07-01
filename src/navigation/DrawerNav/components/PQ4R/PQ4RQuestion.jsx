@@ -11,11 +11,11 @@ import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 
-const PQ4RPreview = () => {
+const PQ4RQuestion = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const toggleQuestion = () => {
-    navigation.navigate("PQ4RQuestion");
+  const togglePreview = () => {
+    navigation.navigate("PQ4RPreview");
   };
   const toggleRead = () => {
     navigation.navigate("PQ4RRead");
@@ -39,13 +39,14 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "#608BF9" : "transparent" },
+                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
                 ]}
+                onPress={togglePreview}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#FFFFFF" : "#608BF9" },
+                    { color: isFocused ? "#608BF9" : "#FFFFFF" },
                   ]}
                 >
                   P
@@ -62,14 +63,13 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "#608BF9" : "transparent" },
                 ]}
-                onPress={toggleQuestion}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "#FFFFFF" },
+                    { color: isFocused ? "#FFFFFF" : "#608BF9" },
                   ]}
                 >
                   Q
@@ -143,6 +143,7 @@ const PQ4RPreview = () => {
                     styles.buttonText,
                     { color: isFocused ? "#608BF9" : "white" },
                   ]}
+                  onPress={toggleRecite}
                 >
                   R3
                 </Text>
@@ -217,4 +218,4 @@ const styles = {
   },
 };
 
-export default PQ4RPreview;
+export default PQ4RQuestion;
