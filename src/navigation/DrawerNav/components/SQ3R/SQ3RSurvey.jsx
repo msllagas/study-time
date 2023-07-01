@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
@@ -9,68 +15,143 @@ const SQ3RSurvey = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const toggleQuestion = () => {
-    // Perform any save logic here
-
-    // Navigate to "SQ3RSurvey" screen
     navigation.navigate("SQ3RQuestion");
+  };
+  const toggleRead = () => {
+    navigation.navigate("SQ3RRead");
+  };
+  const toggleRecite = () => {
+    navigation.navigate("SQ3RRecite");
+  };
+  const toggleReview = () => {
+    navigation.navigate("SQ3RReview");
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.contentContainer}>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: isFocused ? "#DA60F9" : "transparent" },
-          ]}
-        >
-          <Text
-            style={[styles.buttonText, { color: isFocused ? "white" : "pink" }]}
-          >
-            S
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.iconContainer}>
-          <AntDesign name="right" size={60} color="#DA60F9" />
+      <ScrollView horizontal>
+        <View style={styles.scrollViewContainer}>
+          <View style={styles.contentContainer}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { backgroundColor: isFocused ? "#DA60F9" : "transparent" },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: isFocused ? "white" : "pink" },
+                  ]}
+                >
+                  S
+                </Text>
+              </TouchableOpacity>
+              <AntDesign
+                name="right"
+                size={60}
+                color="#DA60F9"
+                style={styles.icon}
+              />
+            </View>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
+                ]}
+                onPress={toggleQuestion}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: isFocused ? "#DA60F9" : "white" },
+                  ]}
+                >
+                  Q
+                </Text>
+              </TouchableOpacity>
+              <AntDesign
+                name="right"
+                size={60}
+                color="#DA60F9"
+                style={styles.icon}
+              />
+            </View>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
+                ]}
+                onPress={toggleRead}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: isFocused ? "#DA60F9" : "white" },
+                  ]}
+                >
+                  R1
+                </Text>
+              </TouchableOpacity>
+              <AntDesign
+                name="right"
+                size={60}
+                color="#DA60F9"
+                style={styles.icon}
+              />
+            </View>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: isFocused ? "#DA60F9" : "white" },
+                  ]}
+                  onPress={toggleRecite}
+                >
+                  R2
+                </Text>
+              </TouchableOpacity>
+              <AntDesign
+                name="right"
+                size={60}
+                color="#DA60F9"
+                style={styles.icon}
+              />
+            </View>
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.button,
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
+                ]}
+                onPress={toggleReview}
+              >
+                <Text
+                  style={[
+                    styles.buttonText,
+                    { color: isFocused ? "#DA60F9" : "white" },
+                  ]}
+                >
+                  R3
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
-          ]}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              { color: isFocused ? "#DA60F9" : "white" },
-            ]}
-            onPress={toggleQuestion}
-          >
-            Q
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.iconContainer}>
-          <AntDesign name="right" size={60} color="#DA60F9" />
-        </View>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
-          ]}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              { color: isFocused ? "#DA60F9" : "white" },
-            ]}
-          >
-            R1
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.iconContainer}>
-          <AntDesign name="right" size={60} color="#DA60F9" />
-        </View>
-      </View>
+      </ScrollView>
       <View style={styles.addButtonContainer}>
         <AddButton />
       </View>
@@ -80,13 +161,23 @@ const SQ3RSurvey = () => {
 
 const styles = {
   container: {
-    height: "100%",
+    flex: 1,
     backgroundColor: "#FFFFFF",
+  },
+  scrollViewContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
   },
   contentContainer: {
     flexDirection: "row",
-    marginTop: 30,
+    flexGrow: 1,
+    alignItems: "flex-start",
     marginLeft: 20,
+    marginTop: 30,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   button: {
     height: 70,
@@ -100,10 +191,6 @@ const styles = {
   buttonText: {
     fontSize: 40,
     justifyContent: "center",
-  },
-  iconContainer: {
-    justifyContent: "center",
-    alignItems: "center",
   },
   addButtonContainer: {
     position: "absolute",

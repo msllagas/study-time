@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Text,
@@ -5,31 +6,26 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 
-const PQ4RPreview = () => {
+const SQ3RRecite = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const toggleSurvey = () => {
+    navigation.navigate("SQ3RSurvey");
+  };
   const toggleQuestion = () => {
-    navigation.navigate("PQ4RQuestion");
+    navigation.navigate("SQ3RQuestion");
   };
   const toggleRead = () => {
-    navigation.navigate("PQ4RRead");
-  };
-  const toggleReflect = () => {
-    navigation.navigate("PQ4RReflect");
-  };
-  const toggleRecite = () => {
-    navigation.navigate("PQ4RRecite");
+    navigation.navigate("SQ3RRead");
   };
   const toggleReview = () => {
-    navigation.navigate("PQ4RReview");
+    navigation.navigate("SQ3RReview");
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView horizontal>
@@ -39,22 +35,23 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "#608BF9" : "transparent" },
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
                 ]}
+                onPress={toggleSurvey}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#FFFFFF" : "#608BF9" },
+                    { color: isFocused ? "#DA60F9" : "white" },
                   ]}
                 >
-                  P
+                  S
                 </Text>
               </TouchableOpacity>
               <AntDesign
                 name="right"
                 size={60}
-                color="#608BF9"
+                color="#DA60F9"
                 style={styles.icon}
               />
             </View>
@@ -62,14 +59,14 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
                 ]}
                 onPress={toggleQuestion}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "#FFFFFF" },
+                    { color: isFocused ? "#DA60F9" : "white" },
                   ]}
                 >
                   Q
@@ -78,7 +75,7 @@ const PQ4RPreview = () => {
               <AntDesign
                 name="right"
                 size={60}
-                color="#608BF9"
+                color="#DA60F9"
                 style={styles.icon}
               />
             </View>
@@ -86,14 +83,14 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
                 ]}
                 onPress={toggleRead}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "white" },
+                    { color: isFocused ? "#DA60F9" : "white" },
                   ]}
                 >
                   R1
@@ -102,7 +99,7 @@ const PQ4RPreview = () => {
               <AntDesign
                 name="right"
                 size={60}
-                color="#608BF9"
+                color="#DA60F9"
                 style={styles.icon}
               />
             </View>
@@ -110,14 +107,13 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "#DA60F9" : "#transparent" },
                 ]}
-                onPress={toggleReflect}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "white" },
+                    { color: isFocused ? "white" : "#DA60F9" },
                   ]}
                 >
                   R2
@@ -126,7 +122,7 @@ const PQ4RPreview = () => {
               <AntDesign
                 name="right"
                 size={60}
-                color="#608BF9"
+                color="#DA60F9"
                 style={styles.icon}
               />
             </View>
@@ -134,39 +130,17 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
-                ]}
-                onPress={toggleRecite}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "white" },
-                  ]}
-                >
-                  R3
-                </Text>
-              </TouchableOpacity>
-              <AntDesign
-                name="right"
-                size={60}
-                color="#608BF9"
-                style={styles.icon}
-              />
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "transparent" : "#DA60F9" },
                 ]}
                 onPress={toggleReview}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "white" },
+                    { color: isFocused ? "#DA60F9" : "white" },
                   ]}
                 >
-                  R4
+                  R3
                 </Text>
               </TouchableOpacity>
             </View>
@@ -202,7 +176,7 @@ const styles = {
     width: 70,
     borderRadius: 35,
     borderWidth: 1,
-    borderColor: "#608BF9",
+    borderColor: "#DA60F9",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -217,4 +191,4 @@ const styles = {
   },
 };
 
-export default PQ4RPreview;
+export default SQ3RRecite;

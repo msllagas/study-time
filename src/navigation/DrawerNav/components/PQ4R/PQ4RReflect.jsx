@@ -11,17 +11,17 @@ import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 
-const PQ4RPreview = () => {
+const PQ4RReflect = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const togglePreview = () => {
+    navigation.navigate("PQ4RPreview");
+  };
   const toggleQuestion = () => {
     navigation.navigate("PQ4RQuestion");
   };
   const toggleRead = () => {
     navigation.navigate("PQ4RRead");
-  };
-  const toggleReflect = () => {
-    navigation.navigate("PQ4RReflect");
   };
   const toggleRecite = () => {
     navigation.navigate("PQ4RRecite");
@@ -39,13 +39,14 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "#608BF9" : "transparent" },
+                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
                 ]}
+                onPress={togglePreview}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#FFFFFF" : "#608BF9" },
+                    { color: isFocused ? "#608BF9" : "#FFFFFF" },
                   ]}
                 >
                   P
@@ -110,14 +111,13 @@ const PQ4RPreview = () => {
               <TouchableOpacity
                 style={[
                   styles.button,
-                  { backgroundColor: isFocused ? "transparent" : "#608BF9" },
+                  { backgroundColor: isFocused ? "#608BF9" : "transparent" },
                 ]}
-                onPress={toggleReflect}
               >
                 <Text
                   style={[
                     styles.buttonText,
-                    { color: isFocused ? "#608BF9" : "white" },
+                    { color: isFocused ? "white" : "#608BF9" },
                   ]}
                 >
                   R2
@@ -153,6 +153,8 @@ const PQ4RPreview = () => {
                 color="#608BF9"
                 style={styles.icon}
               />
+            </View>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[
                   styles.button,
@@ -217,4 +219,4 @@ const styles = {
   },
 };
 
-export default PQ4RPreview;
+export default PQ4RReflect;
