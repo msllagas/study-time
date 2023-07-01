@@ -11,20 +11,17 @@ import {
   Text,
   PaperProvider,
 } from "react-native-paper";
-import CalendarPicker from "react-native-calendar-picker";
+import CalendarDate from "../../../../components/CalendarDate";
+
 import { colors } from "../../../../utils/colors";
 
 import Constants from "expo-constants";
 
 const SpacedRepititionDateStart = ({ navigation }) => {
-  const [startDate, setStartDate] = useState(null);
   const _goBack = () => navigation.goBack();
 
-  const onDateChange = (date) => {
-    setStartDate(date);
-  };
   return (
-    <SafeAreaView sstyle={styles.viewContainer}>
+    <SafeAreaView style={styles.viewContainer}>
       <ScrollView style={{ paddingBottom: 20 }}>
         <PaperProvider>
           <IconButton
@@ -44,7 +41,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
           >
             Start When
           </Text>
-          <CalendarPicker onDateChange={onDateChange} />
+          <CalendarDate />
           <Button
             mode="contained"
             onPress={() => navigation.navigate("SpacedRepititionDateEnd")}

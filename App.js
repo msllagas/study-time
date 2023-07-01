@@ -19,6 +19,7 @@ import SpacedRepitition from "./src/navigation/DrawerNav/components/SpacedRepiti
 import SpacedRepititionAdd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionAdd";
 import SpacedRepititionDateStart from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateStart";
 import SpacedRepititionDateEnd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateEnd";
+import SpacedRepititionNotif from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionNotif";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -67,6 +68,10 @@ export default function App() {
         <Stack.Screen
           name="SpacedRepititionDateEnd"
           component={SpacedRepititionDateEnd}
+        />
+        <Stack.Screen
+          name="SpacedRepititionNotif"
+          component={SpacedRepititionNotif}
         />
       </Stack.Navigator>
     </NavigationContainer>
