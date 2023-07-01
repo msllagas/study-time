@@ -3,7 +3,7 @@ import { Text } from "react-native-paper";
 import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { ActivityIndicator } from "react-native-paper";
-import { FIRESTORE_DB } from "../../firebaseConfig";
+import { FIRESTORE_DB, FIREBASE_AUTH } from "../../firebaseConfig";
 import TopicCard from "./TopicCard";
 import { colors } from "../utils/colors";
 
@@ -14,17 +14,22 @@ const Ongoing = ({ tag }) => {
   useEffect(() => {
     const fetchDoneTopics = async () => {
       try {
+        const currentUser = FIREBASE_AUTH.currentUser;
+        const userId = currentUser.uid; 
+
         let ongoingTopicsQuery;
 
         if (tag) {
           ongoingTopicsQuery = query(
             collection(FIRESTORE_DB, "topics"),
+            where("userId", "==", userId),
             where("tag", "==", tag),
             where("isDone", "==", false)
           );
         } else {
           ongoingTopicsQuery = query(
             collection(FIRESTORE_DB, "topics"),
+            where("userId", "==", userId),
             where("isDone", "==", false)
           );
         }
