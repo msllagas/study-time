@@ -1,0 +1,34 @@
+import {
+  addDoc,
+  collection,
+} from "firebase/firestore";
+import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../firebaseConfig";
+
+const addTopicToFirestore = async () => {
+  try {
+    const currentUser = auth.currentUser;
+    const userId = currentUser.uid;
+
+     const topicData = {
+       userId: userId,
+       title: "Topic 5",
+       description: "This is a new topic added to Firestore.",
+       tag: "sq3r",
+       isDone: true,
+       technique: {
+         date: new Date().toLocaleDateString("en-PH", {
+           month: "2-digit",
+           day: "2-digit",
+           year: "numeric",
+         }),
+       },
+       time: new Date().toLocaleTimeString("en-PH", {
+         hour: "2-digit",
+         minute: "2-digit",
+       }),
+     };
+     await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
+   } catch (error) {
+     console.error("Error adding topic:", error);
+   }
+ };
