@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -16,26 +16,24 @@ import { getFirestore } from "firebase/firestore";
 // const firebaseConfig = {
 
 //     apiKey: "AIzaSyBEvpe3cOyfQcoi-694-OWEzDquiQfOm9k",
-  
+
 //     authDomain: "study-time-866b9.firebaseapp.com",
-  
+
 //     projectId: "study-time-866b9",
-  
+
 //     storageBucket: "study-time-866b9.appspot.com",
-  
+
 //     messagingSenderId: "936454543290",
-  
+
 //     appId: "1:936454543290:web:8e99c07e99ed26d1ccef83"
-  
+
 //   };
-  
 
 // For testing purposes
 // Changed based on your project config
 const firebaseConfig = {
-    // Add Here your project's firebase config
-  };
-  
+  // Add Here your project's firebase config
+};
 
 export const FIREBASE_APP = initializeApp(firebaseConfig);
 export const FIRESTORE_DB = getFirestore(FIREBASE_APP);
