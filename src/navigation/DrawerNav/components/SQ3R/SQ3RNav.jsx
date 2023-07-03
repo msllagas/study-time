@@ -37,158 +37,157 @@ const SQ3RNav = ({ activeComponent }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView horizontal>
-        <View style={styles.scrollViewContainer}>
-          <View style={styles.contentContainer}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
+      <View style={styles.scrollViewContainer}>
+        <ScrollView horizontal contentContainerStyle={styles.contentContainer}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  backgroundColor:
+                    activeComponent === "survey" ? "#DA60F9" : "transparent",
+                },
+              ]}
+              onPress={toggleSurvey}
+            >
+              <Text
                 style={[
-                  styles.button,
+                  styles.buttonText,
                   {
-                    backgroundColor:
-                      activeComponent === "survey" ? "#DA60F9" : "transparent",
+                    color: activeComponent === "survey" ? "white" : "#DA60F9",
+                    fontFamily: "AmaticBold",
                   },
                 ]}
-                onPress={toggleSurvey}
               >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    {
-                      color: activeComponent === "survey" ? "white" : "#DA60F9",
-                    },
-                  ]}
-                >
-                  S
-                </Text>
-              </TouchableOpacity>
-              <AntDesign
-                name="right"
-                size={60}
-                color="#DA60F9"
-                style={styles.icon}
-              />
-            </View>
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {
-                    backgroundColor:
-                      activeComponent === "question"
-                        ? "#DA60F9"
-                        : "transparent",
-                  },
-                ]}
-                onPress={toggleQuestion}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    {
-                      color:
-                        activeComponent === "question" ? "white" : "#DA60F9",
-                    },
-                  ]}
-                >
-                  Q
-                </Text>
-              </TouchableOpacity>
-              <AntDesign
-                name="right"
-                size={60}
-                color="#DA60F9"
-                style={styles.icon}
-              />
-            </View>
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {
-                    backgroundColor:
-                      activeComponent === "read" ? "#DA60F9" : "transparent",
-                  },
-                ]}
-                onPress={toggleRead}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    { color: activeComponent === "read" ? "white" : "#DA60F9" },
-                  ]}
-                >
-                  R1
-                </Text>
-              </TouchableOpacity>
-              <AntDesign
-                name="right"
-                size={60}
-                color="#DA60F9"
-                style={styles.icon}
-              />
-            </View>
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {
-                    backgroundColor:
-                      activeComponent === "recite" ? "#DA60F9" : "transparent",
-                  },
-                ]}
-                onPress={toggleRecite}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    {
-                      color: activeComponent === "recite" ? "white" : "#DA60F9",
-                    },
-                  ]}
-                >
-                  R2
-                </Text>
-              </TouchableOpacity>
-              <AntDesign
-                name="right"
-                size={60}
-                color="#DA60F9"
-                style={styles.icon}
-              />
-            </View>
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  {
-                    backgroundColor:
-                      activeComponent === "review" ? "#DA60F9" : "transparent",
-                  },
-                ]}
-                onPress={toggleReview}
-              >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    {
-                      color: activeComponent === "review" ? "white" : "#DA60F9",
-                    },
-                  ]}
-                >
-                  R3
-                </Text>
-              </TouchableOpacity>
-            </View>
+                S
+              </Text>
+            </TouchableOpacity>
+            <AntDesign
+              name="right"
+              size={60}
+              color="#DA60F9"
+              style={styles.icon}
+            />
           </View>
-        </View>
-      </ScrollView>
-      <View style={styles.addButtonContainer}>
-        <AddButton />
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  backgroundColor:
+                    activeComponent === "question" ? "#DA60F9" : "transparent",
+                },
+              ]}
+              onPress={toggleQuestion}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: activeComponent === "question" ? "white" : "#DA60F9",
+                    fontFamily: "AmaticBold",
+                  },
+                ]}
+              >
+                Q
+              </Text>
+            </TouchableOpacity>
+            <AntDesign
+              name="right"
+              size={60}
+              color="#DA60F9"
+              style={styles.icon}
+            />
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  backgroundColor:
+                    activeComponent === "read" ? "#DA60F9" : "transparent",
+                },
+              ]}
+              onPress={toggleRead}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: activeComponent === "read" ? "white" : "#DA60F9",
+                    fontFamily: "AmaticBold",
+                  },
+                ]}
+              >
+                R1
+              </Text>
+            </TouchableOpacity>
+            <AntDesign
+              name="right"
+              size={60}
+              color="#DA60F9"
+              style={styles.icon}
+            />
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  backgroundColor:
+                    activeComponent === "recite" ? "#DA60F9" : "transparent",
+                },
+              ]}
+              onPress={toggleRecite}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: activeComponent === "recite" ? "white" : "#DA60F9",
+                    fontFamily: "AmaticBold",
+                  },
+                ]}
+              >
+                R2
+              </Text>
+            </TouchableOpacity>
+            <AntDesign
+              name="right"
+              size={60}
+              color="#DA60F9"
+              style={styles.icon}
+            />
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                {
+                  backgroundColor:
+                    activeComponent === "review" ? "#DA60F9" : "transparent",
+                },
+              ]}
+              onPress={toggleReview}
+            >
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: activeComponent === "review" ? "white" : "#DA60F9",
+                    fontFamily: "AmaticBold",
+                  },
+                ]}
+              >
+                R3
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -196,15 +195,12 @@ const SQ3RNav = ({ activeComponent }) => {
 
 const styles = {
   container: {
-    flex: 1,
     backgroundColor: "#FFFFFF",
   },
   scrollViewContainer: {
-    flex: 1,
-    justifyContent: "flex-start",
+    height: 100,
   },
   contentContainer: {
-    flexDirection: "row",
     flexGrow: 1,
     alignItems: "flex-start",
     marginLeft: 20,
@@ -226,11 +222,6 @@ const styles = {
   buttonText: {
     fontSize: 40,
     justifyContent: "center",
-  },
-  addButtonContainer: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
   },
 };
 

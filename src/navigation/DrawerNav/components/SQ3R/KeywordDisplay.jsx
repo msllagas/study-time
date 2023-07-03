@@ -23,16 +23,22 @@ const KeywordDisplay = () => {
           style={{
             flex: 1,
             height: 40,
-            borderColor: "gray",
+            borderColor: "#E1A8EF",
             borderWidth: 1,
             padding: 10,
+            borderRadius: 10,
           }}
           placeholder="Type a keyword"
           onChangeText={handleKeywordChange}
           value={currentKeyword}
         />
         <TouchableOpacity
-          style={{ marginLeft: 10, backgroundColor: "blue", padding: 10 }}
+          style={{
+            marginLeft: 10,
+            backgroundColor: "#DA60F9",
+            padding: 10,
+            borderRadius: 10,
+          }}
           onPress={handleAddKeyword}
         >
           <Text style={{ color: "white" }}>Add</Text>
@@ -41,7 +47,12 @@ const KeywordDisplay = () => {
       {keywords.map((keyword, index) => (
         <View
           key={index}
-          style={{ backgroundColor: "lightgray", marginTop: 10, padding: 10 }}
+          style={{
+            backgroundColor: "#E1A8EF",
+            marginTop: 10,
+            padding: 10,
+            borderRadius: 10,
+          }}
         >
           <Text>{keyword}</Text>
         </View>

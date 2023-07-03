@@ -17,6 +17,9 @@ const SQ3RReview = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SQ3RNav activeComponent={activeComponent} />
+      <View style={styles.addButtonContainer}>
+        <AddButton />
+      </View>
     </SafeAreaView>
   );
 };
@@ -25,6 +28,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
+  },
+  addButtonContainer: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
   },
 };
 
