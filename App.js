@@ -51,38 +51,16 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const value = await AsyncStorage.getItem('isLoggedIn');
-        if (value === 'true') {
-          setIsLoggedIn(true);
-        }
-      } catch (error) {
-        console.log('Error checking login status:', error);
-      }
-      setIsLoading(false);
-    };
-
-    checkLoginStatus();
-  }, []);
   
   if (!loaded) {
     return null;
-  }
-  if (isLoading) {
-    return (
-      <View>
-        <ActivityIndicator />
-      </View>
-    );
   }
 
   // For development purposes only. Change in initialRouteName to 'StartUp' for production.
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isLoggedIn ? 'Drawer' : 'StartUp'}
+        initialRouteName={'StartUp'}
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="StartUp" component={StartUp} />
