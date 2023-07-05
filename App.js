@@ -1,10 +1,12 @@
 import "react-native-gesture-handler";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native-paper";
 import { useFonts } from "expo-font";
 import Login from "./src/screens/Login";
 import StartUp from "./src/screens/StartUp";
-import MainPage from "./src/screens/MainPage";
 import Register from "./src/screens/Register";
 import Drawer from "./src/navigation/DrawerNav/Drawer";
 import ActiveRecall from "./src/navigation/DrawerNav/components/ActiveRecall/ActiveRecall";
@@ -46,15 +48,41 @@ export default function App() {
     FuzzyBubblesRegular: require("./assets/fonts/FuzzyBubbles-Regular.ttf"),
     Inter: require("./assets/fonts/Inter-Regular.ttf"),
   });
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const value = await AsyncStorage.getItem('isLoggedIn');
+        if (value === 'true') {
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.log('Error checking login status:', error);
+      }
+      setIsLoading(false);
+    };
+
+    checkLoginStatus();
+  }, []);
+  
   if (!loaded) {
     return null;
   }
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
   // For development purposes only. Change in initialRouteName to 'StartUp' for production.
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="StartUp"
+        initialRouteName={isLoggedIn ? 'Drawer' : 'StartUp'}
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="StartUp" component={StartUp} />
