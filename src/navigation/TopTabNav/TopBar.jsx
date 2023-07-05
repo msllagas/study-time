@@ -1,8 +1,9 @@
-import * as React from "react";
-import { colors } from "../../utils/colors";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { colors } from "../../utils/colors";
+import Done from "../../components/Done";
+import Ongoing from "../../components/Ongoing";
 
-const TopBar = ({ Done, Ongoing, tag }) => {
+const TopBar = ({ tag }) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
@@ -26,33 +27,3 @@ const TopBar = ({ Done, Ongoing, tag }) => {
 };
 
 export default TopBar;
-
-// function StatusTabs() {
-//     const Tab = createMaterialTopTabNavigator();
-//     return(
-//         <Tab.Navigator
-//         initialRouteName='Done'
-//         screenOptions={{
-//             activeTintColor: colors.violet,
-//             labelStyle: {fontSize: 14},
-//             style: {backgroundColor: 'white'}
-//         }}>
-//             <Tab.Screen
-//                 name='Done'
-//                 component={Done}
-//                 options={{tabBarLabel:'Done'}}
-//             />
-//             <Tab.Screen
-//                 name='On-going'
-//                 component={Ongoing}
-//                 options={{tabBarLabel:'On-going'}}
-//             />
-//         </Tab.Navigator>
-//     )
-// }
-
-// export default function TopBar(){
-//     return(
-//             <StatusTabs/>
-//     )
-// }
