@@ -5,7 +5,7 @@ import Done from "../components/Done";
 import Ongoing from "../components/Ongoing";
 
 const MainPage = () => {
-  return <TopBar Done={Done} Ongoing={Ongoing}/>;
+  return <TopBar/>;
 };
 
 export default MainPage;
