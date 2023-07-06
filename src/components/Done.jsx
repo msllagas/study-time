@@ -1,7 +1,7 @@
 import { View, StyleSheet, FlatList } from "react-native";
 import { Text } from "react-native-paper";
 import React, { useState, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { ActivityIndicator } from "react-native-paper";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../firebaseConfig";
 import TopicCard from "./TopicCard";
@@ -24,13 +24,15 @@ const Done = ({ tag }) => {
             collection(FIRESTORE_DB, "topics"),
             where("userId", "==", userId),
             where("tag", "==", tag),
-            where("isDone", "==", true)
+            where("isDone", "==", true),
+            orderBy("createdAt", "desc")
           );
         } else {
           doneTopicsQuery = query(
             collection(FIRESTORE_DB, "topics"),
             where("userId", "==", userId),
-            where("isDone", "==", true)
+            where("isDone", "==", true),
+            orderBy("createdAt", "desc")
           );
         }
 
@@ -69,6 +71,7 @@ const Done = ({ tag }) => {
               tag={topic.item.tag}
               topic={topic.item.title}
               topicId={topic.item.id}
+              isDone={true}
             />
           )}
           keyExtractor={(topic) => topic.id}
