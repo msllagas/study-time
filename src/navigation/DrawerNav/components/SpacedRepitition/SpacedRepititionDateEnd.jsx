@@ -41,7 +41,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
           >
             D-Day
           </Text>
-          <CalendarDate />
+          <CalendarDate endPoint={"end"} />
           <Button
             mode="contained"
             onPress={() => navigation.navigate("SpacedRepititionNotif")}

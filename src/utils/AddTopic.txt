@@ -15,6 +15,7 @@ const addTopicToFirestore = async () => {
        description: "This is a new topic added to Firestore.",
        tag: "sq3r",
        isDone: true,
+       createdAt: *input date here*
        technique: {
          date: new Date().toLocaleDateString("en-PH", {
            month: "2-digit",
