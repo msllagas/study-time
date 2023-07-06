@@ -4,7 +4,9 @@ import CalendarPicker from "react-native-calendar-picker";
 
 const CalendarDate = () => {
   const [startDate, setStartDate] = useState(null);
+
   const onDateChange = (date) => {
+    console.log(date.toString());
     setStartDate(date);
   };
   return <CalendarPicker onDateChange={onDateChange} />;

@@ -63,7 +63,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    paddingTop: Constants.statusBarHeight,
+    height: "100%",
     backgroundColor: colors.white,
   },
   backButton: {
