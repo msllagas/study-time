@@ -13,14 +13,90 @@ import {
   Switch,
 } from "react-native-paper";
 import CalendarDate from "../../../../components/CalendarDate";
+import moment from "moment";
 
 import { colors } from "../../../../utils/colors";
 
 import Constants from "expo-constants";
+import { useAppContext } from "../../../../context/AppContext";
 const SpacedRepititionNotif = ({ navigation }) => {
+  const { startDate, endDate, numSessions } = useAppContext();
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const _goBack = () => navigation.goBack();
+
+  function SpacedRepetition(numSessions) {
+    const sessions = [];
+    const schedule = {};
+
+    function generateSessions() {
+      for (let i = 0; i < numSessions; i++) {
+        sessions.push({
+          session: `Session ${i + 1}`,
+          repetitions: 0,
+          scheduledDays: [],
+        });
+      }
+    }
+
+    function generateSchedule(days) {
+      const sessionInterval = Math.ceil(days / numSessions);
+
+      let dayOffset = 0;
+
+      for (let i = 0; i < numSessions; i++) {
+        const session = sessions[i];
+        const scheduledDay = dayOffset + 1;
+        session.scheduledDays.push(scheduledDay);
+        dayOffset = dayOffset + sessionInterval + i;
+      }
+
+      for (let i = 0; i < days; i++) {
+        const formattedDate = getFormattedDate(i);
+        schedule[formattedDate] = [];
+
+        for (const session of sessions) {
+          if (session.scheduledDays.includes(i + 1)) {
+            schedule[formattedDate].push(session.session);
+          }
+        }
+      }
+    }
+
+    function getFormattedDate(dayOffset) {
+      const currentDate = startDate.toDate();
+      const date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() + dayOffset
+      );
+      return date.toISOString().split("T")[0];
+    }
+
+    function getSchedule() {
+      return schedule;
+    }
+
+    generateSessions();
+
+    return {
+      generateSchedule,
+      getSchedule,
+    };
+  }
+
+  const days = endDate.diff(startDate, "days");
+
+  // Usage example
+  // const numSessions = 5; // Number of sessions
+  // const days = 15; // Number of days to generate the schedule
+
+  const spacedRepetition = SpacedRepetition(numSessions);
+
+  spacedRepetition.generateSchedule(days);
+
+  const schedule = spacedRepetition.getSchedule();
+  console.log("Generated Schedule:", schedule);
 
   return (
     <SafeAreaView style={styles.viewContainer}>
@@ -48,30 +124,43 @@ const SpacedRepititionNotif = ({ navigation }) => {
               fontFamily: "FuzzyBubblesBold",
               fontSize: 18,
               textAlign: "center",
+              marginBottom: 15,
             }}
           >
-            June 1 - July 6
+            {moment(startDate).format("MMMM Do")} -{" "}
+            {moment(endDate).format("MMMM Do")}
           </Text>
-          <View style={styles.sessionContainer}>
-            <Text
-              style={{
-                color: "black",
-                fontSize: 30,
-                fontFamily: "AlumniSansRegular",
-              }}
-            >
-              Session 1:
-            </Text>
-            <Text
-              style={{
-                color: "black",
-                fontSize: 18,
-                fontFamily: "FuzzyBubblesBold",
-              }}
-            >
-              June 1, 2023
-            </Text>
-          </View>
+
+          {Object.entries(schedule).map(
+            ([date, sessions]) =>
+              sessions.length !== 0 && (
+                <View style={styles.sessionContainer} key={date}>
+                  {sessions.map((session) => (
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 30,
+                        fontFamily: "AlumniSansRegular",
+                      }}
+                      key={session}
+                    >
+                      {session}
+                    </Text>
+                  ))}
+
+                  <Text
+                    style={{
+                      color: "black",
+                      fontSize: 18,
+                      fontFamily: "FuzzyBubblesBold",
+                    }}
+                  >
+                    {date}
+                  </Text>
+                </View>
+              )
+          )}
+
           <View style={styles.notifContainer}>
             <Text
               style={{
@@ -80,17 +169,6 @@ const SpacedRepititionNotif = ({ navigation }) => {
               }}
             >
               Notify Me
-            </Text>
-            <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-          </View>
-          <View style={styles.notifContainer}>
-            <Text
-              style={{
-                color: "black",
-                fontSize: 18,
-              }}
-            >
-              Alarm
             </Text>
             <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
           </View>
@@ -121,7 +199,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: "70px",
-    marginVertical: "20px",
+    marginVertical: "5px",
   },
   notifContainer: {
     display: "flex",
@@ -129,6 +207,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: "70px",
+    marginTop: 20,
   },
   viewContainer: {
     height: "100%",

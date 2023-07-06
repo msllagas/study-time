@@ -125,7 +125,7 @@ const SpacedRepititionAdd = ({ navigation }) => {
           <Button
             mode="contained"
             onPress={
-              topicName || numSessions <= 0
+              topicName !== "" && numSessions > 2 && !isNaN(Number(numSessions))
                 ? () => navigation.navigate("SpacedRepititionDateStart")
                 : () => showModal()
             }
