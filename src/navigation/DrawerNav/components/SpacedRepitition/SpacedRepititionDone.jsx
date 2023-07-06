@@ -21,7 +21,7 @@ import Constants from "expo-constants";
 import { useAppContext } from "../../../../context/AppContext";
 
 const SpacedRepititionDone = ({ navigation }) => {
-  const { startDate, endDate, schedule } = useAppContext();
+  const { startDate, endDate, schedule, topicName } = useAppContext();
 
   return (
     <SafeAreaView style={styles.viewContainer}>
@@ -42,7 +42,7 @@ const SpacedRepititionDone = ({ navigation }) => {
               marginTop: 20,
             }}
           >
-            Topic 1
+            {topicName}
           </Text>
           <Text
             style={{
