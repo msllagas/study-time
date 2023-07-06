@@ -6,17 +6,42 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import AddButton from "../../../../components/AddButton";
-import { useNavigation } from "@react-navigation/native";
 import PQ4RNav from "./PQ4RNav";
+import PQ4RKeywordDisplay from "./PQ4RKeywordDisplay";
+import { colors } from "../../../../utils/colors";
 
 const PQ4RPreview = () => {
   const activeComponent = "preview";
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <PQ4RNav activeComponent={activeComponent} />
-      <Text>Preview</Text>
-    </SafeAreaView>
+      <View
+        style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
+      >
+        <Text
+          style={{
+            fontFamily: "AmaticBold",
+            fontSize: 40,
+            color: colors.skyBlue,
+            marginTop: 80,
+            letterSpacing: 4,
+          }}
+        >
+          Preview
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            textAlign: "center",
+            marginTop: 10,
+            marginBottom: 30,
+          }}
+        >
+          Enter keywords while {"\n"} skimming you material.
+        </Text>
+        <PQ4RKeywordDisplay />
+      </View>
+    </View>
   );
 };
 

@@ -30,7 +30,7 @@ const Pomodoro = () => {
       <Pressable onPress={() => navigation.navigate("PomodoroDone")}>
         <Text>go to DONE</Text>
       </Pressable>
-      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro"/>
+      <TopBar tag="pomodoro"/>
       <AddButton onPressAdd={()=>navigation.navigate("PomodoroAdd")}/>
     </SafeAreaView>
   );
