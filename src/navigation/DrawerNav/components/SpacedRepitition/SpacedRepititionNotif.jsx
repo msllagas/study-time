@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: "70px",
   },
   viewContainer: {
-    paddingTop: Constants.statusBarHeight,
+    height: "100%",
     backgroundColor: colors.white,
   },
   backButton: {

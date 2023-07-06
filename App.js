@@ -33,6 +33,7 @@ import SpacedRepititionAdd from "./src/navigation/DrawerNav/components/SpacedRep
 import SpacedRepititionDateStart from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateStart";
 import SpacedRepititionDateEnd from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDateEnd";
 import SpacedRepititionNotif from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionNotif";
+import { AppProvider } from "./src/context/AppContext";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -52,54 +53,56 @@ export default function App() {
   }
   // For development purposes only. Change in initialRouteName to 'StartUp' for production.
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="StartUp"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="StartUp" component={StartUp} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Drawer" component={Drawer} />
-        <Stack.Screen name="ActiveRecall" component={ActiveRecall} />
-        <Stack.Screen name="ActiveRecallAdd" component={ActiveRecallAdd} />
-        <Stack.Screen name="ActiveRecallQuiz" component={ActiveRecallQuiz} />
-        <Stack.Screen name="ActiveRecallDone" component={ActiveRecallDone} />
-        <Stack.Screen name="Pomodoro" component={Pomodoro} />
-        <Stack.Screen name="PomodoroAdd" component={PomodoroAdd} />
-        <Stack.Screen name="PomodoroTimer" component={PomodoroTimer} />
-        <Stack.Screen name="PomodoroDone" component={PomodoroDone} />
-        <Stack.Screen name="SQ3R" component={SQ3R} />
-        <Stack.Screen name="SQ3RSurvey" component={SQ3RSurvey} />
-        <Stack.Screen name="SQ3RQuestion" component={SQ3RQuestion} />
-        <Stack.Screen name="SQ3RRead" component={SQ3RRead} />
-        <Stack.Screen name="SQ3RRecite" component={SQ3RRecite} />
-        <Stack.Screen name="SQ3RReview" component={SQ3RReview} />
-        <Stack.Screen name="PQ4R" component={PQ4R} />
-        <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
-        <Stack.Screen name="PQ4RQuestion" component={PQ4RQuestion} />
-        <Stack.Screen name="PQ4RRead" component={PQ4RRead} />
-        <Stack.Screen name="PQ4RReflect" component={PQ4RReflect} />
-        <Stack.Screen name="PQ4RRecite" component={PQ4RRecite} />
-        <Stack.Screen name="PQ4RReview" component={PQ4RReview} />
-        <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
-        <Stack.Screen
-          name="SpacedRepititionAdd"
-          component={SpacedRepititionAdd}
-        />
-        <Stack.Screen
-          name="SpacedRepititionDateStart"
-          component={SpacedRepititionDateStart}
-        />
-        <Stack.Screen
-          name="SpacedRepititionDateEnd"
-          component={SpacedRepititionDateEnd}
-        />
-        <Stack.Screen
-          name="SpacedRepititionNotif"
-          component={SpacedRepititionNotif}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Drawer"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="StartUp" component={StartUp} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Drawer" component={Drawer} />
+          <Stack.Screen name="ActiveRecall" component={ActiveRecall} />
+          <Stack.Screen name="ActiveRecallAdd" component={ActiveRecallAdd} />
+          <Stack.Screen name="ActiveRecallQuiz" component={ActiveRecallQuiz} />
+          <Stack.Screen name="ActiveRecallDone" component={ActiveRecallDone} />
+          <Stack.Screen name="Pomodoro" component={Pomodoro} />
+          <Stack.Screen name="PomodoroAdd" component={PomodoroAdd} />
+          <Stack.Screen name="PomodoroTimer" component={PomodoroTimer} />
+          <Stack.Screen name="PomodoroDone" component={PomodoroDone} />
+          <Stack.Screen name="SQ3R" component={SQ3R} />
+          <Stack.Screen name="SQ3RSurvey" component={SQ3RSurvey} />
+          <Stack.Screen name="SQ3RQuestion" component={SQ3RQuestion} />
+          <Stack.Screen name="SQ3RRead" component={SQ3RRead} />
+          <Stack.Screen name="SQ3RRecite" component={SQ3RRecite} />
+          <Stack.Screen name="SQ3RReview" component={SQ3RReview} />
+          <Stack.Screen name="PQ4R" component={PQ4R} />
+          <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
+          <Stack.Screen name="PQ4RQuestion" component={PQ4RQuestion} />
+          <Stack.Screen name="PQ4RRead" component={PQ4RRead} />
+          <Stack.Screen name="PQ4RReflect" component={PQ4RReflect} />
+          <Stack.Screen name="PQ4RRecite" component={PQ4RRecite} />
+          <Stack.Screen name="PQ4RReview" component={PQ4RReview} />
+          <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
+          <Stack.Screen
+            name="SpacedRepititionAdd"
+            component={SpacedRepititionAdd}
+          />
+          <Stack.Screen
+            name="SpacedRepititionDateStart"
+            component={SpacedRepititionDateStart}
+          />
+          <Stack.Screen
+            name="SpacedRepititionDateEnd"
+            component={SpacedRepititionDateEnd}
+          />
+          <Stack.Screen
+            name="SpacedRepititionNotif"
+            component={SpacedRepititionNotif}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }

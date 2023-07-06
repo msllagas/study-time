@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import logo from "../../assets/imgs/logo3.png";
-import {
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { TextInput, Button, Text } from "react-native-paper";
@@ -86,7 +84,12 @@ const Login = () => {
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={logo} resizeMode="contain" />
         </View>
-        <Text variant="headlineSmall" style={{textAlign: 'center', fontWeight: 'bold'}}>Login in Your Account</Text>
+        <Text
+          variant="headlineSmall"
+          style={{ textAlign: "center", fontWeight: "bold" }}
+        >
+          Login in Your Account
+        </Text>
         <View style={styles.inputContainer}>
           <TextInput
             mode="outlined"
@@ -113,7 +116,7 @@ const Login = () => {
           <Button
             mode="elevated"
             onPress={signIn}
-            buttonColor='dodgerblue'
+            buttonColor="dodgerblue"
             style={[styles.button, { opacity: isLoading ? 0.5 : 1 }]}
             labelStyle={styles.buttonLabel}
             contentStyle={{ height: "100%" }}

@@ -6,14 +6,17 @@ const initialState = {};
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [date, setDate] = useState(null);
+  const [topicName, setTopicName] = React.useState("");
+  const [numSessions, setNumSessions] = React.useState("0");
 
   return (
     // export the function and state here
     <AppContext.Provider
       value={{
-        date,
-        setDate,
+        topicName,
+        setTopicName,
+        numSessions,
+        setNumSessions,
       }}
     >
       {children}
