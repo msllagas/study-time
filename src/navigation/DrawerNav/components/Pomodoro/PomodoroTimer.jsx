@@ -31,7 +31,7 @@ export default function PomodoroTimer({navigation}) {
         icon="arrow-left" 
         style={styles.backButton} 
         size={40}
-        onPress={()=>navigation.navigate("Pomodoro")}
+        onPress={()=>navigation.goBack()}
       />
 
       <Image 
