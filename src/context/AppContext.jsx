@@ -6,10 +6,12 @@ const initialState = {};
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
+  //spacedRepetition
   const [topicName, setTopicName] = React.useState("");
   const [numSessions, setNumSessions] = React.useState(3);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [schedule, setSchedule] = useState("");
 
   return (
     // export the function and state here
@@ -23,6 +25,8 @@ const AppProvider = ({ children }) => {
         setStartDate,
         endDate,
         setEndDate,
+        schedule,
+        setSchedule,
       }}
     >
       {children}

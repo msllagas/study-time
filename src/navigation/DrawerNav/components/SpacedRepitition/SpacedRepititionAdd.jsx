@@ -49,14 +49,6 @@ const SpacedRepititionAdd = ({ navigation }) => {
             onPress={_goBack}
           />
 
-          <IconButton
-            icon="help-circle-outline"
-            iconColor={colors.redOrange}
-            size={25}
-            style={{ position: "absolute", top: 20, right: 0 }}
-            onPress={showModal}
-          />
-
           <View style={styles.logoContainer}>
             <Image
               style={{ width: 500, height: 200 }}
@@ -70,6 +62,7 @@ const SpacedRepititionAdd = ({ navigation }) => {
               fontFamily: "FuzzyBubblesBold",
               fontSize: 18,
               textAlign: "center",
+              color: "black",
             }}
           >
             Study with Spaced Repitition Technique
@@ -96,6 +89,7 @@ const SpacedRepititionAdd = ({ navigation }) => {
               alignSelf: "center",
               marginBottom: 30,
               backgroundColor: colors.lighterYellow,
+              color: "black",
             }}
             underlineColor={colors.lighterYellow}
             activeUnderlineColor={colors.beige}
@@ -194,6 +188,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: colors.lighterYellow,
     textAlign: "center",
+    color: "black",
   },
 });
 
