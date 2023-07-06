@@ -7,17 +7,20 @@ import {
   Animated,
 } from "react-native";
 import { IconButton, Text, Surface } from "react-native-paper";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { doc, deleteDoc } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 import { FIRESTORE_DB } from "../../firebaseConfig";
 import { colors } from "../utils/colors";
 
-const TopicCard = ({ tag, topic = "Topic Here", topicId }) => {
+const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
   const slideAnimation = useRef(new Animated.Value(0)).current;
   const buttonOpacity = useRef(new Animated.Value(0)).current;
   const buttonScale = useRef(new Animated.Value(0)).current;
   const [slidePosition, setSlidePosition] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
 
+  const navigation = useNavigation();
   const buttonWidth = 60;
   const sensitivity = 50000; // Increase this value for higher sensitivity
 
@@ -99,8 +102,8 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId }) => {
     borderColor = colors.violet;
     method = "Pomodoro Technique";
   } else if (tag === "spaced repetition") {
-    backgroundColor = colors.beige
-    borderColor = colors.beige
+    backgroundColor = colors.beige;
+    borderColor = colors.beige;
     method = "Spaced Repetition";
   } else if (tag === "active recall") {
     backgroundColor = colors.green;
@@ -115,74 +118,101 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId }) => {
     borderColor = colors.purple;
     method = "SQ3R Method";
   }
-
+  const navigateToPage = () => {
+    if (isDone) {
+      if (tag === "pomodoro") {
+        navigation.navigate("PomodoroDone");
+      } else if (tag === "active recall") {
+        navigation.navigate("ActiveRecallDone");
+      } else if (tag === "spaced repetition") {
+        navigation.navigate("SpacedRepetition");
+      } else if (tag === "pq4r") {
+        navigation.navigate("PQ4RPreview");
+      } else if (tag === "sq3r") {
+        navigation.navigate("SQ3RSurvey");
+      }
+    } else {
+      if (tag === "pomodoro") {
+        navigation.navigate("PomodoroTimer");
+      } else if (tag === "active recall") {
+        navigation.navigate("ActiveRecallOngoing");
+      } else if (tag === "spaced repetition") {
+        navigation.navigate("SpacedRepetition");
+      } else if (tag === "pq4r") {
+        navigation.navigate("PQ4R");
+      } else if (tag === "sq3r") {
+        navigation.navigate("SQ3R");
+      }
+    }
+  };
 
   const deleteTopic = async () => {
     try {
-      const topicRef = doc(FIRESTORE_DB, 'topics', topicId);
+      const topicRef = doc(FIRESTORE_DB, "topics", topicId);
       await deleteDoc(topicRef);
-      console.log('Topic deleted successfully!');
+      console.log("Topic deleted successfully!");
     } catch (error) {
-      console.error('Error deleting topic:', error);
+      console.error("Error deleting topic:", error);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.textContainer,
-          {
-            backgroundColor: backgroundColor,
-            borderColor: borderColor,
-            transform: [{ translateX: textContainerTranslateX }],
-          },
-        ]}
-      >
-        <Text variant="labelSmall" style={styles.methodText}>
-          {method}
-        </Text>
-      </Animated.View>
-      <Animated.View style={styles.cardContainer}>
-        <Surface
-        elevation={2}
+    <TouchableOpacity onPress={navigateToPage}>
+      <View style={styles.container}>
+        <Animated.View
           style={[
+            styles.textContainer,
+            {
+              backgroundColor: backgroundColor,
+              borderColor: borderColor,
+              transform: [{ translateX: textContainerTranslateX }],
+            },
+          ]}
+        >
+          <Text variant="labelSmall" style={styles.methodText}>
+            {method}
+          </Text>
+        </Animated.View>
+        <Animated.View style={styles.cardContainer}>
+          <Surface
+            elevation={2}
+            style={[
               styles.card,
               {
                 transform: [{ translateX: slideAnimation }],
                 width: cardWidth,
                 borderColor: borderColor,
-                shadowColor: borderColor
+                shadowColor: borderColor,
               },
             ]}
             {...panResponder.panHandlers}
-        >
-          
+          >
             <Text variant="titleMedium" numberOfLines={1} ellipsizeMode="tail">
               {topic}
             </Text>
-        </Surface>
-      </Animated.View>
-      <Animated.View
-        style={[
-          styles.buttonContainer,
-          {
-            opacity: buttonOpacityAnimation,
-            transform: [{ scale: buttonScaleAnimation }],
-          },
-        ]}
-      >
-        <IconButton
-          mode="contained-tonal"
-          icon="delete-outline"
-          rippleColor="white"
-          containerColor="red"
-          iconColor="white"
-          size={buttonSize}
-          onPress={deleteTopic}
-        />
-      </Animated.View>
-    </View>
+          </Surface>
+        </Animated.View>
+        <Animated.View
+          style={[
+            styles.buttonContainer,
+            {
+              opacity: buttonOpacityAnimation,
+              transform: [{ scale: buttonScaleAnimation }],
+            },
+          ]}
+        >
+          <IconButton
+            mode="contained-tonal"
+            icon="delete-outline"
+            rippleColor="white"
+            containerColor="red"
+            iconColor="white"
+            size={buttonSize}
+            onPress={deleteTopic}
+          />
+        </Animated.View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -216,7 +246,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flexDirection: "row",
     minHeight: 70,
-    backgroundColor: 'white'
+    backgroundColor: "white",
   },
   methodText: {
     color: colors.white,
