@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity } from "react-native";
 
-const KeywordDisplay = () => {
+const PQ4RKeywordDisplay = () => {
   const [keywords, setKeywords] = useState([]);
   const [currentKeyword, setCurrentKeyword] = useState("");
 
@@ -23,7 +23,7 @@ const KeywordDisplay = () => {
           style={{
             flex: 1,
             height: 40,
-            borderColor: "#E1A8EF",
+            borderColor: "#608BF9",
             borderWidth: 1,
             padding: 10,
             borderRadius: 10,
@@ -35,7 +35,7 @@ const KeywordDisplay = () => {
         <TouchableOpacity
           style={{
             marginLeft: 10,
-            backgroundColor: "#DA60F9",
+            backgroundColor: "#608BF9",
             padding: 10,
             borderRadius: 10,
           }}
@@ -48,7 +48,7 @@ const KeywordDisplay = () => {
         <View
           key={index}
           style={{
-            backgroundColor: "#E1A8EF",
+            backgroundColor: "#DFEBFD",
             marginTop: 10,
             padding: 10,
             borderRadius: 10,
@@ -61,4 +61,4 @@ const KeywordDisplay = () => {
   );
 };
 
-export default KeywordDisplay;
+export default PQ4RKeywordDisplay;

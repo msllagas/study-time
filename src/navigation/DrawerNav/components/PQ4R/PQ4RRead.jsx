@@ -6,16 +6,41 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import AddButton from "../../../../components/AddButton";
-import { useNavigation } from "@react-navigation/native";
 import PQ4RNav from "./PQ4RNav";
+import PQ4RKeywordDisplay from "./PQ4RKeywordDisplay";
+import { colors } from "../../../../utils/colors";
 
 const PQ4RRead = () => {
   const activeComponent = "read";
   return (
     <SafeAreaView style={styles.container}>
       <PQ4RNav activeComponent={activeComponent} />
-      <Text>Read</Text>
+      <View
+        style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
+      >
+        <Text
+          style={{
+            fontFamily: "AmaticBold",
+            fontSize: 40,
+            color: colors.skyBlue,
+            marginTop: 80,
+            letterSpacing: 4,
+          }}
+        >
+          Read
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            textAlign: "center",
+            marginTop: 10,
+            marginBottom: 30,
+          }}
+        >
+          Read the material again. Read and {"\n"} comprehend the topic.
+        </Text>
+        <PQ4RKeywordDisplay />
+      </View>{" "}
     </SafeAreaView>
   );
 };

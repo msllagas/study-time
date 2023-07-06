@@ -10,9 +10,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
-import KeywordDisplay from "./KeywordDisplay";
 import SQ3RNav from "./SQ3RNav";
 import { colors } from "../../../../utils/colors";
+import SQ3RKeywordDisplay from "./SQ3RKeywordDisplay";
 
 const SQ3RSurvey = () => {
   const activeComponent = "survey";
@@ -43,7 +43,7 @@ const SQ3RSurvey = () => {
         >
           Enter keywords while {"\n"} skimming you material.
         </Text>
-        <KeywordDisplay />
+        <SQ3RKeywordDisplay />
       </View>
       <View style={styles.addButtonContainer}>
         <AddButton />
