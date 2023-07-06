@@ -12,12 +12,19 @@ import {
   PaperProvider,
 } from "react-native-paper";
 import CalendarDate from "../../../../components/CalendarDate";
+import ErrorModal from "../../../../components/ErrorModal";
 
 import { colors } from "../../../../utils/colors";
 
 import Constants from "expo-constants";
+import { useAppContext } from "../../../../context/AppContext";
 
 const SpacedRepititionDateStart = ({ navigation }) => {
+  const { startDate } = useAppContext();
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   const _goBack = () => navigation.goBack();
 
   return (
@@ -44,7 +51,11 @@ const SpacedRepititionDateStart = ({ navigation }) => {
           <CalendarDate />
           <Button
             mode="contained"
-            onPress={() => navigation.navigate("SpacedRepititionDateEnd")}
+            onPress={
+              startDate !== ""
+                ? () => navigation.navigate("SpacedRepititionDateEnd")
+                : () => showModal()
+            }
             style={{
               borderRadius: 8,
               width: "70%",
@@ -55,6 +66,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
           >
             Set-up Start Date
           </Button>
+          <ErrorModal visible={visible} hideModal={hideModal} />
         </PaperProvider>
       </ScrollView>
     </SafeAreaView>
@@ -63,7 +75,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    paddingTop: Constants.statusBarHeight,
+    height: "100%",
     backgroundColor: colors.white,
   },
   backButton: {

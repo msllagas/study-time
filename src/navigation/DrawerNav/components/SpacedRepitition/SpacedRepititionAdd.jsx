@@ -17,29 +17,27 @@ import {
   Modal,
   Portal,
   Text,
+  Card,
   PaperProvider,
 } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import Constants from "expo-constants";
 import { color } from "react-native-reanimated";
+import logo from "../../../../../assets/imgs/logo3.png";
+import ErrorModal from "../../../../components/ErrorModal";
+import { useAppContext } from "../../../../context/AppContext";
 
 const SpacedRepititionAdd = ({ navigation }) => {
-  const [topicName, setTopicName] = React.useState("");
-  const [startTime, setStartTime] = React.useState("0");
+  const { topicName, setTopicName, numSessions, setNumSessions } =
+    useAppContext();
 
   const [visible, setVisible] = React.useState(false);
   const _goBack = () => navigation.goBack();
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = {
-    backgroundColor: "white",
-    padding: 20,
-    width: "80%",
-    alignSelf: "center",
-    borderRadius: 8,
-  };
+
   return (
     <SafeAreaView style={styles.viewContainer}>
       <ScrollView style={{ paddingBottom: 20 }}>
@@ -51,25 +49,20 @@ const SpacedRepititionAdd = ({ navigation }) => {
             onPress={_goBack}
           />
 
-          <IconButton
-            icon="help-circle-outline"
-            iconColor={colors.redOrange}
-            size={25}
-            style={{ position: "absolute", top: 20, right: 0 }}
-            onPress={showModal}
-          />
-
-          <Image
-            style={styles.imageContainer}
-            source={require("../../../../../assets/imgs/logo2.png")}
-            resizeMode="contain"
-          />
+          <View style={styles.logoContainer}>
+            <Image
+              style={{ width: 500, height: 200 }}
+              source={logo}
+              resizeMode="contain"
+            />
+          </View>
 
           <Text
             style={{
               fontFamily: "FuzzyBubblesBold",
               fontSize: 18,
               textAlign: "center",
+              color: "black",
             }}
           >
             Study with Spaced Repitition Technique
@@ -96,6 +89,7 @@ const SpacedRepititionAdd = ({ navigation }) => {
               alignSelf: "center",
               marginBottom: 30,
               backgroundColor: colors.lighterYellow,
+              color: "black",
             }}
             underlineColor={colors.lighterYellow}
             activeUnderlineColor={colors.beige}
@@ -110,12 +104,12 @@ const SpacedRepititionAdd = ({ navigation }) => {
               marginTop: 20,
             }}
           >
-            Session Interval
+            Number of Sessions
           </Text>
 
           <TextInput
-            value={startTime}
-            onChangeText={(startTime) => setStartTime(startTime)}
+            value={numSessions}
+            onChangeText={(numSessions) => setNumSessions(numSessions)}
             style={styles.setupInput}
             mode="outlined"
             outlineColor={colors.lighterYellow}
@@ -124,7 +118,11 @@ const SpacedRepititionAdd = ({ navigation }) => {
 
           <Button
             mode="contained"
-            onPress={() => navigation.navigate("SpacedRepititionDateStart")}
+            onPress={
+              topicName !== "" && numSessions > 2 && !isNaN(Number(numSessions))
+                ? () => navigation.navigate("SpacedRepititionDateStart")
+                : () => showModal()
+            }
             style={{
               borderRadius: 8,
               width: "70%",
@@ -136,15 +134,7 @@ const SpacedRepititionAdd = ({ navigation }) => {
             Set-up Schedule
           </Button>
 
-          <Portal>
-            <Modal
-              visible={visible}
-              onDismiss={hideModal}
-              contentContainerStyle={containerStyle}
-            >
-              <Text>Example Modal. Click outside this area to dismiss.</Text>
-            </Modal>
-          </Portal>
+          <ErrorModal visible={visible} hideModal={hideModal} />
         </PaperProvider>
       </ScrollView>
     </SafeAreaView>
@@ -153,13 +143,23 @@ const SpacedRepititionAdd = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    paddingTop: Constants.statusBarHeight,
+    height: "100%",
     backgroundColor: colors.white,
   },
   backButton: {
     position: "absolute",
     left: 0,
     top: 0,
+  },
+  logoContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+
+    marginHorizontal: 20,
+    zIndex: -50,
+
+    marginHorizontal: 20,
   },
   imageContainer: {
     alignSelf: "center",
@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: colors.lighterYellow,
     textAlign: "center",
+    color: "black",
   },
 });
 

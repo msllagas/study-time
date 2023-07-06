@@ -41,7 +41,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
           >
             D-Day
           </Text>
-          <CalendarDate />
+          <CalendarDate endPoint={"end"} />
           <Button
             mode="contained"
             onPress={() => navigation.navigate("SpacedRepititionNotif")}
@@ -63,7 +63,7 @@ const SpacedRepititionDateStart = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    paddingTop: Constants.statusBarHeight,
+    height: "100%",
     backgroundColor: colors.white,
   },
   backButton: {
