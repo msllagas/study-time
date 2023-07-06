@@ -14,9 +14,11 @@ import {
   import { useNavigation } from "@react-navigation/native";
   import { colors } from "../../../../utils/colors";
   import Header from "../../../../components/Header";
+  import { collection, query, where, getDocs } from "firebase/firestore";
 
   //connect to firebase, read&randomize questions, write {userAnswer} -> validate
   //_onSkip function
+  {/* <AddButton onPressAdd={()=><addHandler questionInput={question} answerInput={answerInput}/>}/> */}
   const ActiveRecall = ({navigation}) => {
     const _goBack = () => navigation.goBack();
     const [answer, setAnswer] = React.useState("");
@@ -45,12 +47,20 @@ import {
               underlineStyle={{borderRadius:40}}   
         />
         </View>
-        <Button 
+          <Button 
               mode="outlined" 
               onPress={()=>console.log("skip")}  
               textColor={colors.green}                           
-              style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:30, borderColor:colors.green}}>
+              style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, borderColor:colors.green}}>
             Skip
+          </Button> 
+
+          <Button 
+              mode="outlined" 
+              onPress={()=>console.log("done")}  
+              textColor={colors.green}                           
+              style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:20, marginBottom:10, borderColor:colors.green}}>
+            Done
           </Button>     
       </SafeAreaView>
     );

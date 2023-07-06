@@ -8,21 +8,46 @@ import {
     Pressable,
     Image,
   } from "react-native";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Button, Appbar, IconButton } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import Header from "../../../../components/Header";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
+import { ScrollView } from "react-native-gesture-handler";
   
   
   //connect to firebase, read qna
   //displayQnA
-  //if {userAnswer} == correct display <Ionicons name="checkmark-circle" size={25} color={colors.green}/>
+  // const doneTopic = ({}) => {
+  //   const [qna, setQnA] = useState([])
+  //   const [question, setQuestion] = useState()
+
+  //   useEffect( () => {
+  //     const currentUser = FIREBASE_AUTH.currentUser;
+  //     const userid = currentUser.uid
+
+  //     let qnaQuery;
+
+  //     if ("tag") {
+  //       qnaQuery = query (
+  //         collection(FIRESTORE_DB, "topics"),
+  //         where ("userId", "==", userid),
+  //         where ("tag")
+  //       );
+  //     }
+
+      
+  //   })
+  // }
+  
   const ActiveRecallDone = ({navigation}) => {
     const _goBack = () => navigation.goBack();
+    
       return (
-        <View>
+        <ScrollView>
             <Header title={"Active Recall"} onPressBackArrow={_goBack}/>
             {/* {topicName} */}
             <Text style={styles.topicName}>Topic 1</Text>
@@ -31,23 +56,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
             {/* displayQnA */}
             <View style={styles.textContainer}>            
-            {/* {questionNum} */}
-            <Text style={styles.questionTitle}>Q1: This Question</Text> 
+              {/* {questionNum} */}
+              <Text style={styles.questionTitle}>Q1: This Question</Text> 
 
-            {/* {userAnswer}, {answer} */}           
-            <Text style={styles.answer}>
-              <Ionicons name="checkmark-circle-outline" size={25} color={colors.green}/>
-              Correct Answer
-            </Text>
-            <Text style={styles.answer}>              
-              <Ionicons name="close-circle" size={25} color={colors.redOrange}/>
-              User Answer
-            </Text>
+              {/* {userAnswer}, {answer} */}           
+              <Text style={styles.answerContainer}>
+                <Ionicons name="send" size={20} color={colors.green}/>
+                Answer
+              </Text>
             </View>
 
             {/* if questionNum == userQuestionNum {display image} */}
             <Image style={styles.imageContainer} source={require('../../../../../assets/imgs/done-badge.png')} />
-          </View>
+          </ScrollView>
         );
   }
   
@@ -85,10 +106,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
         fontFamily: 'AlumniSansRegular',
         fontSize: 32
     },
-    answer: {
+    answerContainer: {
         fontFamily: 'FuzzyBubblesRegular',
         fontSize: 20,
-        textAlignVertical:'center',        
+        textAlignVertical:'center', 
+        marginLeft: 5,       
     },
     imageContainer: {
       alignSelf: 'center',
