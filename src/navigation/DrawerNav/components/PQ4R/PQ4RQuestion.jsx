@@ -17,11 +17,12 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import DeleteButton from "../../../../components/DeleteButton";
 import PQ4RNav from "./PQ4RNav";
+import { useAppContext } from "../../../../context/AppContext";
 
 const PQ4RQuestion = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [question, setQuestion] = useState("");
-  const [savedQuestions, setSavedQuestions] = useState([]);
+  const { pqsavedQuestions, setPqSavedQuestions } = useAppContext();
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
 
@@ -40,16 +41,16 @@ const PQ4RQuestion = () => {
   };
 
   const saveQuestion = () => {
-    setSavedQuestions([...savedQuestions, question]);
+    setPqSavedQuestions([...pqsavedQuestions, question]);
     closeModal();
     setQuestion("");
   };
 
   const deleteQuestions = () => {
-    const filteredQuestions = savedQuestions.filter(
+    const filteredQuestions = pqsavedQuestions.filter(
       (_, index) => !selectedQuestions.includes(index)
     );
-    setSavedQuestions(filteredQuestions);
+    setPqSavedQuestions(filteredQuestions);
     setSelectedQuestions([]);
     setIsDeleteMode(false);
   };
@@ -114,7 +115,7 @@ const PQ4RQuestion = () => {
           </View>
         </Modal>
         <ScrollView style={styles.questionList}>
-          {savedQuestions.map((savedQuestion, index) => (
+          {pqsavedQuestions.map((savedQuestion, index) => (
             <View style={styles.questionContainer} key={index}>
               {isDeleteMode && (
                 <CheckBox

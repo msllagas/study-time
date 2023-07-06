@@ -17,11 +17,12 @@ import { useNavigation } from "@react-navigation/native";
 import SQ3RNav from "./SQ3RNav";
 import { colors } from "../../../../utils/colors";
 import DeleteButton from "../../../../components/DeleteButton";
+import { useAppContext } from "../../../../context/AppContext";
 
 const SQ3RQuestion = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [question, setQuestion] = useState("");
-  const [savedQuestions, setSavedQuestions] = useState([]);
+  const { savedQuestions, setSavedQuestions } = useAppContext();
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
 
