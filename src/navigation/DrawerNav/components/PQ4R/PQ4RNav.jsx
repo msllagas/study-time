@@ -56,6 +56,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     {
                       color:
                         activeComponent === "preview" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -88,6 +89,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     {
                       color:
                         activeComponent === "question" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -117,6 +119,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     styles.buttonText,
                     {
                       color: activeComponent === "read" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -147,6 +150,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     {
                       color:
                         activeComponent === "reflect" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -176,6 +180,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     styles.buttonText,
                     {
                       color: activeComponent === "recite" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -203,6 +208,7 @@ const PQ4RNav = ({ activeComponent }) => {
                     styles.buttonText,
                     {
                       color: activeComponent === "review" ? "white" : "#608BF9",
+                      fontFamily: "AmaticBold",
                     },
                   ]}
                 >
@@ -219,7 +225,6 @@ const PQ4RNav = ({ activeComponent }) => {
 
 const styles = {
   container: {
-    flex: 1,
     backgroundColor: "#FFFFFF",
   },
   scrollViewContainer: {

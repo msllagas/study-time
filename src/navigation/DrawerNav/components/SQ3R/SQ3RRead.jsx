@@ -6,13 +6,10 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import { AntDesign } from "@expo/vector-icons";
-import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
-import { useNavigation } from "@react-navigation/native";
-import KeywordDisplay from "./KeywordDisplay";
 import SQ3RNav from "./SQ3RNav";
 import { colors } from "../../../../utils/colors";
+import SQ3RKeywordDisplay from "./SQ3RKeywordDisplay";
 
 const SQ3RRead = () => {
   const activeComponent = "read";
@@ -43,7 +40,7 @@ const SQ3RRead = () => {
         >
           Read the material again. Read and {"\n"} comprehend the topic.
         </Text>
-        <KeywordDisplay />
+        <SQ3RKeywordDisplay />
       </View>
       <View style={styles.addButtonContainer}>
         <AddButton />
