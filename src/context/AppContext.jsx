@@ -8,6 +8,8 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [topicName, setTopicName] = React.useState("");
   const [numSessions, setNumSessions] = React.useState("0");
+  const [savedQuestions, setSavedQuestions] = useState([]);
+  const [pqsavedQuestions, setPqSavedQuestions] = useState([]);
 
   return (
     // export the function and state here
@@ -17,6 +19,10 @@ const AppProvider = ({ children }) => {
         setTopicName,
         numSessions,
         setNumSessions,
+        savedQuestions,
+        setSavedQuestions,
+        pqsavedQuestions,
+        setPqSavedQuestions,
       }}
     >
       {children}

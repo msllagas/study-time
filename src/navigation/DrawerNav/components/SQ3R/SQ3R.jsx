@@ -46,7 +46,7 @@ const SQ3R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro" />
+      <TopBar tag="sq3r" />
       <AddButton onPressAdd={toggleModal} />
       <Modal
         visible={modalVisible}
