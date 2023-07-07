@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo/ngrok": "^2.5.0",
     "@expo/webpack-config": "^18.0.1",
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/datetimepicker": "6.7.3",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/drawer": "^6.6.2",
@@ -38,8 +39,7 @@
     "react-native-svg": "13.4.0",
     "react-native-tab-view": "^3.5.1",
     "react-native-web": "~0.18.10",
-    "svg": "^0.1.0",
-    "@react-native-async-storage/async-storage": "1.17.11"
+    "svg": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
