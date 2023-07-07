@@ -14,10 +14,23 @@ import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import PQ4RNav from "./PQ4RNav";
 import { colors } from "../../../../utils/colors";
+import { useAppContext } from "../../../../context/AppContext";
 
 const PQ4RRecite = () => {
   const activeComponent = "recite";
   const [isModalVisible, setModalVisible] = useState(false);
+  const { summarypqText, setSummarypqText } = useAppContext();
+
+  const handleSummaryChange = (text) => {
+    setSummarypqText(text);
+  };
+
+  const handleUpdateButton = () => {
+    if (Array.isArray(summarypqText)) {
+      const updatedSummary = summarypqText.join("");
+      setSummarypqText(updatedSummary);
+    }
+  };
 
   const showModal = () => {
     setModalVisible(true);
@@ -65,7 +78,8 @@ const PQ4RRecite = () => {
               textAlign: "left",
             }}
             multiline={true}
-            numberOfLines={10}
+            value={summarypqText}
+            onChangeText={handleSummaryChange}
           />
         </View>
         <View style={styles.ButtonContainer}>
@@ -79,6 +93,7 @@ const PQ4RRecite = () => {
               alignItems: "center",
               justifyContent: "center",
             }}
+            onPress={handleUpdateButton}
           >
             <Text style={{ color: "white", textAlign: "center", fontSize: 16 }}>
               Save

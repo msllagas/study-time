@@ -1,9 +1,4 @@
-//to do:
-//gumawa ng array for storing answers for questions in the dropdown list
-//gawan function ang save button inside the modal
-// gawan array to save the input in the TextInput (main screen)
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -20,14 +15,25 @@ import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import SQ3RNav from "./SQ3RNav";
 import { colors } from "../../../../utils/colors";
-import { useAppContext } from "../../../../context/AppContext"; // Update the path to the AppProvider
+import { useAppContext } from "../../../../context/AppContext"; //the path to the AppProvider
 
 const SQ3RRecite = () => {
   const activeComponent = "recite";
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState("");
+  const [inputText, setInputText] = useState("");
   const { savedQuestions, setSavedQuestions } = useAppContext(); // Access savedQuestions and setSavedQuestions from AppContext
+  const { savedAnswers, setSavedAnswers } = useAppContext(); // state variable for storing the saved answers
+  const { summaryText, setSummaryText } = useAppContext();
 
+  const handleSummaryChange = (text) => {
+    setSummaryText(text);
+  };
+
+  const handleUpdateButton = () => {
+    const updatedSummary = summaryText.join(""); // Join array elements into a single string without a separator
+    setSummaryText(updatedSummary);
+  };
   const showModal = () => {
     setModalVisible(true);
   };
@@ -40,9 +46,38 @@ const SQ3RRecite = () => {
     setSelectedQuestion(question);
   };
 
+  const handleSave = () => {
+    if (selectedQuestion && inputText) {
+      // Check if a question is selected and input is provided
+      const question = `${selectedQuestion}`;
+      const answer = `${inputText}`;
+
+      const savedEntry = {
+        question: question,
+        answer: answer,
+      };
+
+      setSavedAnswers([...savedAnswers, savedEntry]); // Store the question and answer in the savedAnswers array
+      setInputText("");
+      setSelectedQuestion("");
+    }
+  };
+
+  const deleteAnswerIfQuestionDeleted = () => {
+    const updatedAnswers = savedAnswers.filter((entry) =>
+      savedQuestions.includes(entry.question)
+    );
+    setSavedAnswers(updatedAnswers);
+  };
+
+  useEffect(() => {
+    deleteAnswerIfQuestionDeleted();
+  }, [savedQuestions]);
+
   return (
     <SafeAreaView style={styles.container}>
       <SQ3RNav activeComponent={activeComponent} />
+
       <View
         style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
       >
@@ -67,6 +102,7 @@ const SQ3RRecite = () => {
         >
           Summarize what you've learned.
         </Text>
+
         <View style={{ height: 500, width: 380 }}>
           <TextInput
             style={{
@@ -78,43 +114,20 @@ const SQ3RRecite = () => {
               textAlign: "left",
             }}
             multiline={true}
-            numberOfLines={10}
+            value={summaryText}
+            onChangeText={handleSummaryChange}
           />
         </View>
+
         <View style={styles.ButtonContainer}>
-          <TouchableOpacity
-            onPress={showModal}
-            style={{
-              backgroundColor: "#DA60F9",
-              padding: 10,
-              borderRadius: 10,
-              width: "80%",
-              height: 50,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: "white", textAlign: "center", fontSize: 16 }}>
-              Add Answer
-            </Text>
+          <TouchableOpacity onPress={showModal} style={styles.addButton}>
+            <Text style={styles.addButtonLabel}>Add Answer</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              setSavedQuestions([...savedQuestions, "New Question"]); // Example: Saving a new question
-            }}
-            style={{
-              backgroundColor: "#DA60F9",
-              padding: 10,
-              borderRadius: 10,
-              width: "80%",
-              height: 50,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            style={styles.saveButton}
+            onPress={handleUpdateButton}
           >
-            <Text style={{ color: "white", textAlign: "center", fontSize: 16 }}>
-              Save
-            </Text>
+            <Text style={styles.saveButtonLabel}>Update</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -125,7 +138,7 @@ const SQ3RRecite = () => {
             <Picker
               style={styles.picker}
               selectedValue={selectedQuestion}
-              onValueChange={(itemValue) => handleQuestionSelection(itemValue)}
+              onValueChange={handleQuestionSelection}
             >
               <Picker.Item label="Select a question" value="" />
               {savedQuestions.map((question, index) => (
@@ -137,49 +150,18 @@ const SQ3RRecite = () => {
               ))}
             </Picker>
             <TextInput
-              style={{
-                borderBottomWidth: 1,
-                borderBottomColor: "#DA60F9",
-                width: "85%",
-                borderRadius: 10,
-                marginBottom: 20,
-                height: 35,
-                padding: 20,
-                fontStyle: "italic",
-              }}
+              style={styles.input}
               placeholder="Type your answer..."
               placeholderTextColor="#808080"
+              value={inputText}
+              onChangeText={setInputText}
             />
-            <View
-              style={{
-                flexDirection: "row",
-                alignContent: "center",
-                justifyContent: "center",
-              }}
-            >
+            <View style={styles.modalButtonContainer}>
               <TouchableOpacity style={styles.modalButton} onPress={hideModal}>
                 <Text style={styles.modalButtonText}>Close</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#DA60F9",
-                  padding: 10,
-                  borderRadius: 10,
-                  width: "90%",
-                  height: 50,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    textAlign: "center",
-                    fontSize: 16,
-                  }}
-                >
-                  Save
-                </Text>
+              <TouchableOpacity style={styles.modalButton} onPress={handleSave}>
+                <Text style={styles.modalButtonText}>Save</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -200,6 +182,34 @@ const styles = {
     alignItems: "center",
     marginTop: 15,
     gap: 40,
+  },
+  addButton: {
+    backgroundColor: "#DA60F9",
+    padding: 10,
+    borderRadius: 10,
+    width: "80%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonLabel: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 16,
+  },
+  saveButton: {
+    backgroundColor: "#DA60F9",
+    padding: 10,
+    borderRadius: 10,
+    width: "80%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  saveButtonLabel: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 16,
   },
   modalContainer: {
     flex: 1,
@@ -223,15 +233,30 @@ const styles = {
     borderColor: colors.pink,
     borderRadius: 5,
   },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#DA60F9",
+    width: "85%",
+    borderRadius: 10,
+    marginBottom: 20,
+    height: 35,
+    padding: 20,
+    fontStyle: "italic",
+  },
+  modalButtonContainer: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+  },
   modalButton: {
     backgroundColor: "#F3D4FB",
     padding: 10,
     borderRadius: 10,
-    width: "90%",
+    width: "95%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 20,
+    marginRight: 10,
     borderColor: "#DA60F9",
     borderWidth: 1,
   },
