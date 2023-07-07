@@ -15,11 +15,13 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import TopBar from "../../../TopTabNav/TopBar";
 import Header from "../../../../components/Header";
+import { useAppContext } from "../../../../context/AppContext";
 
 const SQ3R = () => {
   const navigation = useNavigation();
+  const { sq3rTopicName, setSq3rTopicName } = useAppContext();
   const [modalVisible, setModalVisible] = useState(false);
-  const [topicName, setTopicName] = useState("");
+
   const [isInputActive, setIsInputActive] = useState(false);
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -45,7 +47,10 @@ const SQ3R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-    <Header title="SQR3 Method" onPressBackArrow={() => navigation.goBack()}/>
+      <Header
+        title="SQR3 Method"
+        onPressBackArrow={() => navigation.goBack()}
+      />
       <TopBar tag="sq3r" />
       <AddButton onPressAdd={toggleModal} />
       <Modal
@@ -73,8 +78,8 @@ const SQ3R = () => {
 
             <TextInput
               label="Topic"
-              value={topicName}
-              onChangeText={(topicName) => setTopicName(topicName)}
+              value={sq3rTopicName}
+              onChangeText={(sq3rTopicName) => setSq3rTopicName(sq3rTopicName)}
               style={[
                 styles.input,
                 isInputActive ? styles.activeInput : styles.inactiveInput,

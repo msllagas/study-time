@@ -23,6 +23,8 @@ import SQ3RQuestion from "./src/navigation/DrawerNav/components/SQ3R/SQ3RQuestio
 import SQ3RRead from "./src/navigation/DrawerNav/components/SQ3R/SQ3RRead";
 import SQ3RRecite from "./src/navigation/DrawerNav/components/SQ3R/SQ3RRecite";
 import SQ3RReview from "./src/navigation/DrawerNav/components/SQ3R/SQ3RReview";
+import SQ3RDone from "./src/navigation/DrawerNav/components/SQ3R/SQ3RDone";
+import SQ3RTopicDisplay from "./src/navigation/DrawerNav/components/SQ3R/SQ3RTopicDisplay";
 import PQ4R from "./src/navigation/DrawerNav/components/PQ4R/PQ4R";
 import PQ4RPreview from "./src/navigation/DrawerNav/components/PQ4R/PQ4RPreview";
 import PQ4RQuestion from "./src/navigation/DrawerNav/components/PQ4R/PQ4RQuestion";
@@ -82,6 +84,8 @@ export default function App() {
           <Stack.Screen name="SQ3RRead" component={SQ3RRead} />
           <Stack.Screen name="SQ3RRecite" component={SQ3RRecite} />
           <Stack.Screen name="SQ3RReview" component={SQ3RReview} />
+          <Stack.Screen name="SQ3RDone" component={SQ3RDone} />
+          <Stack.Screen name="SQ3RTopicDisplay" component={SQ3RTopicDisplay} />
           <Stack.Screen name="PQ4R" component={PQ4R} />
           <Stack.Screen name="PQ4RPreview" component={PQ4RPreview} />
           <Stack.Screen name="PQ4RQuestion" component={PQ4RQuestion} />
