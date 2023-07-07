@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,51 +6,65 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { addDoc, collection } from "firebase/firestore";
-import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
+import {
+  Button,
+  Appbar,
+  IconButton,
+  TextInput,
+  Modal,
+  Portal,
+  Card,
+  PaperProvider,
+} from "react-native-paper";
 import { useAppContext } from "../../../../context/AppContext";
 import SQ3RNav from "./SQ3RNav";
 import AddButton from "../../../../components/AddButton";
 import { colors } from "../../../../utils/colors";
-import { useNavigation } from "@react-navigation/native";
 
-const SQ3RReview = () => {
-  const navigation = useNavigation();
-  const activeComponent = "review";
-  const { sq3rTopicName, savedQuestions, savedAnswers, summaryText } =
-    useAppContext();
+import { doc, getDoc } from "firebase/firestore";
+import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
 
-  const addTopicToFirestore = async () => {
-    try {
-      const currentUser = FIREBASE_AUTH.currentUser;
-      const userId = currentUser.uid;
+const SQ3RTopicDisplay = ({ route, navigation }) => {
+  const { topicId } = route.params;
 
-      const topicData = {
-        userId: userId,
+  const [topicName, setTopicName] = useState("");
+  const [savedAnswers, setSavedAnswers] = useState([]);
+  const [summaryText, setSummaryText] = useState("");
 
-        title: sq3rTopicName,
-        description: "This is a new topic added to Firestore.",
-        tag: "sq3r",
-        isDone: false,
-        createdAt: new Date(),
-        technique: {
-          savedAnswers: savedAnswers,
-          summaryText: summaryText,
-        },
-      };
-      await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
-      console.log("it is working");
-      navigation.navigate("SQ3RDone");
-    } catch (error) {
-      console.error("Error adding topic:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchTopic = async () => {
+      try {
+        const topicRef = doc(FIRESTORE_DB, "topics", topicId);
+        const data = await getDoc(topicRef);
+        console.log(data.data());
+
+        setSavedAnswers(data.data()?.technique?.savedAnswers);
+
+        setSummaryText(data.data()?.technique?.summaryText);
+
+        setTopicName(data.data()?.title);
+
+        console.log("Topic fetched");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTopic();
+  }, []);
+
+  const _goBack = () => navigation.goBack();
 
   return (
     <SafeAreaView style={styles.container}>
-      <SQ3RNav activeComponent={activeComponent} />
-
       <ScrollView style={styles.contentContainer}>
+        <PaperProvider>
+          <IconButton
+            icon="arrow-left"
+            style={styles.backButton}
+            size={40}
+            onPress={_goBack}
+          />
+        </PaperProvider>
         <View>
           <Text
             style={{
@@ -62,7 +76,7 @@ const SQ3RReview = () => {
               marginTop: 60,
             }}
           >
-            Review
+            {topicName}
           </Text>
           <Text
             style={{
@@ -72,7 +86,7 @@ const SQ3RReview = () => {
               marginBottom: 30,
             }}
           >
-            Review the material as often as {"\n"} possible.
+            This is date
           </Text>
         </View>
 
@@ -170,31 +184,18 @@ const SQ3RReview = () => {
         </View>
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#DA60F9",
-              padding: 10,
-              borderRadius: 10,
-              width: "40%",
-              height: 50,
-              marginTop: 40,
-            }}
-            onPress={addTopicToFirestore}
-          >
-            <Text
-              style={{ color: "#FFFFFF", textAlign: "center", fontSize: 16 }}
-            >
-              Save
-            </Text>
-          </TouchableOpacity>
-        </View>
+        ></View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = {
+  backButton: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+  },
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
@@ -223,4 +224,4 @@ const styles = {
   },
 };
 
-export default SQ3RReview;
+export default SQ3RTopicDisplay;

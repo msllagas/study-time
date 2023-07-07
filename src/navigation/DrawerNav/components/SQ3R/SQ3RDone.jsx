@@ -6,50 +6,17 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { addDoc, collection } from "firebase/firestore";
-import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
 import { useAppContext } from "../../../../context/AppContext";
 import SQ3RNav from "./SQ3RNav";
 import AddButton from "../../../../components/AddButton";
 import { colors } from "../../../../utils/colors";
-import { useNavigation } from "@react-navigation/native";
 
-const SQ3RReview = () => {
-  const navigation = useNavigation();
-  const activeComponent = "review";
+const SQ3RDone = () => {
   const { sq3rTopicName, savedQuestions, savedAnswers, summaryText } =
     useAppContext();
 
-  const addTopicToFirestore = async () => {
-    try {
-      const currentUser = FIREBASE_AUTH.currentUser;
-      const userId = currentUser.uid;
-
-      const topicData = {
-        userId: userId,
-
-        title: sq3rTopicName,
-        description: "This is a new topic added to Firestore.",
-        tag: "sq3r",
-        isDone: false,
-        createdAt: new Date(),
-        technique: {
-          savedAnswers: savedAnswers,
-          summaryText: summaryText,
-        },
-      };
-      await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
-      console.log("it is working");
-      navigation.navigate("SQ3RDone");
-    } catch (error) {
-      console.error("Error adding topic:", error);
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <SQ3RNav activeComponent={activeComponent} />
-
       <ScrollView style={styles.contentContainer}>
         <View>
           <Text
@@ -62,7 +29,7 @@ const SQ3RReview = () => {
               marginTop: 60,
             }}
           >
-            Review
+            {sq3rTopicName}
           </Text>
           <Text
             style={{
@@ -72,7 +39,7 @@ const SQ3RReview = () => {
               marginBottom: 30,
             }}
           >
-            Review the material as often as {"\n"} possible.
+            This is date
           </Text>
         </View>
 
@@ -180,12 +147,11 @@ const SQ3RReview = () => {
               height: 50,
               marginTop: 40,
             }}
-            onPress={addTopicToFirestore}
           >
             <Text
               style={{ color: "#FFFFFF", textAlign: "center", fontSize: 16 }}
             >
-              Save
+              Done
             </Text>
           </TouchableOpacity>
         </View>
@@ -223,4 +189,4 @@ const styles = {
   },
 };
 
-export default SQ3RReview;
+export default SQ3RDone;

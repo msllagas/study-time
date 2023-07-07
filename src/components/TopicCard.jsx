@@ -143,9 +143,9 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
           topicId,
         });
       } else if (tag === "pq4r") {
-        navigation.navigate("PQ4R");
+        navigation.navigate("PQ4R", { topicId });
       } else if (tag === "sq3r") {
-        navigation.navigate("SQ3R");
+        navigation.navigate("SQ3RTopicDisplay", { topicId });
       }
     }
   };
