@@ -126,7 +126,7 @@ const ActiveRecall = () => {
       {/* <Pressable onPress={() => navigation.navigate("ActiveRecallDone")}>
         <Text>go to DONE</Text>
       </Pressable>  tt*/}
-      <Header title="Active Recall" onPressBackArrow={() => navigation.goBack()}/>
+
       <TopBar tag="active recall" />
             
        <Portal>
