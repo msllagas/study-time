@@ -97,13 +97,11 @@ const ActiveRecall = () => {
           userId: userId,
           tag: "active recall",
           isDone: false,
-          technique: {
-            date: new Date().toLocaleDateString("en-PH", {
+          createdAt: new Date().toLocaleDateString("en-PH", {
               month: "2-digit",
               day: "2-digit",
               year: "numeric",
             }),
-          },
           time: new Date().toLocaleTimeString("en-PH", {
             hour: "2-digit",
             minute: "2-digit",
