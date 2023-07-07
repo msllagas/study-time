@@ -7,7 +7,7 @@ const TopBar = ({ tag }) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Done"
+      initialRouteName="On-going"
       screenOptions={{
         labelStyle: { fontSize: 14 },
         style: { backgroundColor: "white" },

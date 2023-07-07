@@ -18,6 +18,7 @@ import Constants from "expo-constants";
 import Done from "../../../../components/Done";
 import Ongoing from "../../../../components/Ongoing";
 import TopicCard from "../../../../components/TopicCard";
+import Header from "../../../../components/Header";
 
 function Dones() {
   return <Done tag="pomodoro"></Done>;
@@ -27,9 +28,7 @@ const Pomodoro = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable onPress={() => navigation.navigate("PomodoroDone")}>
-        <Text>go to DONE</Text>
-      </Pressable>
+    <Header title="Pomodoro Method" onPressBackArrow={() => navigation.goBack()}/>
       <TopBar tag="pomodoro"/>
       <AddButton onPressAdd={()=>navigation.navigate("PomodoroAdd")}/>
     </SafeAreaView>

@@ -29,6 +29,7 @@ import {
   documentId,
 } from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
+import Header from "../../../../components/Header";
 
 
 // const saveHandler = ({navigation}) => {
@@ -125,7 +126,7 @@ const ActiveRecall = () => {
       {/* <Pressable onPress={() => navigation.navigate("ActiveRecallDone")}>
         <Text>go to DONE</Text>
       </Pressable>  tt*/}
-
+      <Header title="Active Recall" onPressBackArrow={() => navigation.goBack()}/>
       <TopBar tag="active recall" />
             
        <Portal>

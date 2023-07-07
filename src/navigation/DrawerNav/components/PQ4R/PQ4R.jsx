@@ -13,8 +13,7 @@ import AddButton from "../../../../components/AddButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import TopBar from "../../../TopTabNav/TopBar";
-import Done from "../../../../components/Done";
-import Ongoing from "../../../../components/Ongoing";
+import Header from "../../../../components/Header";
 
 const PQ4R = () => {
   const navigation = useNavigation();
@@ -46,6 +45,7 @@ const PQ4R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+    <Header title="PQ4R Method" onPressBackArrow={() => navigation.goBack()}/>
       <TopBar tag="pq4r" />
       <AddButton onPressAdd={toggleModal} />
       <Modal
