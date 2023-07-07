@@ -15,8 +15,8 @@ const Done = ({ tag }) => {
     const fetchDoneTopics = async () => {
       try {
         const currentUser = FIREBASE_AUTH.currentUser;
-        const userId = currentUser.uid; 
-        
+        const userId = currentUser.uid;
+
         let doneTopicsQuery;
 
         if (tag) {
@@ -43,6 +43,7 @@ const Done = ({ tag }) => {
         }));
         setIsLoading(false);
         setDoneTopics(doneTopicsData);
+        console.log("hello world");
       } catch (error) {
         console.log("Error fetching done topics:", error);
       }
@@ -82,7 +83,7 @@ const Done = ({ tag }) => {
         />
       ) : (
         <View style={styles.emptyText}>
-          <Text variant="displaySmall">Empty</Text>
+          <Text variant="displaySmall" style={styles.text}>Empty</Text>
         </View>
       )}
     </View>
@@ -110,4 +111,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  text: {
+    fontFamily: "AmaticBold", 
+    color:  colors.redOrange
+  }
 });

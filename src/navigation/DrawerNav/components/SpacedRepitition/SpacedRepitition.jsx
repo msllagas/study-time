@@ -9,17 +9,17 @@ import {
 } from "react-native";
 import { Card, Text, PaperProvider } from "react-native-paper";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import CalendarDate from "../../../../components/CalendarDate";
 import AddButton from "../../../../components/AddButton";
 import TopBar from "../../../TopTabNav/TopBar";
-import Done from "../../../../components/Done";
-import Ongoing from "../../../../components/Ongoing";
-import logo from "../../../../../assets/imgs/logo3.png";
+import Header from "../../../../components/Header";
 import { useAppContext } from "../../../../context/AppContext";
 
 const SpacedRepitition = ({ navigation }) => {
   const { date, setDate } = useAppContext();
+
 
   const onDateChange = (date) => {
     console.log(date);
@@ -29,6 +29,7 @@ const SpacedRepitition = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <PaperProvider>
+      <Header title="Spaced Repetition" onPressBackArrow={() => navigation.goBack()}/>
         <Text
           style={{
             fontFamily: "AmaticBold",
@@ -43,7 +44,7 @@ const SpacedRepitition = ({ navigation }) => {
       </PaperProvider>
       <CalendarDate />
 
-      <TopBar tag="spacedrepi" />
+      <TopBar tag="spaced repetition" />
 
       <AddButton
         onPressAdd={() => navigation.navigate("SpacedRepititionAdd")}

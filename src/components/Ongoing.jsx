@@ -15,7 +15,7 @@ const Ongoing = ({ tag }) => {
     const fetchDoneTopics = async () => {
       try {
         const currentUser = FIREBASE_AUTH.currentUser;
-        const userId = currentUser.uid; 
+        const userId = currentUser.uid;
 
         let ongoingTopicsQuery;
 
@@ -62,7 +62,7 @@ const Ongoing = ({ tag }) => {
             style={{ alignSelf: "center" }}
           />
         </View>
-      ) : (ongoingTopics.length > 0 ? (
+      ) : ongoingTopics.length > 0 ? (
         <FlatList
           data={ongoingTopics}
           renderItem={(topic) => (
@@ -75,16 +75,16 @@ const Ongoing = ({ tag }) => {
             />
           )}
           keyExtractor={(topic) => topic.id}
-          showsVerticalScrollIndicator = {false}
+          showsVerticalScrollIndicator={false}
           style={styles.scrollView}
-          contentContainerStyle={{justifyContent: 'center'}}
+          contentContainerStyle={{ justifyContent: "center" }}
           bounces={false}
         />
       ) : (
         <View style={styles.emptyText}>
-          <Text variant="displaySmall">Empty</Text>
+          <Text variant="displaySmall" style={styles.text}>Empty</Text>
         </View>
-      ))}
+      )}
     </View>
   );
 };
@@ -110,4 +110,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  text: {
+    fontFamily: "AmaticBold", 
+    color:  colors.redOrange
+  }
 });

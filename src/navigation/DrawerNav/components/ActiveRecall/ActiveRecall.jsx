@@ -35,6 +35,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
+import Header from "../../../../components/Header";
 
 
 const storeData = async (value) => {

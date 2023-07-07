@@ -14,8 +14,7 @@ import AddButton from "../../../../components/AddButton";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import TopBar from "../../../TopTabNav/TopBar";
-import Done from "../../../../components/Done";
-import Ongoing from "../../../../components/Ongoing";
+import Header from "../../../../components/Header";
 
 const SQ3R = () => {
   const navigation = useNavigation();
@@ -46,6 +45,7 @@ const SQ3R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+    <Header title="SQR3 Method" onPressBackArrow={() => navigation.goBack()}/>
       <TopBar tag="sq3r" />
       <AddButton onPressAdd={toggleModal} />
       <Modal

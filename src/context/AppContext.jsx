@@ -14,7 +14,11 @@ const AppProvider = ({ children }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [schedule, setSchedule] = useState("");
-  
+  const [savedAnswers, setSavedAnswers] = useState([]);
+  const [summaryText, setSummaryText] = useState("");
+  const [savedpqAnswers, setSavedpqAnswers] = useState([]);
+  const [summarypqText, setSummarypqText] = useState([]);
+
   return (
     // export the function and state here
     <AppContext.Provider
@@ -33,6 +37,14 @@ const AppProvider = ({ children }) => {
         setEndDate,
         schedule,
         setSchedule,
+        savedAnswers,
+        setSavedAnswers,
+        summaryText,
+        setSummaryText,
+        savedpqAnswers,
+        setSavedpqAnswers,
+        summarypqText,
+        setSummarypqText,
       }}
     >
       {children}

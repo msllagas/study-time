@@ -7,20 +7,19 @@ const TopBar = ({ tag }) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="Done"
+      initialRouteName="On-going"
       screenOptions={{
         labelStyle: { fontSize: 14 },
         style: { backgroundColor: "white" },
-        tabBarIndicatorStyle:{ backgroundColor:colors.redOrange },
-        swipeEnabled: false
+        tabBarIndicatorStyle: { backgroundColor: colors.redOrange },
+        swipeEnabled: false,
       }}
-      
     >
-      <Tab.Screen name="Done" options={{ tabBarLabel: "Done" }}>
-        {() => <Done tag={tag} />}
-      </Tab.Screen>
       <Tab.Screen name="On-going" options={{ tabBarLabel: "On-going" }}>
         {() => <Ongoing tag={tag} />}
+      </Tab.Screen>
+      <Tab.Screen name="Done" options={{ tabBarLabel: "Done" }}>
+        {() => <Done tag={tag} />}
       </Tab.Screen>
     </Tab.Navigator>
   );

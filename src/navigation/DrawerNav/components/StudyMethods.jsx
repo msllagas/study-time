@@ -5,6 +5,7 @@ import {
   Dimensions,
   ScrollView,
   SafeAreaView,
+  Pressable,
 } from "react-native";
 import {
   Button,
@@ -17,13 +18,33 @@ import {
   Portal,
   Text,
 } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../utils/colors";
 import techniques from "../../../utils/techniques";
-// import { SafeAreaView } from "react-native-web";
+
+
 
 const StudyMethodsCard = ({ title, description, onPress }) => {
+
+  const navigation = useNavigation();
   const cardWidth = Dimensions.get("window").width * 0.9;
+
+  const navigateToPage = () => {
+    if (title === "Pomodoro Method" ) {
+      navigation.navigate("Pomodoro");
+    } else if (title === "Active Recall"){
+      navigation.navigate("ActiveRecall");
+    }else if (title === "Spaced Repetition"){
+      navigation.navigate("SpacedRepitition");
+    }else if (title === "SQR3 Method"){
+      navigation.navigate("SQ3R");
+    }else if (title === "PQ4R Method"){
+      navigation.navigate("PQ4R");
+    }
+  }
+
   return (
+    <Pressable onPress={navigateToPage}>
     <Surface
       mode="elevated"
       style={{
@@ -57,6 +78,7 @@ const StudyMethodsCard = ({ title, description, onPress }) => {
         </Text>
       </View>
     </Surface>
+    </Pressable>
   );
 };
 
@@ -74,6 +96,9 @@ const StudyMethods = () => {
   const hideModal = () => setVisible(false);
 
   const containerStyle = { backgroundColor: "white", padding: 20, marginHorizontal: 20, borderRadius: 10 };
+  
+ 
+  
   return (
     <SafeAreaView style={{ backgroundColor: colors.blueGreen, height: "100%" }}>
       <PaperProvider>
