@@ -18,10 +18,10 @@ import Constants from 'expo-constants';
 import { colors } from "../../../../utils/colors";
 import logo from "../../../../../assets/imgs/logo2.png";
 import Header from "../../../../components/Header";
-import { collection, query, where, getDocs, updateDoc, documentId, getDoc, doc, setDoc, awaitDoc, addDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, updateDoc, documentId, getDoc, doc, setDoc, awaitDoc, addDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
-// import { useDocId } from "./useDocId";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { async } from "@firebase/util";
 
 
 //add/delete question function
@@ -34,27 +34,45 @@ return (
       iconColor={colors.redOrange}
       style={styles.deleteButton} 
       size={35}
-      onPress={()=>console.log("delete this")}
+      // onPress={()=>delQnA(num={num}, question={question}, answer={answer})}
+      onPress={()=>console.log("delete qna")}
     />
   <View style={styles.setupContainer}>
     {/* {questionNum} */}
     <Text style={styles.fieldTitle}>Question {num}</Text>
-    <Text style={{paddingVertical: 15, paddingHorizontal: 10}}>{question}</Text>
+    <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{question}</Text>
   </View>                    
   <View style={styles.setupContainer}>
     {/* {answerNum} */}
     <Text style={styles.fieldTitle}>Answer {num}</Text>
-    <Text style={{paddingVertical: 15, paddingHorizontal: 10}}>{answer}</Text>
+    <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{answer}</Text>
   </View>   
 </View> 
-)
-}
+)}
+
+const delQnA = async (num, question, answer) => {
+  let delQuery = query(
+    collection(FIRESTORE_DB, "topics", global.docId,"qna"),
+    where("num", "==", num),
+    where("question", "==", question),
+    where("answer", "==", answer))
+  await deleteDoc(delQuery);
+  console.log("qna deleted")
+};
+
+const storeQnAid = async (value) => {
+  try {
+    await AsyncStorage.setItem('qnaId', value);
+  } catch (e) {
+    console.log("error storing id")
+  }
+};
 
 const ActiveRecallAdd = ({navigation}) => {
   const [topicQuestion, setQuestion] = React.useState("");
   const [topicAnswer, setAnswer] = React.useState("");
   const [qnaNum, setNum] = React.useState(1);
-  const [QnAs, setQnAs] = React.useState()
+  const [QnAs, setQnAs] = React.useState([])
 
   const _goBack = () => navigation.goBack();
 
@@ -67,23 +85,24 @@ const ActiveRecallAdd = ({navigation}) => {
     const fetchQnAs = async () => {      
       try {
         const currentUser = FIREBASE_AUTH.currentUser;
-        const userId = currentUser.uid; 
+        if (!currentUser){
+          console.log("error");
+        } else {
+          const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics/'+global.docId+'/qna'));
+          // const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics'));
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+          });
 
-        const querySnapshot = await getDocs(collection(FIRESTORE_DB, "topics", value, "qna"));
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-          // setQnAs(doc.id, " => ", doc.data())
-        });
-
-        const qnaSnapshot = await getDocs(querySnapshot);
-        const qnaData = qnaSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        
+          const qnaData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setQnAs(qnaData);
+        }//if-else
       } catch (error) {
-        console.log("Error fetching done qna:", error);
+        console.log("Error fetching qna:", error);
       }
     }
 
@@ -100,7 +119,8 @@ const ActiveRecallAdd = ({navigation}) => {
             answer: topicAnswer,
             num: qnaNum
           });
-          console.log("topic added with id:", qnaRef.id);
+          console.log("qna added with id:", qnaRef.id);
+
 
           console.log("success");
         } catch (error) {
@@ -110,44 +130,25 @@ const ActiveRecallAdd = ({navigation}) => {
         setNum(qnaNum+1);
         console.log("latest is from async: ", value);
         setVisible(false);
+        global.docId=value;
+        console.log("id from global: ", global.docId);
       } 
     } catch (e) {
-      // error reading value
+      console.log("error reading value: ", e);
     }
   };
 
   return (
     <SafeAreaView style={styles.viewContainer}>
       <Header title="Active Recall" onPressBackArrow={_goBack}/>
-      <PaperProvider>
+      <PaperProvider style={{textColor:"#00000"}}>
       <ScrollView>         
         <Image style={styles.imageContainer} source={logo} resizeMode="cover"/>
         <Text 
           style={{fontFamily:'FuzzyBubblesBold', fontSize:16, textAlign:'center', paddingHorizontal:15}}>
           Study with Active Recall. Set your questions and answers for your flashcard.
         </Text>
-
-        {/* <View style={styles.qnaContainer}>
-          <IconButton 
-              icon="delete-circle" 
-              iconColor={colors.redOrange}
-              style={styles.deleteButton} 
-              size={35}
-              onPress={()=>console.log("delete this")}
-            />
-          <View style={styles.setupContainer}>
-     
-            <Text style={styles.fieldTitle}>Question</Text>
-            <Text style={{paddingVertical: 15, paddingHorizontal: 10}}>{topicQuestion}</Text>
-          </View>                    
-          <View style={styles.setupContainer}>
-            
-            <Text style={styles.fieldTitle}>Answer</Text>
-            <Text style={{paddingVertical: 15, paddingHorizontal: 10}}>{topicAnswer}</Text>
-          </View>   
-        </View>  */}
-
-        {/* <QnAfields/> */}
+       
         <FlatList
           data = {QnAs}
           renderItem={(qna) => (
@@ -172,7 +173,7 @@ const ActiveRecallAdd = ({navigation}) => {
             onPress={() => console.log("add")} 
             buttonColor={colors.green}
             textColor={colors.white}
-            style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:30}}>
+            style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, marginBottom:10}}>
           Start
         </Button>
       </ScrollView>     
@@ -254,7 +255,7 @@ const styles =StyleSheet.create({
     marginBottom: 5
   },
   qnaContainer:{
-    marginBottom: 30,
+    marginBottom: 10,
     width: '70%',
     alignSelf: 'center',
   },
