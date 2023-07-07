@@ -16,7 +16,7 @@ import { colors } from "../../../../utils/colors";
 import Header from "../../../../components/Header";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
-//connect to firebase, read&randomize questions, write {userAnswer} -> validate
+//connect to firebase, read&randomize questions, write {userAnswer} -> validate jj
 //_onSkip function
 {/* <AddButton onPressAdd={()=><addHandler questionInput={question} answerInput={answerInput}/>}/> */}
 const ActiveRecall = ({navigation}) => {

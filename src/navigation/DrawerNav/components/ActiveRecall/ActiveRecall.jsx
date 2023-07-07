@@ -124,7 +124,7 @@ const ActiveRecall = () => {
         
       {/* <Pressable onPress={() => navigation.navigate("ActiveRecallDone")}>
         <Text>go to DONE</Text>
-      </Pressable> */}
+      </Pressable>  tt*/}
 
       <TopBar tag="active recall" />
             
