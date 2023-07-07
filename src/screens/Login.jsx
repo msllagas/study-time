@@ -108,7 +108,6 @@ const Login = () => {
             onBlur={onPasswordBlur}
             secureTextEntry
             left={<TextInput.Icon icon="lock-outline" />}
-            right={<TextInput.Icon icon="eye-outline" />}
             error={isPasswordEmpty}
           />
         </View>
