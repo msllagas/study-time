@@ -139,7 +139,9 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
       } else if (tag === "active recall") {
         navigation.navigate("ActiveRecallOngoing");
       } else if (tag === "spaced repetition") {
-        navigation.navigate("SpacedRepititionDisplay");
+        navigation.navigate("SpacedRepititionDisplay", {
+          topicId,
+        });
       } else if (tag === "pq4r") {
         navigation.navigate("PQ4R");
       } else if (tag === "sq3r") {

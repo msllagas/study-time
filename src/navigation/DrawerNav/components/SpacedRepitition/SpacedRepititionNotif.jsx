@@ -115,7 +115,7 @@ const SpacedRepititionNotif = ({ navigation }) => {
         title: topicName,
         description: "This is a new topic added to Firestore.",
         tag: "spaced repetition",
-        isDone: true,
+        isDone: false,
         createdAt: new Date(),
         technique: {
           startDate: moment(startDate).toDate(),

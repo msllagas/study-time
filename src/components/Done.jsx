@@ -15,8 +15,8 @@ const Done = ({ tag }) => {
     const fetchDoneTopics = async () => {
       try {
         const currentUser = FIREBASE_AUTH.currentUser;
-        const userId = currentUser.uid; 
-        
+        const userId = currentUser.uid;
+
         let doneTopicsQuery;
 
         if (tag) {
@@ -43,13 +43,14 @@ const Done = ({ tag }) => {
         }));
         setIsLoading(false);
         setDoneTopics(doneTopicsData);
+        console.log("hello world");
       } catch (error) {
         console.log("Error fetching done topics:", error);
       }
     };
 
     fetchDoneTopics();
-  }, [tag, doneTopics]);
+  }, [tag]);
 
   return (
     <View style={styles.container}>
