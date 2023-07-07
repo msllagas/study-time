@@ -46,7 +46,7 @@ const PQ4R = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar Done={Done} Ongoing={Ongoing} tag="pomodoro" />
+      <TopBar tag="pq4r" />
       <AddButton onPressAdd={toggleModal} />
       <Modal
         visible={modalVisible}

@@ -8,11 +8,13 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   //spacedRepetition
   const [topicName, setTopicName] = React.useState("");
+  const [savedQuestions, setSavedQuestions] = useState([]);
+  const [pqsavedQuestions, setPqSavedQuestions] = useState([]);
   const [numSessions, setNumSessions] = React.useState(3);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [schedule, setSchedule] = useState("");
-
+  
   return (
     // export the function and state here
     <AppContext.Provider
@@ -21,6 +23,10 @@ const AppProvider = ({ children }) => {
         setTopicName,
         numSessions,
         setNumSessions,
+        savedQuestions,
+        setSavedQuestions,
+        pqsavedQuestions,
+        setPqSavedQuestions,
         startDate,
         setStartDate,
         endDate,
