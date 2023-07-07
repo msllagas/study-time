@@ -14,13 +14,15 @@ import {
 } from "react-native-paper";
 import CalendarDate from "../../../../components/CalendarDate";
 import moment from "moment";
-
 import { colors } from "../../../../utils/colors";
-
+import { addDoc, collection } from "firebase/firestore";
+import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
 import Constants from "expo-constants";
 import { useAppContext } from "../../../../context/AppContext";
+
 const SpacedRepititionNotif = ({ navigation }) => {
-  const { startDate, endDate, numSessions, setSchedule } = useAppContext();
+  const { topicName, startDate, endDate, numSessions, setSchedule } =
+    useAppContext();
   const [isSwitchOn, setIsSwitchOn] = useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
   const _goBack = () => navigation.goBack();
@@ -101,6 +103,34 @@ const SpacedRepititionNotif = ({ navigation }) => {
   }, []);
   console.log("Generated Schedule:", schedule);
 
+  const addTopicToFirestore = async () => {
+    try {
+      const currentUser = FIREBASE_AUTH.currentUser;
+      const userId = currentUser.uid;
+
+      console.log(moment(startDate).toDate());
+      const topicData = {
+        userId: userId,
+
+        title: topicName,
+        description: "This is a new topic added to Firestore.",
+        tag: "spaced repetition",
+        isDone: true,
+        createdAt: new Date(),
+        technique: {
+          startDate: moment(startDate).toDate(),
+          endDate: moment(endDate).toDate(),
+          schedule: schedule,
+        },
+      };
+      await addDoc(collection(FIRESTORE_DB, "topics"), topicData);
+      console.log("it is working");
+      navigation.navigate("SpacedRepititionDone");
+    } catch (error) {
+      console.error("Error adding topic:", error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.viewContainer}>
       <ScrollView style={{ paddingBottom: 20 }}>
@@ -178,7 +208,7 @@ const SpacedRepititionNotif = ({ navigation }) => {
 
           <Button
             mode="contained"
-            onPress={() => navigation.navigate("SpacedRepititionDone")}
+            onPress={addTopicToFirestore}
             style={{
               borderRadius: 8,
               width: "70%",
