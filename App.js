@@ -50,7 +50,9 @@ export default function App() {
     FuzzyBubblesRegular: require("./assets/fonts/FuzzyBubbles-Regular.ttf"),
     Inter: require("./assets/fonts/Inter-Regular.ttf"),
   });
-
+  if (!loaded) {
+    return null;
+  }
   // For development purposes only. Change in initialRouteName to 'StartUp' for production.
   return (
     <AppProvider>
