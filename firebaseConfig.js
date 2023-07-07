@@ -33,6 +33,18 @@ import { getFirestore } from "firebase/firestore";
 // Changed based on your project config
 const firebaseConfig = {
   // Add Here your project's firebase config
+  apiKey: "AIzaSyAsM8vG6J_x9s2ANuyviS4FAHDPq7txnvc",
+
+  authDomain: "todo-995c2.firebaseapp.com",
+
+  projectId: "todo-995c2",
+
+  storageBucket: "todo-995c2.appspot.com",
+
+  messagingSenderId: "933148103721",
+
+  appId: "1:933148103721:web:bd3eef8a333e26f3fa3838"
+
 };
 
 export const FIREBASE_APP = initializeApp(firebaseConfig);

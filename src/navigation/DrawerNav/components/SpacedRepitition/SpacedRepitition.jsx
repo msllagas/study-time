@@ -43,7 +43,7 @@ const SpacedRepitition = ({ navigation }) => {
       </PaperProvider>
       <CalendarDate />
 
-      <TopBar tag="spacedrepi" />
+      <TopBar tag="spaced repetition" />
 
       <AddButton
         onPressAdd={() => navigation.navigate("SpacedRepititionAdd")}
