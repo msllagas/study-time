@@ -19,30 +19,6 @@ import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-//connect to firebase, read qna
-//displayQnA
-// const doneTopic = ({}) => {
-//   const [qna, setQnA] = useState([])
-//   const [question, setQuestion] = useState()
-
-//   useEffect( () => {
-//     const currentUser = FIREBASE_AUTH.currentUser;
-//     const userid = currentUser.uid
-
-//     let qnaQuery;
-
-//     if ("tag") {
-//       qnaQuery = query (
-//         collection(FIRESTORE_DB, "topics"),
-//         where ("userId", "==", userid),
-//         where ("tag")
-//       );
-//     }
-
-    
-//   })
-// }
-
 const ActiveRecallDone = ({navigation}) => {
   const _goBack = () => navigation.goBack();
   
