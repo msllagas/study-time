@@ -90,49 +90,6 @@ const Drawer = () => {
         }}
       />
       <Drawer.Screen
-        name="Pomoodoro"
-        component={Pomodoro}
-        options={{
-          headerTitle: "Pomodoro Method",
-          drawerLabel: "Pomodoro (temp)",
-        }}
-      />
-      <Drawer.Screen
-        name="ActiveRecall"
-        component={ActiveRecall}
-        options={{
-          headerTitle: "Active Recall",
-          drawerLabel: "Active Recall (temp)",
-        }}
-      />
-      <Drawer.Screen
-        name="SpacedRepitition"
-        component={SpacedRepitition}
-        options={{
-          headerTitle: "SpacedRepitition",
-          drawerLabel: "SpacedRepitition (temp)",
-        }}
-      />
-
-      <Drawer.Screen
-        name="SQ3R"
-        component={SQ3R}
-        options={{
-          headerTitle: "SQ3R",
-          drawerLabel: "SQ3R (temp)",
-        }}
-      />
-
-      <Drawer.Screen
-        name="PQ4R"
-        component={PQ4R}
-        options={{
-          headerTitle: "PQ4R",
-          drawerLabel: "PQ4R (temp)",
-        }}
-      />
-
-      <Drawer.Screen
         name="Study Methods"
         component={StudyMethods}
         options={{
