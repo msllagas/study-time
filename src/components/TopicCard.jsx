@@ -22,7 +22,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
 
   const navigation = useNavigation();
   const buttonWidth = 60;
-  const sensitivity = 50000; // Increase this value for higher sensitivity
+  const sensitivity = 50000; // Increase this value for higher sensitivity.
 
   const panResponder = useRef(
     PanResponder.create({

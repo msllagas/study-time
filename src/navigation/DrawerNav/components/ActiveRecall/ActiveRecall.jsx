@@ -2,11 +2,7 @@ import {
   View,
   Text,
   SafeAreaView,
-  Platform,
-  StatusBar,
   StyleSheet,
-  Pressable,
-  Image,
   Modal,
   TouchableOpacity
 } from "react-native";
@@ -19,22 +15,7 @@ import TopBar from "../../../TopTabNav/TopBar";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from "@expo/vector-icons";
 import Header from "../../../../components/Header";
-
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-  getDocs,
-  documentId,
-  Timestamp,
-  Firestore,
-  serverTimestamp,
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp} from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
 
 
@@ -102,8 +83,6 @@ const ActiveRecall = () => {
         console.log("topic added with id:", topicData.id);
         storeData(topicData.id);
         getData();
-        // global.thisDocId = topicData.id;
-        // console.log("topic id from global:", thisDocId);
       } catch (error) {
         console.error("Error adding topic:", error);
       }

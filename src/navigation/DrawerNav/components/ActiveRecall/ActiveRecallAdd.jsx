@@ -26,41 +26,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from "@expo/vector-icons";
 
 
-//add/delete question function
-
 const QnAfields = ({question, answer, num}) =>{
 return (
-  <View style={styles.qnaContainer}>
-  <IconButton 
-      icon="delete-circle" 
-      iconColor={colors.redOrange}
-      style={styles.deleteButton} 
-      size={35}
-      // onPress={()=>delQnA(num={num}, question={question}, answer={answer})}
-      onPress={()=>console.log("delete qna")}
-    />
-  <View style={styles.setupContainer}>
-    {/* {questionNum} */}
-    <Text style={styles.fieldTitle}>Question {num}</Text>
-    <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{question}</Text>
-  </View>                    
-  <View style={styles.setupContainer}>
-    {/* {answerNum} */}
-    <Text style={styles.fieldTitle}>Answer {num}</Text>
-    <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{answer}</Text>
-  </View>   
-</View> 
+  <View style={styles.qnaContainer}>  
+    <View style={styles.setupContainer}>
+      {/* {questionNum} */}
+      <Text style={styles.fieldTitle}>Question {num}</Text>
+      <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{question}</Text>
+    </View>                    
+    <View style={styles.setupContainer}>
+      {/* {answerNum} */}
+      <Text style={styles.fieldTitle}>Answer {num}</Text>
+      <Text style={{paddingVertical: 5, paddingHorizontal: 10}}>{answer}</Text>
+    </View>   
+  </View> 
 )}
-
-const delQnA = async (num, question, answer) => {
-  let delQuery = query(
-    collection(FIRESTORE_DB, "topics", global.docId,"qna"),
-    where("num", "==", num),
-    where("question", "==", question),
-    where("answer", "==", answer))
-  await deleteDoc(delQuery);
-  console.log("qna deleted")
-};
 
 const storeQnAid = async (value) => {
   try {
@@ -92,6 +72,14 @@ const ActiveRecallAdd = ({navigation}) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);  
 
+  const delQnA = async () => {
+    const docuId = await AsyncStorage.getItem('my-key');
+    const qnaId = await AsyncStorage.getItem('qnaId');
+    await deleteDoc(doc(FIRESTORE_DB, "topics", docuId,"qna", qnaId));
+    console.log("qna deleted");
+    setNum(qnaNum-1);
+  };
+
   React.useEffect(() => {
     const fetchQnAs = async () => {      
       try {
@@ -100,12 +88,6 @@ const ActiveRecallAdd = ({navigation}) => {
           console.log("error");
         } else {
           const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics/'+global.docId+'/qna'));
-          // const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics'));
-         // querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());            
-         // });
-
           const qnaData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -166,6 +148,13 @@ const ActiveRecallAdd = ({navigation}) => {
           style={{fontFamily:'FuzzyBubblesBold', fontSize:16, textAlign:'center', paddingHorizontal:15}}>
           Study with Active Recall. Set your questions and answers for your flashcard.
         </Text>
+        <IconButton 
+          icon="delete-circle" 
+          iconColor={colors.redOrange}
+          style={styles.deleteButton} 
+          size={40}
+          onPress={()=>delQnA()}
+        />
        
         <FlatList
           data = {QnAs}
@@ -183,17 +172,15 @@ const ActiveRecallAdd = ({navigation}) => {
           contentContainerStyle={{justifyContent: 'center'}}
           bounces={false}
         />
-
-        <Button 
-            mode="contained" 
-            onPress={() => navigation.navigate("ActiveRecallQuiz")} 
-            buttonColor={colors.green}
-            textColor={colors.white}
-            style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, marginBottom:10}}>
-          Start
-        </Button>
-
       </ScrollView>     
+        <Button 
+          mode="contained" 
+          onPress={() => navigation.navigate("ActiveRecallQuiz")} 
+          buttonColor={colors.green}
+          textColor={colors.white}
+          style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, marginBottom:10}}>
+        Start
+        </Button>
           <Modal visible={visible} onRequestClose={hideModal} animationType="fade" transparent={true}>
             <View style={styles.modalBackground}>
               <View style={styles.modalContainer}>

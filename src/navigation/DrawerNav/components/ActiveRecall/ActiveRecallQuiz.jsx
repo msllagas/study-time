@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import { Button, Appbar, TextInput } from "react-native-paper";
+import { Button, Appbar, TextInput, PaperProvider, Portal, Modal } from "react-native-paper";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
@@ -17,6 +17,7 @@ import Header from "../../../../components/Header";
 import { collection, query, where, getDocs, getCountFromServer, getDoc, doc } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ActiveRecallQuiz = ({navigation}) => {
   const [userAnswer, setUserAnswer] = React.useState("");
@@ -25,9 +26,32 @@ const ActiveRecallQuiz = ({navigation}) => {
   const [QnAs, setQnAs] = React.useState([]);
   const [qnaNum, setQnAnum] = React.useState(0);
 
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20};
+
   const _goBack = () => navigation.goBack();
   const _skip = () => {
     setQnAnum(qnaNum+1);
+  }
+  const _done = async() => {
+    //update isDone field
+  }
+  const _enter = () => {
+    showModal();
+    if (userAnswer == theAnswer){
+      return(
+        <PaperProvider>
+          <Portal>
+            <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+            <Text style={{fontSize: 45, fontFamily:'AmaticBold', textAlign:"center", textAlignVertical:'center'}}>You get it right!</Text>
+          </Modal>
+          </Portal>
+        </PaperProvider>
+      )
+    } 
   }
 
   class qnaData {
@@ -43,7 +67,6 @@ const ActiveRecallQuiz = ({navigation}) => {
     toString() {
         return this.num + ', ' + this.question + ', ' + this.answer;
     }    
-    
   };
   
   const qnaConverter = {
@@ -100,29 +123,29 @@ const ActiveRecallQuiz = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>  
-      <Header title={"Active Recall"} onPressBackArrow={_goBack}/>
+      <Header title={"Active Recall"} onPressBackArrow={()=>navigation.navigate("ActiveRecall")}/>
       <View style={styles.card}>
         {/* {question} */}
-          <Text style={styles.cardContent}>
-              {theQuestion} 
-          </Text>
+          <Text style={styles.cardContent}>{theQuestion}</Text>
       </View>
       <View style={styles.answerView}>
         {/* {userAnswer} */}
-      <Text style={styles.fieldTitle}>Answer</Text>
-            <TextInput
+          <Text style={styles.fieldTitle}>Answer</Text>
+          <View style={{flexDirection:"row", justifyContent:'flex-start'}}>
+          <TextInput
             value={userAnswer}
             onChangeText={userAnswer => setUserAnswer(userAnswer)}
             style={{backgroundColor: colors.lighterGreen}}
             underlineColor={colors.lightGreen}
             activeUnderlineColor={colors.green}
             underlineStyle={{borderRadius:40}}   
-      />
+          />
+          <Ionicons name="send" size={40} color={colors.green} onPress={()=>_enter()}/>
+          </View>
       </View>
         <Button 
             mode="outlined" 
             onPress={()=>_skip()}  
-            // onPress={()=>fetchQnAs()}
             textColor={colors.green}                           
             style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, borderColor:colors.green}}>
           Skip
@@ -130,7 +153,7 @@ const ActiveRecallQuiz = ({navigation}) => {
 
         <Button 
             mode="outlined" 
-            onPress={()=>navigation.navigate("Drawer")}  
+            onPress={()=>navigation.navigate("ActiveRecall")}  
             textColor={colors.green}                           
             style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:20, marginBottom:10, borderColor:colors.green}}>
           Done
