@@ -137,7 +137,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
       if (tag === "pomodoro") {
         navigation.navigate("PomodoroTimer");
       } else if (tag === "active recall") {
-        navigation.navigate("ActiveRecallOngoing");
+        navigation.navigate("ActiveRecallQuiz");
       } else if (tag === "spaced repetition") {
         navigation.navigate("SpacedRepititionDisplay", {
           topicId,

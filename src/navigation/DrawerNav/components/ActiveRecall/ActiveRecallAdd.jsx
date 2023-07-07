@@ -9,9 +9,11 @@ import {
   Image,
   ScrollView,
   FlatList,
+  Modal,
+  TouchableOpacity
 } from "react-native";
 import React from "react";
-import { Button, Appbar, IconButton, TextInput, PaperProvider, Portal, Modal} from "react-native-paper";
+import { Button, Appbar, IconButton, TextInput} from "react-native-paper";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import Constants from 'expo-constants';
@@ -21,7 +23,7 @@ import Header from "../../../../components/Header";
 import { collection, query, where, getDocs, updateDoc, documentId, getDoc, doc, setDoc, awaitDoc, addDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { async } from "@firebase/util";
+import { AntDesign } from "@expo/vector-icons";
 
 
 //add/delete question function
@@ -68,18 +70,27 @@ const storeQnAid = async (value) => {
   }
 };
 
+const getQnAid = async () => {
+  try {
+    const value = await AsyncStorage.getItem('qnaId');
+    if (value !== null) {
+      // value previously stored
+      console.log("qna id from async: ",value);
+    }
+  } catch (e) {
+    // error reading value
+  }
+};
+
 const ActiveRecallAdd = ({navigation}) => {
   const [topicQuestion, setQuestion] = React.useState("");
   const [topicAnswer, setAnswer] = React.useState("");
   const [qnaNum, setNum] = React.useState(1);
   const [QnAs, setQnAs] = React.useState([])
 
-  const _goBack = () => navigation.goBack();
-
   const [visible, setVisible] = React.useState(false);
   const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20, borderRadius:8, width:"80%", alignSelf:"center"};
+  const hideModal = () => setVisible(false);  
 
   React.useEffect(() => {
     const fetchQnAs = async () => {      
@@ -90,10 +101,10 @@ const ActiveRecallAdd = ({navigation}) => {
         } else {
           const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics/'+global.docId+'/qna'));
           // const querySnapshot = await getDocs(collection(FIRESTORE_DB, 'topics'));
-          querySnapshot.forEach((doc) => {
+         // querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-          });
+            // console.log(doc.id, " => ", doc.data());            
+         // });
 
           const qnaData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
@@ -105,7 +116,6 @@ const ActiveRecallAdd = ({navigation}) => {
         console.log("Error fetching qna:", error);
       }
     }
-
     fetchQnAs();
   }), [QnAs];
 
@@ -120,7 +130,8 @@ const ActiveRecallAdd = ({navigation}) => {
             num: qnaNum
           });
           console.log("qna added with id:", qnaRef.id);
-
+          storeQnAid(qnaRef.id);
+          getQnAid();
 
           console.log("success");
         } catch (error) {
@@ -132,16 +143,23 @@ const ActiveRecallAdd = ({navigation}) => {
         setVisible(false);
         global.docId=value;
         console.log("id from global: ", global.docId);
+        setAnswer("");
+        setQuestion("");
       } 
     } catch (e) {
       console.log("error reading value: ", e);
     }
   };
 
+  const _goBack = () => {
+    navigation.goBack();
+    // await deleteDoc(doc(FIRESTORE_DB, "topics", global.docId));
+    // console.log("cancelled adding topic");
+  }
+
   return (
     <SafeAreaView style={styles.viewContainer}>
-      <Header title="Active Recall" onPressBackArrow={_goBack}/>
-      <PaperProvider style={{textColor:"#00000"}}>
+      <Header title="Active Recall" onPressBackArrow={_goBack}/>      
       <ScrollView>         
         <Image style={styles.imageContainer} source={logo} resizeMode="cover"/>
         <Text 
@@ -157,7 +175,6 @@ const ActiveRecallAdd = ({navigation}) => {
               question={qna.item.question}
               answer={qna.item.answer}
               num={qna.item.num}
-              
             />
           )}
           keyExtractor={(qna) => qna.id}
@@ -167,70 +184,65 @@ const ActiveRecallAdd = ({navigation}) => {
           bounces={false}
         />
 
-        
         <Button 
             mode="contained" 
-            onPress={() => console.log("add")} 
+            onPress={() => navigation.navigate("ActiveRecallQuiz")} 
             buttonColor={colors.green}
             textColor={colors.white}
             style={{borderRadius:8, width: '70%', alignSelf:'center', marginTop:30, marginBottom:10}}>
           Start
         </Button>
+
       </ScrollView>     
-
-        <Portal>
-          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-            <View style={styles.qnaContainer}>
-              <View style={styles.setupContainer}>
-                {/* {questionNum} */}
-                {/* <Text style={styles.fieldTitle}>Question</Text> */}
-                <TextInput
-                label={"Question "+qnaNum}  //{questionNum}
-                value={topicQuestion}
-                placeholder=" "
-                onChangeText={topicQuestion => setQuestion(topicQuestion)}
-                style={{backgroundColor: colors.lighterGreen}}
-                underlineColor={colors.lightGreen}
-                activeUnderlineColor={colors.green}
-                underlineStyle={{borderRadius:10}}
-                />
-              </View>                    
-              <View style={styles.setupContainer}>
-                {/* {answerNum} */}
-                {/* <Text style={styles.fieldTitle}>Answer</Text> */}
-                <TextInput
-                label={"Answer "+qnaNum} //{answerNum}
-                placeholder=" "
-                value={topicAnswer}
-                onChangeText={topicAnswer => setAnswer(topicAnswer)}
-                style={{backgroundColor: colors.lighterGreen}}
-                underlineColor={colors.lightGreen}
-                activeUnderlineColor={colors.green}
-                underlineStyle={{borderRadius:10}}
-                />
-              </View>   
+          <Modal visible={visible} onRequestClose={hideModal} animationType="fade" transparent={true}>
+            <View style={styles.modalBackground}>
+              <View style={styles.modalContainer}>
+                <TouchableOpacity style={styles.closeButton} onPress={hideModal}>
+                <AntDesign name="close" size={35} color="gray" />
+                </TouchableOpacity>
+                <View style={styles.qnaContainer}>
+                  <View style={styles.setupContainer}>
+                    <TextInput
+                    label={"Question "+qnaNum}  
+                    value={topicQuestion}
+                    placeholder=" "
+                    onChangeText={topicQuestion => setQuestion(topicQuestion)}
+                    style={{backgroundColor: colors.lighterGreen}}
+                    underlineColor={colors.lightGreen}
+                    activeUnderlineColor={colors.green}
+                    underlineStyle={{borderRadius:10}}
+                    />
+                  </View>                    
+                  <View style={styles.setupContainer}>
+                    <TextInput
+                    label={"Answer "+qnaNum} 
+                    placeholder=" "
+                    value={topicAnswer}
+                    onChangeText={topicAnswer => setAnswer(topicAnswer)}
+                    style={{backgroundColor: colors.lighterGreen}}
+                    underlineColor={colors.lightGreen}
+                    activeUnderlineColor={colors.green}
+                    underlineStyle={{borderRadius:10}}
+                    />
+                  </View>   
+                </View>                
+                <Button 
+                  mode="contained" 
+                  onPress={()=>addQnA()}
+                  buttonColor={colors.green}
+                  textColor={colors.white}
+                  style={{borderRadius:8, width: '60%', alignSelf:'center', marginVertical:20}}>
+                  Add
+                </Button>
+              </View>
             </View>
-            {/* <addTopic topicTitle={topicName} quest={question} ans={answer}/> */}
-            <Button 
-              mode="contained" 
-              // onPress={()=>addQnA()} 
-              onPress={()=>addQnA()}
-              buttonColor={colors.green}
-              textColor={colors.white}
-              style={{borderRadius:8, width: '60%', alignSelf:'center', marginVertical:20}}>
-              Add
-            </Button>
           </Modal>
-        </Portal>
-
         <AddButton onPressAdd={showModal}/>
-
-      </PaperProvider>
     </SafeAreaView>
   );
 };
 
-const styles =StyleSheet.create({
+const styles = StyleSheet.create({
   viewContainer:{
     backgroundColor: colors.white,
     height: '100%'
@@ -238,7 +250,6 @@ const styles =StyleSheet.create({
   backButton:{
     position:'absolute',
     left:0,
-    
   },
   imageContainer: {
     alignSelf: 'center',      
@@ -255,6 +266,7 @@ const styles =StyleSheet.create({
     marginBottom: 5
   },
   qnaContainer:{
+    marginTop:30,
     marginBottom: 10,
     width: '70%',
     alignSelf: 'center',
@@ -263,7 +275,25 @@ const styles =StyleSheet.create({
     position:'relative',
     top: '20%',
     alignSelf:'flex-end'
-
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+  modalContainer: {
+    backgroundColor: colors.white,
+    height: 300,
+    width: 280,
+    borderRadius: 10,
+    position: "relative",
+  },
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    marginTop: 10,
   },
 })
 
