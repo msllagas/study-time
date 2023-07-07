@@ -7,17 +7,14 @@ import {
   StyleSheet,
   Pressable,
   Image,
-  Modal,
-  TouchableOpacity
 } from "react-native";
 import React from "react";
-import { Button, Appbar, PaperProvider, Portal, TextInput } from "react-native-paper";
+import { Button, Appbar, PaperProvider, Portal, Modal, TextInput } from "react-native-paper";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import TopBar from "../../../TopTabNav/TopBar";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AntDesign } from "@expo/vector-icons";
 
 import {
   addDoc,
@@ -30,14 +27,24 @@ import {
   where,
   getDocs,
   documentId,
-  Timestamp,
-  Firestore,
-  serverTimestamp,
 } from "firebase/firestore";
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig.js";
 import Header from "../../../../components/Header";
 
 
+// const saveHandler = ({navigation}) => {
+
+// }
+
+// export function useDocId() {
+//   return global.thisDocId;
+// }
+// export const useDocId = () => {
+//   return global.thisDocId;
+// }
+
+// const [docId, setDocId] = React.useState("");
+// export const useDocId = "" + global.thisDocId;
 const storeData = async (value) => {
   try {
     await AsyncStorage.setItem('my-key', value);
@@ -63,7 +70,7 @@ const ActiveRecall = () => {
   const [isEmptyTopic, setIsEmptyTopic] = React.useState(false);
 
   const [visible, setVisible] = React.useState(false);
-  const showModal = () => {setVisible(true); setTopicName("")}
+  const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20, borderRadius:8, width:"80%", alignSelf:"center"};
 
@@ -91,7 +98,11 @@ const ActiveRecall = () => {
           userId: userId,
           tag: "active recall",
           isDone: false,
-          createdAt: new serverTimestamp(),
+          createdAt: new Date().toLocaleDateString("en-PH", {
+              month: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+            }),
           time: new Date().toLocaleTimeString("en-PH", {
             hour: "2-digit",
             minute: "2-digit",
@@ -110,39 +121,44 @@ const ActiveRecall = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar/>
+      <PaperProvider>
+        
+      {/* <Pressable onPress={() => navigation.navigate("ActiveRecallDone")}>
+        <Text>go to DONE</Text>
+      </Pressable>  tt*/}
+
       <TopBar tag="active recall" />
-      <Modal visible={visible} onRequestClose={hideModal} animationType="fade" transparent={true}>
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContainer}>
-          <TouchableOpacity style={styles.closeButton} onPress={hideModal}>
-            <AntDesign name="close" size={35} color="gray" />
-          </TouchableOpacity>
+            
+       <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
           <Text 
-          style={{fontFamily:'AmaticBold', fontSize:48, textAlign:'center', color:colors.green, marginTop:25, marginBottom: 20}}>
-          Topic Name
-        </Text>
-        <TextInput
-          label="Title"
-          value={topicName}
-          onChangeText={onTopicChange}
-          style={{width:'80%', alignSelf:'center', backgroundColor: colors.lighterGreen, marginBottom:20}}
-          underlineColor={colors.lightGreen}
-          activeUnderlineColor={colors.green}
-          error = {isEmptyTopic}
-        />
-        <Button 
-            mode="contained" 
-            onPress={()=>_add()} 
-            buttonColor={colors.green}
-            textColor={colors.white}
-            style={{borderRadius: 8, width: '70%', alignSelf:'center', marginVertical:30}}>
-          Next
-        </Button>
-          </View>
-        </View>
-      </Modal>
+            style={{fontFamily:'AmaticBold', fontSize:48, textAlign:'center', color:colors.green, marginTop:20}}>
+            Topic Name
+          </Text>
+          <TextInput
+            label="Topic"
+            value={topicName}
+            onChangeText={onTopicChange}
+            style={{width:'70%', alignSelf:'center', backgroundColor: colors.lighterGreen}}
+            underlineColor={colors.lightGreen}
+            activeUnderlineColor={colors.green}
+            error = {isEmptyTopic}
+          />
+          <Button 
+              mode="contained" 
+              onPress={()=>_add()} 
+              buttonColor={colors.green}
+              textColor={colors.white}
+              style={{borderRadius: 8, width: '70%', alignSelf:'center', marginVertical:30}}>
+            Next
+          </Button>
+        </Modal>
+      </Portal>
+
       <AddButton onPressAdd={showModal} />    
+      
+      </PaperProvider>
+      {/* <AddButton onPressAdd={()=>navigation.navigate("ActiveRecallAdd")} />   */}
     </SafeAreaView>
   );
 };
@@ -151,25 +167,6 @@ const styles=StyleSheet.create({
   container:{
     height: '100%',
     backgroundColor:colors.white,
-  },
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
-  },
-  modalContainer: {
-    backgroundColor: colors.white,
-    height: 300,
-    width: 280,
-    borderRadius: 10,
-    position: "relative",
-  },
-  closeButton: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    marginTop: 10,
   },
 })
 
