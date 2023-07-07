@@ -49,7 +49,7 @@ const Ongoing = ({ tag }) => {
     };
 
     fetchDoneTopics();
-  }, [tag, ongoingTopics]);
+  }, [tag]);
 
   return (
     <View style={styles.container}>
@@ -82,7 +82,9 @@ const Ongoing = ({ tag }) => {
         />
       ) : (
         <View style={styles.emptyText}>
-          <Text variant="displaySmall" style={styles.text}>Empty</Text>
+          <Text variant="displaySmall" style={styles.text}>
+            Empty
+          </Text>
         </View>
       )}
     </View>
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontFamily: "AmaticBold", 
-    color:  colors.redOrange
-  }
+    fontFamily: "AmaticBold",
+    color: colors.redOrange,
+  },
 });
