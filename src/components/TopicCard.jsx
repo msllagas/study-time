@@ -5,6 +5,7 @@ import {
   Dimensions,
   PanResponder,
   Animated,
+  Pressable
 } from "react-native";
 import { IconButton, Text, Surface } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -22,7 +23,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
 
   const navigation = useNavigation();
   const buttonWidth = 60;
-  const sensitivity = 50000; // Increase this value for higher sensitivity
+  const sensitivity = 50000; // Increase this value for higher sensitivity.
 
   const panResponder = useRef(
     PanResponder.create({
@@ -137,7 +138,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
       if (tag === "pomodoro") {
         navigation.navigate("PomodoroTimer");
       } else if (tag === "active recall") {
-        navigation.navigate("ActiveRecallOngoing");
+        navigation.navigate("ActiveRecallQuiz");
       } else if (tag === "spaced repetition") {
         navigation.navigate("SpacedRepititionDisplay", {
           topicId,
@@ -161,7 +162,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
   };
 
   return (
-    <TouchableOpacity onPress={navigateToPage}>
+    <Pressable onPress={navigateToPage}>
       <View style={styles.container}>
         <Animated.View
           style={[
@@ -216,7 +217,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
           />
         </Animated.View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
