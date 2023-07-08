@@ -250,6 +250,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignSelf: 'center',      
     marginBottom: 5,
+    zIndex:-50,
   },
   setupContainer: {      
     marginVertical: 10,   

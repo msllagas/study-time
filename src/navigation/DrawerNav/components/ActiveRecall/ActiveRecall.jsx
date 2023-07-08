@@ -50,7 +50,7 @@ const ActiveRecall = () => {
 
   const navigation = useNavigation();
   const _goto = () => navigation.navigate("ActiveRecallAdd");
-  const _goBack = () => navigation.goBack();
+  const _goBack = () => navigation.navigate("StudyMethods");
 
   const onTopicChange = (text) => {
     setTopicName(text);

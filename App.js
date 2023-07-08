@@ -40,6 +40,7 @@ import SpacedRepititionNotif from "./src/navigation/DrawerNav/components/SpacedR
 import SpacedRepititionDone from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDone";
 import SpacedRepititionDisplay from "./src/navigation/DrawerNav/components/SpacedRepitition/SpacedRepititionDisplay";
 import TopicCard from "./src/components/TopicCard";
+import StudyMethods from "./src/navigation/DrawerNav/components/StudyMethods";
 
 import { AppProvider } from "./src/context/AppContext";
 
@@ -94,31 +95,14 @@ export default function App() {
           <Stack.Screen name="PQ4RRecite" component={PQ4RRecite} />
           <Stack.Screen name="PQ4RReview" component={PQ4RReview} />
           <Stack.Screen name="SpacedRepitition" component={SpacedRepitition} />
-          <Stack.Screen
-            name="SpacedRepititionAdd"
-            component={SpacedRepititionAdd}
-          />
-          <Stack.Screen
-            name="SpacedRepititionDateStart"
-            component={SpacedRepititionDateStart}
-          />
-          <Stack.Screen
-            name="SpacedRepititionDateEnd"
-            component={SpacedRepititionDateEnd}
-          />
-          <Stack.Screen
-            name="SpacedRepititionNotif"
-            component={SpacedRepititionNotif}
-          />
-          <Stack.Screen
-            name="SpacedRepititionDone"
-            component={SpacedRepititionDone}
-          />
-          <Stack.Screen
-            name="SpacedRepititionDisplay"
-            component={SpacedRepititionDisplay}
-          />
+          <Stack.Screen name="SpacedRepititionAdd" component={SpacedRepititionAdd}/>
+          <Stack.Screen name="SpacedRepititionDateStart" component={SpacedRepititionDateStart}/>
+          <Stack.Screen name="SpacedRepititionDateEnd" component={SpacedRepititionDateEnd}/>
+          <Stack.Screen name="SpacedRepititionNotif" component={SpacedRepititionNotif}/>
+          <Stack.Screen name="SpacedRepititionDone" component={SpacedRepititionDone}/>
+          <Stack.Screen name="SpacedRepititionDisplay" component={SpacedRepititionDisplay}/>
           <Stack.Screen name="TopicCard" component={TopicCard} />
+          <Stack.Screen name="StudyMethods" component={StudyMethods}/>
         </Stack.Navigator>
       </NavigationContainer>
     </AppProvider>
