@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
     left: 0,
-    top: 0,
+    top: 30,
   },
   logoContainer: {
     alignItems: "center",
