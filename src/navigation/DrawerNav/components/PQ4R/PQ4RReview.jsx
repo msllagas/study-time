@@ -19,8 +19,8 @@ const PQ4RReview = () => {
     pqsavedQuestions,
     setSavedpqAnswers,
     setPqSavedQuestions,
+    summarypqText,
   } = useAppContext();
-  const { summarypqText, setSummarypqText } = useAppContext();
 
   return (
     <SafeAreaView style={styles.container}>
