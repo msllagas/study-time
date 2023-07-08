@@ -27,10 +27,11 @@ const SQ3RRead = () => {
       setCurrentKeyword("");
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <SQ3RNav activeComponent={activeComponent} />
-      <View style={{ justifyContent: "flex-start", alignItems: "center" }}>
+      <View style={styles.contentContainer}>
         <Text
           style={{
             fontFamily: "AmaticBold",
@@ -52,52 +53,51 @@ const SQ3RRead = () => {
         >
           Read the material again. Read and {"\n"} comprehend the topic.
         </Text>
-      </View>
-      <View>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <View style={{ marginTop: 20 }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TextInput
-                style={{
-                  flex: 1,
-                  height: 40,
-                  borderColor: "#E1A8EF",
-                  borderWidth: 1,
-                  padding: 10,
-                  borderRadius: 10,
-                }}
-                placeholder="Type a keyword"
-                onChangeText={handleKeywordChange}
-                value={currentKeyword}
-              />
-              <TouchableOpacity
-                style={{
-                  marginLeft: 10,
-                  backgroundColor: "#DA60F9",
-                  padding: 10,
-                  borderRadius: 10,
-                }}
-                onPress={handleAddKeyword}
-              >
-                <Text style={{ color: "white" }}>Add</Text>
-              </TouchableOpacity>
-            </View>
-            {readkeywords.map((keyword, index) => (
-              <View
-                key={index}
-                style={{
-                  backgroundColor: "#E1A8EF",
-                  marginTop: 10,
-                  padding: 10,
-                  borderRadius: 10,
-                }}
-              >
-                <Text>{keyword}</Text>
-              </View>
-            ))}
+        <View style={{ marginTop: 20 }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TextInput
+              style={{
+                height: 40,
+                width: 200,
+                borderColor: "#E1A8EF",
+                borderWidth: 1,
+                padding: 10,
+                borderRadius: 10,
+              }}
+              placeholder="Type a keyword"
+              onChangeText={handleKeywordChange}
+              value={currentKeyword}
+            />
+            <TouchableOpacity
+              style={{
+                marginLeft: 10,
+                height: 40,
+                width: 60,
+                backgroundColor: "#DA60F9",
+                padding: 10,
+                borderRadius: 10,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onPress={handleAddKeyword}
+            >
+              <Text style={{ color: "white" }}>Add</Text>
+            </TouchableOpacity>
           </View>
+
+          {readkeywords.map((keyword, index) => (
+            <View
+              key={index}
+              style={{
+                backgroundColor: "#E1A8EF",
+                marginTop: 10,
+                padding: 10,
+                borderRadius: 10,
+              }}
+            >
+              <Text>{keyword}</Text>
+            </View>
+          ))}
         </View>
       </View>
     </SafeAreaView>
@@ -109,10 +109,11 @@ const styles = {
     flex: 1,
     backgroundColor: "#FFFFFF",
   },
-  addButtonContainer: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
+  contentContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 20,
   },
 };
 
