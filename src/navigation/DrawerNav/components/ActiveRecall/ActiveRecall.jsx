@@ -90,7 +90,7 @@ const ActiveRecall = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Active Recall" onPressBackArrow={_goBack}/>  
+      <Header title="Active Recall" nPressBackArrow={() => navigation.goBack()}/>  
       <TopBar tag="active recall" />
       <Modal visible={visible} onRequestClose={hideModal} animationType="fade" transparent={true}>
         <View style={styles.modalBackground}>
