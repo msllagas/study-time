@@ -21,6 +21,7 @@ const AppProvider = ({ children }) => {
   const [savedpqAnswers, setSavedpqAnswers] = useState([]);
   const [summarypqText, setSummarypqText] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [readkeywords, setReadKeywords] = useState([]);
 
   return (
     // export the function and state here
@@ -52,6 +53,8 @@ const AppProvider = ({ children }) => {
         setSq3rTopicName,
         answers,
         setAnswers,
+        readkeywords,
+        setReadKeywords,
       }}
     >
       {children}
