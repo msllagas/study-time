@@ -49,7 +49,7 @@ const Ongoing = ({ tag }) => {
     };
 
     fetchDoneTopics();
-  }, [tag]);
+  }, [tag, ongoingTopics]);
 
   return (
     <View style={styles.container}>

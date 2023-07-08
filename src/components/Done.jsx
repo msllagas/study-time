@@ -50,7 +50,7 @@ const Done = ({ tag }) => {
     };
 
     fetchDoneTopics();
-  }, [tag]);
+  }, [tag, doneTopics]);
 
   return (
     <View style={styles.container}>
