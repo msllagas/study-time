@@ -14,7 +14,7 @@ import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../../../utils/colors";
 import Header from "../../../../components/Header";
-import { collection, query, where, getDocs, getCountFromServer, getDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, getCountFromServer, getDoc, doc, updateDoc } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FIRESTORE_DB, FIREBASE_AUTH } from "../../../../../firebaseConfig";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -25,6 +25,7 @@ const ActiveRecallQuiz = ({navigation}) => {
   const [theQuestion, setTheQuestion] = React.useState("");
   const [QnAs, setQnAs] = React.useState([]);
   const [qnaNum, setQnAnum] = React.useState(0);
+  var maxQnA;
 
   const [visible, setVisible] = React.useState(false);
 
@@ -32,12 +33,28 @@ const ActiveRecallQuiz = ({navigation}) => {
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20};
 
-  const _goBack = () => navigation.goBack();
+  const _goBack = () => navigation.navigate("ActiveRecall")
   const _skip = () => {
-    setQnAnum(qnaNum+1);
+    if (qnaNum >= maxQnA){
+      setQnAnum(0);
+    }
+    else {
+      setQnAnum(qnaNum+1);
+      console.log("next index"+qnaNum)
+    }
+    
   }
   const _done = async() => {
     //update isDone field
+    const lastTopicId = await AsyncStorage.getItem('my-key');
+    const lastQnAId = await AsyncStorage.getItem('qnaId');
+
+    const docRef = doc(FIRESTORE_DB, "topics", lastTopicId,"qna", lastQnAId);
+    // Set the "isDone" field of the last qna
+    await updateDoc(docRef, {
+      isDone: true
+    });
+    navigation.navigate("ActiveRecallDone");
   }
   const _enter = () => {
     showModal();
@@ -107,12 +124,9 @@ const ActiveRecallQuiz = ({navigation}) => {
           const coll = collection(FIRESTORE_DB, 'topics/'+lastTopicId+'/qna');
           const snapshot = await getCountFromServer(coll);
           console.log('count: ', snapshot.data().count);
-          const maxQnA = snapshot.data().count;   
+          maxQnA = snapshot.data().count;   
           console.log('total num of QnAs'+maxQnA);   
           
-          if (qnaNum>maxQnA) {
-            setQnAnum(1);
-          }
         }//if-else
       } catch (error) {
         console.log("Error fetching qna:", error);
@@ -123,7 +137,7 @@ const ActiveRecallQuiz = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>  
-      <Header title={"Active Recall"} onPressBackArrow={()=>navigation.navigate("ActiveRecall")}/>
+      <Header title={"Active Recall"} onPressBackArrow={()=>_goBack()}/>
       <View style={styles.card}>
         {/* {question} */}
           <Text style={styles.cardContent}>{theQuestion}</Text>
@@ -153,7 +167,7 @@ const ActiveRecallQuiz = ({navigation}) => {
 
         <Button 
             mode="outlined" 
-            onPress={()=>navigation.navigate("ActiveRecall")}  
+            onPress={()=>_done()}  
             textColor={colors.green}                           
             style={{borderRadius:8, width: '70%', alignSelf:'center', marginVertical:20, marginBottom:10, borderColor:colors.green}}>
           Done
