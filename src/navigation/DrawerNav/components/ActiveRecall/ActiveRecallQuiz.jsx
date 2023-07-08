@@ -46,14 +46,14 @@ const ActiveRecallQuiz = ({navigation}) => {
   }
   const _done = async() => {
     //update isDone field
-    const lastTopicId = await AsyncStorage.getItem('my-key');
-    const lastQnAId = await AsyncStorage.getItem('qnaId');
+    // const lastTopicId = await AsyncStorage.getItem('my-key');
+    // const lastQnAId = await AsyncStorage.getItem('qnaId');
 
-    const docRef = doc(FIRESTORE_DB, "topics", lastTopicId,"qna", lastQnAId);
-    // Set the "isDone" field of the last qna
-    await updateDoc(docRef, {
-      isDone: true
-    });
+    // const docRef = doc(FIRESTORE_DB, "topics", lastTopicId,"qna", lastQnAId);
+    // // Set the "isDone" field of the last qna
+    // await updateDoc(docRef, {
+    //   isDone: true
+    // });
     navigation.navigate("ActiveRecallDone");
   }
   const _enter = () => {
@@ -115,9 +115,7 @@ const ActiveRecallQuiz = ({navigation}) => {
           const ref = doc(FIRESTORE_DB, "topics", lastTopicId, "qna", lastQnAId).withConverter(qnaConverter);
           const docSnap = await getDoc(ref);
           if (docSnap.exists()) {
-            // Convert to City object
             const qnaInfo = docSnap.data();
-            // Use a City instance method
             console.log(qnaInfo.toString());
           } else {console.log("No such document!");}
   
@@ -145,16 +143,16 @@ const ActiveRecallQuiz = ({navigation}) => {
       <View style={styles.answerView}>
         {/* {userAnswer} */}
           <Text style={styles.fieldTitle}>Answer</Text>
-          <View style={{flexDirection:"row", justifyContent:'flex-start'}}>
+          <View style={{flexDirection:"row", justifyContent:'space-between'}}>
           <TextInput
             value={userAnswer}
-            onChangeText={userAnswer => setUserAnswer(userAnswer)}
-            style={{backgroundColor: colors.lighterGreen}}
+            onChangeText={userAnswer => setUserAnswer()}
+            style={{backgroundColor: colors.lighterGreen, width:"70%"}}
             underlineColor={colors.lightGreen}
             activeUnderlineColor={colors.green}
             underlineStyle={{borderRadius:40}}   
           />
-          <Ionicons name="send" size={40} color={colors.green} onPress={()=>_enter()}/>
+          <Ionicons name="send" size={40} color={colors.green} onPress={()=>_enter()} style={{marginRight: 20}}/>
           </View>
       </View>
         <Button 
@@ -206,7 +204,7 @@ const styles=StyleSheet.create({
   },
   answerView:{
       width:'70%',
-      alignSelf: 'center'
+      alignSelf:'center'
   },
 })
 

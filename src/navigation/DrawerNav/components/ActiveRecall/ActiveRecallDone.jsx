@@ -81,39 +81,39 @@ const ActiveRecallDone = ({navigation}) => {
     }
   };
 
-  React.useEffect(() => {
-    const fetchQnAs = async() => {
-      const lastTopicId = await AsyncStorage.getItem('my-key');
-      const lastQnAId = await AsyncStorage.getItem('qnaId');
-      try {
-        const currentUser = FIREBASE_AUTH.currentUser;
-        if (!currentUser) {
-          console.log("error");
-        }else{
-          const ref = doc(FIRESTORE_DB, "topics", lastTopicId, "qna", lastQnAId).withConverter(qnaConverter);
-          const docSnap = await getDoc(ref);
-          if (docSnap.exists()) {
-            // Convert to City object
-            const qnaInfo = docSnap.data();
-            // Use a City instance method
-            console.log(qnaInfo.toString());
-          } else {console.log("No such document!");}
+  // React.useEffect(() => {
+  //   const fetchQnAs = async() => {
+  //     const lastTopicId = await AsyncStorage.getItem('my-key');
+  //     const lastQnAId = await AsyncStorage.getItem('qnaId');
+  //     try {
+  //       const currentUser = FIREBASE_AUTH.currentUser;
+  //       if (!currentUser) {
+  //         console.log("error");
+  //       }else{
+  //         const ref = doc(FIRESTORE_DB, "topics", lastTopicId, "qna", lastQnAId).withConverter(qnaConverter);
+  //         const docSnap = await getDoc(ref);
+  //         if (docSnap.exists()) {
+  //           // Convert to City object
+  //           const qnaInfo = docSnap.data();
+  //           // Use a City instance method
+  //           console.log(qnaInfo.toString());
+  //         } else {console.log("No such document!");}
 
-          const topicRef = doc(FIRESTORE_DB, "topics", lastTopicId).withConverter(topicConverter);
-          const topicSnap = await getDoc(topicRef);
-          if (topicSnap.exists()) {
-            // Convert to City object
-            const topicInfo = topicSnap.data();
-            // Use a City instance method
-            console.log(topicInfo.toString());
-          } else {console.log("No such document!");}
-        }
-      } catch (error) {
-        console.log("ERROR: ", error)
-      }
-    }
-    fetchQnAs();
-  })
+  //         const topicRef = doc(FIRESTORE_DB, "topics", lastTopicId).withConverter(topicConverter);
+  //         const topicSnap = await getDoc(topicRef);
+  //         if (topicSnap.exists()) {
+  //           // Convert to City object
+  //           const topicInfo = topicSnap.data();
+  //           // Use a City instance method
+  //           console.log(topicInfo.toString());
+  //         } else {console.log("No such document!");}
+  //       }
+  //     } catch (error) {
+  //       console.log("ERROR: ", error)
+  //     }
+  //   }
+  //   fetchQnAs();
+  // })
   
     return (
       <ScrollView>
