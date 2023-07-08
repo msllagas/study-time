@@ -104,7 +104,9 @@ const ActiveRecall = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Active Recall" onPressBackArrow={_goBack} />
+
+      <Header title="Active Recall" onPressBackArrow={() => navigation.goBack()}/>  
+
       <TopBar tag="active recall" />
       <Modal
         visible={visible}

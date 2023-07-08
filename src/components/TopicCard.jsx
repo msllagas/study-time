@@ -5,6 +5,7 @@ import {
   Dimensions,
   PanResponder,
   Animated,
+  Pressable
 } from "react-native";
 import { IconButton, Text, Surface } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -161,7 +162,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
   };
 
   return (
-    <TouchableOpacity onPress={navigateToPage}>
+    <Pressable onPress={navigateToPage}>
       <View style={styles.container}>
         <Animated.View
           style={[
@@ -216,7 +217,7 @@ const TopicCard = ({ tag, topic = "Topic Here", topicId, isDone }) => {
           />
         </Animated.View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

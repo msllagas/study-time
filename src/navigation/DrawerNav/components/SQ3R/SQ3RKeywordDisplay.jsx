@@ -17,12 +17,14 @@ const SQ3RKeywordDisplay = () => {
   };
 
   return (
-    <View style={{ marginTop: 20 }}>
+    <View
+      style={{ marginTop: 20, alignItems: "center", justifyContent: "center" }}
+    >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <TextInput
           style={{
-            flex: 1,
             height: 40,
+            width: "60%",
             borderColor: "#E1A8EF",
             borderWidth: 1,
             padding: 10,
