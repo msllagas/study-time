@@ -75,9 +75,15 @@ const ActiveRecallAdd = ({navigation}) => {
   const delQnA = async () => {
     const docuId = await AsyncStorage.getItem('my-key');
     const qnaId = await AsyncStorage.getItem('qnaId');
-    await deleteDoc(doc(FIRESTORE_DB, "topics", docuId,"qna", qnaId));
-    console.log("qna deleted");
-    setNum(qnaNum-1);
+    // await deleteDoc(doc(FIRESTORE_DB, "topics", docuId,"qna", qnaId));
+    try {
+      const qnaRef = doc(FIRESTORE_DB, "topics", docuId,"qna", qnaId);
+      await deleteDoc(qnaRef);
+      console.log("document deleted successfully!");
+      setNum(qnaNum-1);
+    } catch (error) {
+      console.error("Error deleting qna:", error);
+    }
   };
 
   React.useEffect(() => {
@@ -135,7 +141,10 @@ const ActiveRecallAdd = ({navigation}) => {
 
   const _goBack = () => {
     navigation.goBack();
-    // await deleteDoc(doc(FIRESTORE_DB, "topics", global.docId));
+    setAnswer("");
+    setQuestion("");
+    setNum(1);
+    // await deleteDoc(doc(FIRESTORE_DB, "topics", global.docId)); //only delete fields
     // console.log("cancelled adding topic");
   }
 
@@ -259,8 +268,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   deleteButton: {
-    position:'relative',
-    top: '20%',
+    top: 20,
     alignSelf:'flex-end'
   },
   modalBackground: {
