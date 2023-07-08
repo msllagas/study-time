@@ -9,7 +9,6 @@ import { useAppContext } from "../../../../context/AppContext";
 
 const PQ4RPreview = () => {
   const activeComponent = "preview";
-  const { savedpqAnswers } = useAppContext();
   const navigation = useNavigation(); // Define navigation using useNavigation hook
   const _goBack = () => navigation.goBack();
 
