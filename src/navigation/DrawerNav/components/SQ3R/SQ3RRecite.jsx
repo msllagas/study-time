@@ -7,12 +7,12 @@ import {
   ScrollView,
   TextInput,
   Modal,
-  Picker,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import AddButton from "../../../../components/AddButton";
 import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker";
 import SQ3RNav from "./SQ3RNav";
 import { colors } from "../../../../utils/colors";
 import { useAppContext } from "../../../../context/AppContext"; //the path to the AppProvider

@@ -231,15 +231,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: "70px",
-    marginVertical: "5px",
+    paddingHorizontal: 70,
+    marginVertical: 5,
   },
   notifContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: "70px",
+    paddingHorizontal: 70,
     marginTop: 20,
   },
   viewContainer: {
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignSelf: "center",
-    width: "50px",
+    width: 50,
     marginTop: 20,
   },
   setupContainer: {

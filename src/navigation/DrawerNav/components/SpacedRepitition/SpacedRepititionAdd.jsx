@@ -108,8 +108,8 @@ const SpacedRepititionAdd = ({ navigation }) => {
           </Text>
 
           <TextInput
-            value={numSessions}
-            onChangeText={(numSessions) => setNumSessions(numSessions)}
+            value={numSessions.toString()}
+            onChangeText={(numSessions) => setNumSessions(Number(numSessions))}
             style={styles.setupInput}
             mode="outlined"
             outlineColor={colors.lighterYellow}
