@@ -13,31 +13,35 @@ import { useAppContext } from "../../../../context/AppContext";
 
 const PQ4RReflect = () => {
   const activeComponent = "reflect";
-  const { pqsavedQuestions, savedpqAnswers, setSavedpqAnswers } =
-    useAppContext();
+  const { pqsavedQuestions } = useAppContext();
+  const { savedpqAnswers, setSavedpqAnswers } = useAppContext();
 
-  if (pqsavedQuestions.length == 0) {
-    const defaultAnswers = pqsavedQuestions.map(() => "");
-    setSavedpqAnswers(defaultAnswers);
-  }
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    setAnswers(pqsavedQuestions.map(() => ""));
+  }, [pqsavedQuestions]);
+
+  useEffect(() => {
+    setSavedpqAnswers(answers);
+  }, [answers]);
 
   const handleAnswerChange = (index, answer) => {
-    const newAnswers = [...savedpqAnswers];
+    const newAnswers = [...answers];
     newAnswers[index] = answer;
-    setSavedpqAnswers(newAnswers);
+    setAnswers(newAnswers);
   };
 
   const handleSave = () => {
     // Do further processing with answers if needed
-    // Save the answers in savedpqAnswers state
-    setSavedpqAnswers([...savedpqAnswers]);
+    setSavedpqAnswers(answers);
   };
 
   const deleteAnswerIfQuestionDeleted = () => {
-    const updatedAnswers = savedpqAnswers.filter((_, index) =>
+    const updatedAnswers = answers.filter((_, index) =>
       pqsavedQuestions.includes(index)
     );
-    setSavedpqAnswers(updatedAnswers);
+    setAnswers(updatedAnswers);
   };
 
   useEffect(() => {
@@ -67,7 +71,7 @@ const PQ4RReflect = () => {
               </Text>
               <TextInput
                 style={styles.answerInput}
-                value={savedpqAnswers[index]}
+                value={answers[index]}
                 onChangeText={(answer) => handleAnswerChange(index, answer)}
                 placeholder="type your answer"
                 placeholderTextColor="#808080"
